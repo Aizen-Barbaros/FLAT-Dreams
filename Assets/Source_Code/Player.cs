@@ -19,7 +19,7 @@ public class Player : MonoBehaviour{
     public float tempsActifSortVitesse;
     private bool resetSortVitesse;
     private float placeholder;
-    public Text cooldown;
+    //public Text cooldown;
     private Transform spawner;
 
     public float horizontalSpeed;
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour{
 	void Update ()
     {
         placeholder = (cooldownDash + dernierDash - Time.time);
-        cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
+       // cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
         Move();
         
         if (Input.GetKeyDown("e")&& dernierSortVitesse + cooldownSortVitesse <= Time.time)

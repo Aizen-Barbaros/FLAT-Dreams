@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 65716185868908200}
   - component: {fileID: 114670555462709398}
   m_Layer: 0
-  m_Name: enfant
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4495191571182908}
   m_Layer: 0
-  m_Name: enfant
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,7 +246,6 @@ MonoBehaviour:
   StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
   positionCam: {x: 0, y: 0, z: 0}
   tempsActifSortVitesse: 2
-  cooldown: {fileID: 0}
   horizontalSpeed: 10
   cooldownDash: 0
   cooldownStun: 3
