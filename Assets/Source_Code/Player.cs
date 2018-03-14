@@ -14,12 +14,12 @@ public class Player : MonoBehaviour{
     public GameObject StunBall;
     private float iniCamX;
     private float iniCamY;
-    public Vector3 positionCam;
+    private Vector3 position;
     
     public float tempsActifSortVitesse;
     private bool resetSortVitesse;
     private float placeholder;
-    //public Text cooldown;
+    public Text cooldown;
     private Transform spawner;
 
     public float horizontalSpeed;
@@ -40,20 +40,22 @@ public class Player : MonoBehaviour{
     {
         spawner = this.transform;
         Rb = GetComponent<Rigidbody>();
+        
         iniCamX = Input.mousePosition.x;
         iniCamY = Input.mousePosition.y;
         dernierSortVitesse = Time.time;
         cooldownSortVitesse = 0;
         cooldownDash = 0; 
-        tempsActifDash = 1/4;
+        tempsActifDash = 0.3f;
         placeholder = cooldownDash + dernierDash - Time.time;
         cooldownStun = 0;
     }
 	
 	void Update ()
     {
+        position = GetComponent<Transform>().position;
         placeholder = (cooldownDash + dernierDash - Time.time);
-       // cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
+        cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
         Move();
         
         if (Input.GetKeyDown("e")&& dernierSortVitesse + cooldownSortVitesse <= Time.time)
@@ -70,7 +72,7 @@ public class Player : MonoBehaviour{
             speed = 5;
             resetDash = false;
         }
-        if (Input.GetKeyDown("space")&&Rb.velocity.y==0)
+        if (Input.GetKeyDown("space")&&(Rb.velocity.y>=-1&&Rb.velocity.y<=1))
         {
             Jump();
         }
@@ -78,7 +80,7 @@ public class Player : MonoBehaviour{
         {
             Dash();
         }
-        if (Input.GetMouseButton(0) && cooldownStun + dernierStun <= Time.time)
+        if (Input.GetMouseButton(1) && cooldownStun + dernierStun <= Time.time)
         {
             Stun();
         }
@@ -89,6 +91,7 @@ public class Player : MonoBehaviour{
         
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        Debug.Log(position.y);
         transform.Translate(-z, 0, x);
         float rotX = Input.mousePosition.x - iniCamX;
         float rotY = Input.mousePosition.y - iniCamY;
@@ -116,17 +119,19 @@ public class Player : MonoBehaviour{
 
     private void Dash()
     {
-        //Rb.AddRelativeForce(new Vector3(Input.GetAxis("Vertical") * -5000, 0, Input.GetAxis("Horizontal") * 5000), ForceMode.Impulse);
-        speed = 500;
+        speed = 40;
         dernierDash = Time.time;
+        cooldownDash = 6;
         resetDash = true;
     }
 
     private void Stun()
     {
-        Instantiate(StunBall,GetComponent<Transform>().position,Quaternion.identity);
+        position = GetComponent<Transform>().position;
+        //Instantiate(StunBall,new Vector3(position.x,position.y+4,position.z),Quaternion.identity);
         cooldownStun = 3;
         dernierStun = Time.time;
+        Debug.Log("Stun");
     }
 
     void OnCollisionStay(Collision collision)
