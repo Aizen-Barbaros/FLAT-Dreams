@@ -69,7 +69,7 @@ public class Chunk
                 Cube cube = new Cube(this.chunk, new Vector3(x, World.surfaceHeights[mapX, mapZ], z), this.textureAtlas, true);
                 cube.DisplayCube();
 
-                if (World.worldType != World.WorldTypes.HELL && Random.Range(0, 400) == 0)
+                if (World.worldType != World.WorldTypes.HELL && Random.Range(0, 200) == 0)
                     CreateTree((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z);
             }
         }

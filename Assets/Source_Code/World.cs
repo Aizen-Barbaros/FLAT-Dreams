@@ -96,8 +96,7 @@ public class World : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Color.white;
-            RenderSettings.fogDensity = 0.05f;
-
+            RenderSettings.fogDensity = 0.02f;
         }
 
         else if (wType == 2)
@@ -108,7 +107,7 @@ public class World : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Color.black;
-            RenderSettings.fogDensity = 0.03f;
+            RenderSettings.fogDensity = 0.02f;
         }
 
         else
