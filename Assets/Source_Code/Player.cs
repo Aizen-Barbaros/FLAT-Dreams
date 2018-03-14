@@ -55,7 +55,7 @@ public class Player : MonoBehaviour{
     {
         position = GetComponent<Transform>().position;
         placeholder = (cooldownDash + dernierDash - Time.time);
-        cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
+        //cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
         Move();
         
         if (Input.GetKeyDown("e")&& dernierSortVitesse + cooldownSortVitesse <= Time.time)
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour{
 
     private void Jump()
     {
-        Rb.AddForce(new Vector3(0, jump, 0), ForceMode.Impulse);
+        Rb.AddRelativeForce(new Vector3(20f, jump, 0), ForceMode.Impulse);
     }
 
     public void Caught()
