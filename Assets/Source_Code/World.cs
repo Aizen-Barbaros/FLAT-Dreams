@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Map : MonoBehaviour
+public class World : MonoBehaviour
 {
     // Characters
     public GameObject player;

@@ -29,9 +29,9 @@ public class Chunk
 
     public void CreateChunk()
     {
-        for (int x = 0; x < Map.chunkSize; x++)
+        for (int x = 0; x < World.chunkSize; x++)
         {
-            for (int z = 0; z < Map.chunkSize; z++)
+            for (int z = 0; z < World.chunkSize; z++)
             {
                 int yDifferenceWithNeighbours = 0;
                 int mapX = (int)this.chunk.transform.position.x + x;
@@ -40,20 +40,20 @@ public class Chunk
                 // x neighbours check
                 for (int i = -1; i <= 1; i++)
                 {
-                    if (mapX + i >= 0 && mapX + i < Map.mapSize)
+                    if (mapX + i >= 0 && mapX + i < World.mapSize)
                     {
-                        if (Map.surfaceHeights[mapX, mapZ] - Map.surfaceHeights[mapX + i, mapZ] > yDifferenceWithNeighbours)
-                            yDifferenceWithNeighbours = Map.surfaceHeights[mapX, mapZ] - Map.surfaceHeights[mapX + i, mapZ];
+                        if (World.surfaceHeights[mapX, mapZ] - World.surfaceHeights[mapX + i, mapZ] > yDifferenceWithNeighbours)
+                            yDifferenceWithNeighbours = World.surfaceHeights[mapX, mapZ] - World.surfaceHeights[mapX + i, mapZ];
                     }
                 }
 
                 // z neighbours check
                 for (int i = -1; i <= 1; i++)
                 {
-                    if (mapZ + i >= 0 && mapZ + i < Map.mapSize)
+                    if (mapZ + i >= 0 && mapZ + i < World.mapSize)
                     {
-                        if (Map.surfaceHeights[mapX, mapZ] - Map.surfaceHeights[mapX, mapZ + i] > yDifferenceWithNeighbours)
-                            yDifferenceWithNeighbours = Map.surfaceHeights[mapX, mapZ] - Map.surfaceHeights[mapX, mapZ + i];
+                        if (World.surfaceHeights[mapX, mapZ] - World.surfaceHeights[mapX, mapZ + i] > yDifferenceWithNeighbours)
+                            yDifferenceWithNeighbours = World.surfaceHeights[mapX, mapZ] - World.surfaceHeights[mapX, mapZ + i];
                     }
                 }
                 
@@ -61,16 +61,16 @@ public class Chunk
                 {
                     for (int i = -(--yDifferenceWithNeighbours); i < 0; i++)
                     {
-                        Cube underCube = new Cube(this.chunk, new Vector3(x, Map.surfaceHeights[mapX, mapZ] + i, z), this.textureAtlas, false);
+                        Cube underCube = new Cube(this.chunk, new Vector3(x, World.surfaceHeights[mapX, mapZ] + i, z), this.textureAtlas, false);
                         underCube.DisplayCube();
                     }
                 }
                 
-                Cube cube = new Cube(this.chunk, new Vector3(x, Map.surfaceHeights[mapX, mapZ], z), this.textureAtlas, true);
+                Cube cube = new Cube(this.chunk, new Vector3(x, World.surfaceHeights[mapX, mapZ], z), this.textureAtlas, true);
                 cube.DisplayCube();
 
-                if (Map.worldType != Map.WorldTypes.HELL && Random.Range(0, 900) == 0)
-                    CreateTree((int)this.chunk.transform.position.x + x, Map.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z);
+                if (World.worldType != World.WorldTypes.HELL && Random.Range(0, 400) == 0)
+                    CreateTree((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z);
             }
         }
     }
@@ -102,12 +102,12 @@ public class Chunk
 
     public void CreateTree(int x, int y, int z)
     {
-        if (Map.worldType == Map.WorldTypes.NORMAL)
+        if (World.worldType == World.WorldTypes.NORMAL)
         {
             GameObject tree = MonoBehaviour.Instantiate(this.oakTree, new Vector3(x, y, z), Quaternion.identity) as GameObject;
         }
 
-        else if (Map.worldType == Map.WorldTypes.SNOWY)
+        else if (World.worldType == World.WorldTypes.SNOWY)
         {
             GameObject tree = MonoBehaviour.Instantiate(this.pineTree, new Vector3(x, y, z), Quaternion.identity) as GameObject;
         }

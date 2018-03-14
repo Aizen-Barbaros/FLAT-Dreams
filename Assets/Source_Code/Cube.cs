@@ -75,21 +75,21 @@ public class Cube
         int topSideIndex;
         int underSideIndex;
 
-        if (Map.worldType == Map.WorldTypes.NORMAL)
+        if (World.worldType == World.WorldTypes.NORMAL)
         {
             topTopIndex = 0;
             topSideIndex = 1;
             underSideIndex = 2;
         }
 
-        else if (Map.worldType == Map.WorldTypes.SNOWY)
+        else if (World.worldType == World.WorldTypes.SNOWY)
         {
             topTopIndex = 3;
             topSideIndex = 4;
             underSideIndex = 2;
         }
 
-        else if (Map.worldType == Map.WorldTypes.HELL)
+        else if (World.worldType == World.WorldTypes.HELL)
         {
             topTopIndex = 5;
             topSideIndex = 5;
@@ -202,9 +202,9 @@ public class Cube
 
     public bool CheckNeighbour(int x, int z)
     {
-        if (x >= 0 && x < Map.mapSize && z >= 0 && z < Map.mapSize)
+        if (x >= 0 && x < World.mapSize && z >= 0 && z < World.mapSize)
         {
-            if ((Map.surfaceHeights[(int)this.mapPosition.x, (int)this.mapPosition.z] - Map.surfaceHeights[x, z]) > 0)
+            if ((World.surfaceHeights[(int)this.mapPosition.x, (int)this.mapPosition.z] - World.surfaceHeights[x, z]) > 0)
                 return false;
             else
                 return true;
