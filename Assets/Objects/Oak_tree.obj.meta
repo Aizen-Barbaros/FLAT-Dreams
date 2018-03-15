@@ -10,6 +10,7 @@ ModelImporter:
     400000: Oak_tree
     400002: //RootNode
     2100000: Oak_treeMat
+    2100002: palette
     2300000: Oak_tree
     3300000: Oak_tree
     4300000: Oak_tree

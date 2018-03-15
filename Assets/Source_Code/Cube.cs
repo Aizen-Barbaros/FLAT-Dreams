@@ -9,10 +9,13 @@ public class Cube
 
     private Vector2[,] cubeTextureInAtlas = {{new Vector2(0.0f, 0.8f), new Vector2(0.2f, 0.8f), new Vector2(0.0f, 1.0f), new Vector2(0.2f, 1.0f)},              // NORMAL TOP TOP
 	                                         {new Vector2(0.2f, 0.8f), new Vector2(0.4f, 0.8f), new Vector2(0.2f, 1.0f), new Vector2(0.4f, 1.0f)},              // NORMAL TOP SIDE
-		                                     {new Vector2(0.4f, 0.8f), new Vector2(0.6f, 0.8f), new Vector2(0.4f, 1.0f), new Vector2(0.6f, 1.0f)},              // NORMAL / SNOWY UNDER SIDE
+		                                     {new Vector2(0.4f, 0.8f), new Vector2(0.6f, 0.8f), new Vector2(0.4f, 1.0f), new Vector2(0.6f, 1.0f)},              // NORMAL UNDER SIDE
                                              {new Vector2(0.0f, 0.6f), new Vector2(0.2f, 0.6f), new Vector2(0.0f, 0.8f), new Vector2(0.2f, 0.8f)},              // SNOWY TOP TOP
 	                                         {new Vector2(0.2f, 0.6f), new Vector2(0.4f, 0.6f), new Vector2(0.2f, 0.8f), new Vector2(0.4f, 0.8f)},              // SNOWY TOP SIDE
-                                             {new Vector2(0.0f, 0.2f), new Vector2(0.2f, 0.2f), new Vector2(0.0f, 0.4f), new Vector2(0.2f, 0.4f)},              // HELL TOP / UNDER SIDE
+		                                     {new Vector2(0.4f, 0.8f), new Vector2(0.6f, 0.8f), new Vector2(0.4f, 1.0f), new Vector2(0.6f, 1.0f)},              // SNOWY UNDER SIDE
+                                             {new Vector2(0.0f, 0.2f), new Vector2(0.2f, 0.2f), new Vector2(0.0f, 0.4f), new Vector2(0.2f, 0.4f)},              // HELL TOP TOP
+                                             {new Vector2(0.2f, 0.2f), new Vector2(0.4f, 0.2f), new Vector2(0.2f, 0.4f), new Vector2(0.4f, 0.4f)},              // HELL TOP SIDE
+                                             {new Vector2(0.2f, 0.2f), new Vector2(0.4f, 0.2f), new Vector2(0.2f, 0.4f), new Vector2(0.4f, 0.4f)},              // HELL UNDER SIDE
                                              {new Vector2(0.0f, 0.4f), new Vector2(0.2f, 0.4f), new Vector2(0.0f, 0.6f), new Vector2(0.2f, 0.6f)},              // DREAMY TOP TOP
 	                                         {new Vector2(0.2f, 0.4f), new Vector2(0.4f, 0.4f), new Vector2(0.2f, 0.6f), new Vector2(0.4f, 0.6f)},              // DREAMY TOP SIDE
 		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)}};             // DREAMY UNDER SIDE
@@ -86,21 +89,21 @@ public class Cube
         {
             topTopIndex = 3;
             topSideIndex = 4;
-            underSideIndex = 2;
+            underSideIndex = 5;
         }
 
         else if (World.worldType == World.WorldTypes.HELL)
         {
-            topTopIndex = 5;
-            topSideIndex = 5;
-            underSideIndex = 5;
+            topTopIndex = 6;
+            topSideIndex = 7;
+            underSideIndex = 8;
         }
 
         else
         {
-            topTopIndex = 6;
-            topSideIndex = 7;
-            underSideIndex = 8;
+            topTopIndex = 9;
+            topSideIndex = 10;
+            underSideIndex = 11;
         }
 
         // SETTING TEXTURES
