@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour{
+public class Player : Character {
 
     private int Lives { get; set; }
     private int CurrentLives { get; set; }
     private int KeyCaught { get; set; }
     private Rigidbody Rb { get; set; }
-    public float speed;
-    public float jump;
     public GameObject StunBall;
     private float iniCamX;
     private float iniCamY;
@@ -22,17 +20,14 @@ public class Player : MonoBehaviour{
     public Text cooldown;
     private Transform spawner;
 
-    public float horizontalSpeed;
 
     private float dernierSortVitesse;
     private float cooldownSortVitesse;
 
-    public float cooldownDash;
     private float dernierDash;
     private bool resetDash;
     private float tempsActifDash;
 
-    public float cooldownStun;
     private float dernierStun;
     
 
@@ -56,7 +51,7 @@ public class Player : MonoBehaviour{
         position = GetComponent<Transform>().position;
         placeholder = (cooldownDash + dernierDash - Time.time);
         //cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
-        Move();
+        move();
         
         if (Input.GetKeyDown("e")&& dernierSortVitesse + cooldownSortVitesse <= Time.time)
         { 
@@ -78,25 +73,12 @@ public class Player : MonoBehaviour{
         }
         if(Input.GetKeyDown("q")&&cooldownDash+dernierDash<= Time.time)
         {
-            Dash();
+            base.dash();
         }
         if (Input.GetMouseButton(1) && cooldownStun + dernierStun <= Time.time)
         {
-            Stun();
+            base.stun();
         }
-    }
-
-    private void Move()
-    {
-        
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-        Debug.Log(position.y);
-        transform.Translate(-z, 0, x);
-        float rotX = Input.mousePosition.x - iniCamX;
-        float rotY = Input.mousePosition.y - iniCamY;
-        float h = horizontalSpeed * Input.GetAxis("Mouse X");
-        transform.Rotate(0, h, 0);
     }
 
     private void Jump()
@@ -119,19 +101,12 @@ public class Player : MonoBehaviour{
 
     private void Dash()
     {
-        speed = 40;
-        dernierDash = Time.time;
-        cooldownDash = 6;
-        resetDash = true;
+        
     }
 
     private void Stun()
     {
-        position = GetComponent<Transform>().position;
-        //Instantiate(StunBall,new Vector3(position.x,position.y+4,position.z),Quaternion.identity);
-        cooldownStun = 3;
-        dernierStun = Time.time;
-        Debug.Log("Stun");
+
     }
 
     void OnCollisionStay(Collision collision)

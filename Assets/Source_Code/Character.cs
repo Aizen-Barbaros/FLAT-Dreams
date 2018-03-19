@@ -8,9 +8,24 @@ public class Character : MonoBehaviour {
     public float jumpSpeed;
     public float jumpHeight;
 
+    public float horizontalSpeed;
+
+    private float iniCamX;
+    private float iniCamY;
+
+    public float cooldownDash;
+    private float dernierDash;
+    private bool resetDash;
+    private float tempsActifDash;
+
+    public float cooldownStun;
+    private float dernierStun;
+
     private float step;
     private float currentJump;
     private float jumpForce;
+
+    private Vector3 position;
 
     //Test
     public float jumpDuration = 0.5f;
@@ -27,14 +42,19 @@ public class Character : MonoBehaviour {
     private void Start()
     {
         this.jumpForce = 0;
-
+        iniCamX = Input.mousePosition.x;
+        iniCamY = Input.mousePosition.y;
+        cooldownDash = 0;
+        tempsActifDash = 0.3f;
+        cooldownStun = 0;
         //Test
         jumpStartV = -jumpDuration * Physics.gravity.y / 2;
     }
 
     protected virtual void FixedUpdate()
     {
-        if(isJumping && !isFalling)
+        position = GetComponent<Transform>().position;
+        if (isJumping && !isFalling)
         {
             jump();
         }
@@ -65,7 +85,14 @@ public class Character : MonoBehaviour {
 
     protected void move()
     {
-
+        float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        Debug.Log(position.y);
+        transform.Translate(-z, 0, x);
+        float rotX = Input.mousePosition.x - iniCamX;
+        float rotY = Input.mousePosition.y - iniCamY;
+        float h = horizontalSpeed * Input.GetAxis("Mouse X");
+        transform.Rotate(0, h, 0);
     }
 
     protected void move(Vector3 target)
@@ -154,14 +181,21 @@ public class Character : MonoBehaviour {
         }
     }
 
-    private void dash()
+    protected void dash()
     {
-
+        speed = 40;
+        dernierDash = Time.time;
+        cooldownDash = 6;
+        resetDash = true;
     }
 
-    private void stun()
+    protected void stun()
     {
-
+        position = GetComponent<Transform>().position;
+        //Instantiate(StunBall,new Vector3(position.x,position.y+4,position.z),Quaternion.identity);
+        cooldownStun = 3;
+        dernierStun = Time.time;
+        Debug.Log("Stun");
     }
 
     private void cooldown(float time)
