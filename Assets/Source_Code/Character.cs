@@ -27,13 +27,6 @@ public class Character : MonoBehaviour {
 
     private Vector3 position;
 
-    //Test
-    public float jumpDuration = 0.5f;
-    public float jumpDistance = 3;
-
-    private float jumpStartV;
-    //*************************************
-
     protected bool isJumping { get; set; }
 
     private bool isGrounded;
@@ -47,8 +40,7 @@ public class Character : MonoBehaviour {
         cooldownDash = 0;
         tempsActifDash = 0.3f;
         cooldownStun = 0;
-        //Test
-        jumpStartV = -jumpDuration * Physics.gravity.y / 2;
+
     }
 
     protected virtual void FixedUpdate()
