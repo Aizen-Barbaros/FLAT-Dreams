@@ -38,7 +38,7 @@ public class Enemy : Character
         {
             /*isJumping = true;
             jump();*/
-            StartCoroutine(Jump(target));
+            //StartCoroutine(Jump(target));
         }
     }
 

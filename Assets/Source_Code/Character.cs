@@ -100,7 +100,7 @@ public class Character : MonoBehaviour {
     }
 
     //Test
-    protected IEnumerator Jump(Vector3 direction)
+   /* protected IEnumerator Jump(Vector3 direction)
     {
         isJumping = true;
         Vector3 startPoint = transform.position;
@@ -134,7 +134,7 @@ public class Character : MonoBehaviour {
 
         transform.position = targetPoint;
         yield break;
-    }
+    }*/
 
     protected void jump()
     {
