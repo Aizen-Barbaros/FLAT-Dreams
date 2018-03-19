@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : Character {
 
@@ -14,9 +13,6 @@ public class Player : Character {
     
     public float tempsActifSortVitesse;
     private bool resetSortVitesse;
-    private float placeholder;
-    public Text cooldown;
-    private Transform spawner;
 
     public float jumper;
 
@@ -27,7 +23,6 @@ public class Player : Character {
 
     void Start()
     {
-        spawner = this.transform;
         Rb = GetComponent<Rigidbody>();
         
         base.iniCamX = Input.mousePosition.x;
@@ -36,12 +31,10 @@ public class Player : Character {
         cooldownSortVitesse = 0;
         base.cooldownDash = 0; 
         base.tempsActifDash = 0.3f;
-        placeholder = base.cooldownDash + base.dernierDash - Time.time;
     }
 	
 	void Update ()
     {
-        placeholder = (base.cooldownDash + base.dernierDash - Time.time);
         //cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
         move();
         
