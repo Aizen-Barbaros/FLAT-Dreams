@@ -9,9 +9,7 @@ public class Player : Character {
     private int CurrentLives { get; set; }
     private int KeyCaught { get; set; }
     private Rigidbody Rb { get; set; }
-    public GameObject StunBall;
-    private float iniCamX;
-    private float iniCamY;
+    
     private Vector3 position;
     
     public float tempsActifSortVitesse;
@@ -20,36 +18,30 @@ public class Player : Character {
     public Text cooldown;
     private Transform spawner;
 
+    public float jumper;
+
 
     private float dernierSortVitesse;
     private float cooldownSortVitesse;
-
-    private float dernierDash;
-    private bool resetDash;
-    private float tempsActifDash;
-
-    private float dernierStun;
-    
+ 
 
     void Start()
     {
         spawner = this.transform;
         Rb = GetComponent<Rigidbody>();
         
-        iniCamX = Input.mousePosition.x;
-        iniCamY = Input.mousePosition.y;
+        base.iniCamX = Input.mousePosition.x;
+        base.iniCamY = Input.mousePosition.y;
         dernierSortVitesse = Time.time;
         cooldownSortVitesse = 0;
-        cooldownDash = 0; 
-        tempsActifDash = 0.3f;
-        placeholder = cooldownDash + dernierDash - Time.time;
-        cooldownStun = 0;
+        base.cooldownDash = 0; 
+        base.tempsActifDash = 0.3f;
+        placeholder = base.cooldownDash + base.dernierDash - Time.time;
     }
 	
 	void Update ()
     {
-        position = GetComponent<Transform>().position;
-        placeholder = (cooldownDash + dernierDash - Time.time);
+        placeholder = (base.cooldownDash + base.dernierDash - Time.time);
         //cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
         move();
         
@@ -62,7 +54,7 @@ public class Player : Character {
             speed = 5;
             resetSortVitesse = false;
         }
-        if (dernierDash + tempsActifDash <= Time.time && resetDash)
+        if (base.dernierDash + base.tempsActifDash <= Time.time && resetDash)
         {
             speed = 5;
             resetDash = false;
@@ -71,11 +63,11 @@ public class Player : Character {
         {
             Jump();
         }
-        if(Input.GetKeyDown("q")&&cooldownDash+dernierDash<= Time.time)
+        if(Input.GetKeyDown("q")&& base.cooldownDash + base.dernierDash <= Time.time)
         {
             base.dash();
         }
-        if (Input.GetMouseButton(1) && cooldownStun + dernierStun <= Time.time)
+        if (Input.GetMouseButton(1) && base.cooldownStun + base.dernierStun <= Time.time)
         {
             base.stun();
         }
@@ -83,7 +75,7 @@ public class Player : Character {
 
     private void Jump()
     {
-        Rb.AddRelativeForce(new Vector3(20f, jump, 0), ForceMode.Impulse);
+        Rb.AddRelativeForce(new Vector3(20f, jumper, 0), ForceMode.Impulse);
     }
 
     public void Caught()
