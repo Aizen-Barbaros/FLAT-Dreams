@@ -1,3 +1,5 @@
 *.csproj
 *.dwlt
 /Library
+/UnityPackageManager
+/Temp
