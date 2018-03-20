@@ -15,4 +15,15 @@ public class StunBall : MonoBehaviour {
 	void Update () {
         transform.Translate(1, 0, 0);
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+         
+        }
+        else
+        {
+            
+        }
+    }
 }

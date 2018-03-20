@@ -8,33 +8,46 @@ public class Character : MonoBehaviour {
     public float jumpSpeed;
     public float jumpHeight;
 
+    public float horizontalSpeed;
+
+    protected float iniCamX;
+    protected float iniCamY;
+    public GameObject StunBall;
+
+    public float cooldownDash;
+    protected float dernierDash;
+    protected bool resetDash;
+    protected float tempsActifDash;
+
+    public float cooldownStun;
+    protected float dernierStun;
+
     private float step;
     private float currentJump;
     private float jumpForce;
 
-    //Test
-    public float jumpDuration = 0.5f;
-    public float jumpDistance = 3;
-
-    private float jumpStartV;
-    //*************************************
+    protected Vector3 Position;
 
     protected bool isJumping { get; set; }
-
+    
     private bool isGrounded;
     private bool isFalling;
 
     private void Start()
     {
         this.jumpForce = 0;
+        iniCamX = Input.mousePosition.x;
+        iniCamY = Input.mousePosition.y;
+        cooldownDash = 0;
+        tempsActifDash = 0.3f;
+        cooldownStun = 0;
 
-        //Test
-        jumpStartV = -jumpDuration * Physics.gravity.y / 2;
     }
 
     protected virtual void FixedUpdate()
     {
-        if(isJumping && !isFalling)
+        Position = GetComponent<Transform>().position;
+        if (isJumping && !isFalling)
         {
             jump();
         }
@@ -65,7 +78,12 @@ public class Character : MonoBehaviour {
 
     protected void move()
     {
-
+        float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        Debug.Log(Position.y);
+        transform.Translate(-z, 0, x);
+        float h = horizontalSpeed * Input.GetAxis("Mouse X");
+        transform.Rotate(0, h, 0);
     }
 
     protected void move(Vector3 target)
@@ -82,7 +100,7 @@ public class Character : MonoBehaviour {
     }
 
     //Test
-    protected IEnumerator Jump(Vector3 direction)
+   /* protected IEnumerator Jump(Vector3 direction)
     {
         isJumping = true;
         Vector3 startPoint = transform.position;
@@ -116,7 +134,7 @@ public class Character : MonoBehaviour {
 
         transform.position = targetPoint;
         yield break;
-    }
+    }*/
 
     protected void jump()
     {
@@ -154,14 +172,21 @@ public class Character : MonoBehaviour {
         }
     }
 
-    private void dash()
+    protected void dash()
     {
-
+        speed = 40;
+        dernierDash = Time.time;
+        cooldownDash = 6;
+        resetDash = true;
     }
 
-    private void stun()
+    protected void stun()
     {
-
+        Position = GetComponent<Transform>().position;
+        Instantiate(StunBall,new Vector3(Position.x,Position.y+4,Position.z),Quaternion.identity);
+        cooldownStun = 3;
+        dernierStun = Time.time;
+        Debug.Log("Stun");
     }
 
     private void cooldown(float time)
