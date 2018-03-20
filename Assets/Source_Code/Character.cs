@@ -4,49 +4,70 @@ using UnityEngine;
 
 public class Character : MonoBehaviour {
 
+    //============================================================
+    //Public
+    //============================================================
+    //Jump
     public float speed;
     public float jumpSpeed;
     public float jumpHeight;
 
+    //Speed
     public float horizontalSpeed;
 
-    protected float iniCamX;
-    protected float iniCamY;
+    //Stun
     public GameObject StunBall;
 
+    //Cooldown
     public float cooldownDash;
+    public float cooldownStun;
+    //============================================================
+
+    //============================================================
+    //Protected
+    //============================================================
+    //Cam
+    protected float iniCamX;
+    protected float iniCamY;
+
+    //Dash
     protected float dernierDash;
     protected bool resetDash;
     protected float tempsActifDash;
 
-    public float cooldownStun;
+    //Stun
     protected float dernierStun;
 
-    private float step;
-    private float currentJump;
-    private float jumpForce;
-
+    //Position of the mouse in the screen for the cam
     protected Vector3 Position;
 
     protected bool isJumping { get; set; }
-    
+    //============================================================
+
+    //============================================================
+    //Private
+    //============================================================
+    private float step;
+    private float currentJump;
+
     private bool isGrounded;
     private bool isFalling;
-
+    //============================================================
+    
     private void Start()
     {
-        this.jumpForce = 0;
         iniCamX = Input.mousePosition.x;
         iniCamY = Input.mousePosition.y;
         cooldownDash = 0;
         tempsActifDash = 0.3f;
         cooldownStun = 0;
-
     }
 
     protected virtual void FixedUpdate()
     {
-        Position = GetComponent<Transform>().position;
+        Position = GetComponent<Transform>().position; // C'EST QUOI?
+
+        
         if (isJumping && !isFalling)
         {
             jump();
@@ -54,7 +75,7 @@ public class Character : MonoBehaviour {
 
         if(!isJumping && isFalling)
         {
-            fall();
+            //fall();
         }
     }
 
@@ -98,43 +119,6 @@ public class Character : MonoBehaviour {
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
     }
-
-    //Test
-   /* protected IEnumerator Jump(Vector3 direction)
-    {
-        isJumping = true;
-        Vector3 startPoint = transform.position;
-        Vector3 targetPoint = startPoint + direction;
-        float time = 0;
-        float jumpProgress = 0;
-        float velocityY = jumpStartV;
-        float height = startPoint.y;
-
-        while (isJumping)
-        {
-            jumpProgress = time / jumpDuration;
-
-            if (jumpProgress > 1)
-            {
-                isJumping = false;
-                jumpProgress = 1;
-            }
-
-            Vector3 currentPos = Vector3.Lerp(startPoint, targetPoint, jumpProgress);
-            currentPos.y = height;
-            transform.position = currentPos;
-
-            //Wait until next frame.
-            yield return null;
-
-            height += velocityY * Time.deltaTime;
-            velocityY += Time.deltaTime * Physics.gravity.y;
-            time += Time.deltaTime;
-        }
-
-        transform.position = targetPoint;
-        yield break;
-    }*/
 
     protected void jump()
     {
