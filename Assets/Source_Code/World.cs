@@ -22,6 +22,19 @@ public class World : MonoBehaviour
     public GameObject pineTree;
     public GameObject lollipopTree;
 
+    // Key
+    public GameObject key;
+
+    // Monster
+    /*public GameObject zombie;
+    public GameObject littleMonster;
+    public GameObject reaper;
+    public GameObject ghost;
+    public GameObject bear;
+    public GameObject gnome;
+    public GameObject snowMan;
+    public GameObject yeti;*/
+
     public enum TerrainTypes { PLAINS, HILLS, MOUNTAINS };
     public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY};
 
@@ -38,13 +51,20 @@ public class World : MonoBehaviour
 
     public static int[,] surfaceHeights;
 
+    private Chunk[,] chunks;
+    private GameObject[] keys;
+
 
     public void Start()
     {
+        this.chunks = new Chunk[mapSize, mapSize];
+        this.keys = new GameObject[3];
+
         this.ChooseTerrainAndWorldType();
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
+        this.GenerateKeys();
 
         player.transform.position = new Vector3(mapSize / 2, surfaceHeights[mapSize / 2, mapSize / 2] + 1, mapSize / 2);
         player.SetActive(true);
@@ -63,7 +83,7 @@ public class World : MonoBehaviour
         {
             for (int z = 0; z < mapSize; z += chunkSize)
             {
-                Chunk chunk = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree);
+                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree);
             }
         }
     }
@@ -179,5 +199,30 @@ public class World : MonoBehaviour
         }
 
         return total / maxValue;
+    }
+
+    
+    public void GenerateKeys()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            this.keys[i] = MonoBehaviour.Instantiate(this.key, this.GenerateKeyVector(), Quaternion.identity) as GameObject;
+        }
+    }
+
+
+    public Vector3 GenerateKeyVector()
+    {
+        int x = Random.Range(0, 320);
+        int z = Random.Range(0, 320);
+        int y = surfaceHeights[x, z];
+
+        return new Vector3(x, y, z);
+    }
+
+
+    public void GenerateMonsters()
+    {
+
     }
 }
