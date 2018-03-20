@@ -14,7 +14,7 @@ public class Player : Character {
     public float tempsActifSortVitesse;
     private bool resetSortVitesse;
 
-    public float jumper;
+    public float jumper; //C'EST QUOI
 
 
     private float dernierSortVitesse;
@@ -54,7 +54,7 @@ public class Player : Character {
         }
         if (Input.GetKeyDown("space")&&(Rb.velocity.y>=-1&&Rb.velocity.y<=1))
         {
-            Jump();
+            base.jump();
         }
         if(Input.GetKeyDown("q")&& base.cooldownDash + base.dernierDash <= Time.time)
         {
@@ -66,10 +66,10 @@ public class Player : Character {
         }
     }
 
-    private void Jump()
+    /*private void Jump()
     {
         Rb.AddRelativeForce(new Vector3(20f, jumper, 0), ForceMode.Impulse);
-    }
+    }*/
 
     public void Caught()
     {
@@ -96,7 +96,7 @@ public class Player : Character {
 
     void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ennemy"))
+        if (collision.gameObject.tag == "Ennemy")
         {
             Caught();
         }
