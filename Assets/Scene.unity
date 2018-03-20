@@ -151,6 +151,9 @@ MonoBehaviour:
   lollipopTree: {fileID: 1435430740969860, guid: aec0b94983b3c054bbfdea63a2cf7cc0,
     type: 2}
   key: {fileID: 1967048097105674, guid: a2f8636abf6f33541acdf3e5a6d4da77, type: 2}
+  zombie: {fileID: 1864756716239624, guid: 0eac856d87299804c8f1068c17472611, type: 2}
+  littleMonster: {fileID: 1442962235632924, guid: 76f1e041766db344690e9809bb11cbf8,
+    type: 2}
 --- !u!4 &96720496
 Transform:
   m_ObjectHideFlags: 0
@@ -278,6 +281,7 @@ Prefab:
       propertyPath: m_AllowMSAA
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 54577370395519812, guid: 00a3e3f61c029bc40a65b21a092bcf97,
         type: 2}
       propertyPath: m_Mass
@@ -287,16 +291,34 @@ Prefab:
         type: 2}
       propertyPath: m_Drag
       value: 0
+=======
+    - target: {fileID: 114670555462709398, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: jumpHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114670555462709398, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: jumper
+      value: 2
+>>>>>>> 30a890bff1e526db91c017c3141f9d7f2c184dc0
       objectReference: {fileID: 0}
     - target: {fileID: 54577370395519812, guid: 00a3e3f61c029bc40a65b21a092bcf97,
         type: 2}
       propertyPath: m_AngularDrag
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 114670555462709398, guid: 00a3e3f61c029bc40a65b21a092bcf97,
         type: 2}
       propertyPath: jumpHeight
       value: 1.5
+=======
+    - target: {fileID: 65716185868908200, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+>>>>>>> 30a890bff1e526db91c017c3141f9d7f2c184dc0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}

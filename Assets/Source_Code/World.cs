@@ -26,8 +26,8 @@ public class World : MonoBehaviour
     public GameObject key;
 
     // Monster
-    /*public GameObject zombie;
-    public GameObject littleMonster;
+    public GameObject zombie;
+    public GameObject littleMonster;/*
     public GameObject reaper;
     public GameObject ghost;
     public GameObject bear;
@@ -53,18 +53,21 @@ public class World : MonoBehaviour
 
     private Chunk[,] chunks;
     private GameObject[] keys;
+    private GameObject[] monsters;
 
 
     public void Start()
     {
         this.chunks = new Chunk[mapSize, mapSize];
         this.keys = new GameObject[3];
+        this.monsters = new GameObject[50];
 
         this.ChooseTerrainAndWorldType();
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
         this.GenerateKeys();
+        this.GenerateMonsters();
 
         player.transform.position = new Vector3(mapSize / 2, surfaceHeights[mapSize / 2, mapSize / 2] + 1, mapSize / 2);
         player.SetActive(true);
@@ -206,23 +209,25 @@ public class World : MonoBehaviour
     {
         for(int i = 0; i < 3; i++)
         {
-            this.keys[i] = MonoBehaviour.Instantiate(this.key, this.GenerateKeyVector(), Quaternion.identity) as GameObject;
+            this.keys[i] = Instantiate(this.key, this.GenerateRandomVector(), Quaternion.identity) as GameObject;
         }
-    }
-
-
-    public Vector3 GenerateKeyVector()
-    {
-        int x = Random.Range(0, 320);
-        int z = Random.Range(0, 320);
-        int y = surfaceHeights[x, z];
-
-        return new Vector3(x, y, z);
     }
 
 
     public void GenerateMonsters()
     {
+        for (int i = 0; i < 10; i++)
+        {
+            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector(), Quaternion.identity) as GameObject;
+        }
+    }
 
+
+    public Vector3 GenerateRandomVector()
+    {
+        int x = Random.Range(0, 320);
+        int z = Random.Range(0, 320);
+
+        return new Vector3(x, surfaceHeights[x, z], z);
     }
 }
