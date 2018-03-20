@@ -8,12 +8,11 @@ public class Character : MonoBehaviour {
     //Public
     //============================================================
     //Jump
-    public float speed;
-    public float jumpSpeed;
+    public float speed;                                             //Speed de GAB
     public float jumpHeight;
 
     //Speed
-    public float horizontalSpeed;
+    public float horizontalSpeed;                                   //Speed de Félix; Même speed que le premier à revoir
 
     //Stun
     public GameObject StunBall;
@@ -41,17 +40,15 @@ public class Character : MonoBehaviour {
     //Position of the mouse in the screen for the cam
     protected Vector3 Position;
 
-    protected bool isJumping { get; set; }
+    protected bool isJumping { get; set; }                              //TO DO
     //============================================================
 
     //============================================================
     //Private
     //============================================================
     private float step;
-    private float currentJump;
 
     private bool isGrounded;
-    private bool isFalling;
     //============================================================
     
     private void Start()
@@ -66,20 +63,9 @@ public class Character : MonoBehaviour {
     protected virtual void FixedUpdate()
     {
         Position = GetComponent<Transform>().position; // C'EST QUOI?
-
-        
-        if (isJumping && !isFalling)
-        {
-            jump();
-        }
-
-        if(!isJumping && isFalling)
-        {
-            //fall();
-        }
     }
 
-    protected virtual void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
         {
@@ -88,7 +74,7 @@ public class Character : MonoBehaviour {
         }
     }
 
-    protected virtual void OnCollisionExit(Collision collision)
+    protected virtual void OnCollisionExit(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Grounded")
         {
@@ -112,7 +98,7 @@ public class Character : MonoBehaviour {
         this.step = this.speed * Time.deltaTime;
 
         //Follow the player
-        target.y = 0;
+        target.y = 0;                                                                           //A REVOIR
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, step);
 
         //Rotation facing toward the player
@@ -122,38 +108,10 @@ public class Character : MonoBehaviour {
 
     protected void jump()
     {
-        Debug.Log("Jump -> currentJump : "+ currentJump +" < jumpHeight : "+jumpHeight);
-        if (currentJump < jumpHeight)
-        {
-            float force = 0;
-            force = Mathf.Sin(Time.deltaTime) * jumpSpeed; //The function who describe the mouvement
-            currentJump += force;
-            //GetComponent<Rigidbody>().AddForce(new Vector3(0, force * jumpSpeed, 0), ForceMode.Impulse);
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 7, 0);
-        }
-        else
-        {
-            isJumping = false;
-            isFalling = true;
-        }
-    }
-
-    protected void fall()
-    {
-        Debug.Log("Fall -> !isGrounded : "+ !isGrounded);
-        if (!isGrounded)
-        {
-            /*float force = 0;
-            force = Mathf.Sin(Time.deltaTime) * jumpSpeed; //The function who describe the mouvement
-            currentJump -= force;
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, force * jumpSpeed * -1, 0), ForceMode.Impulse);*/
-
-        }
-        else
-        {
-            isFalling = false;
-            currentJump = 0;
-        }
+        //Mathematic function who give the velocity for a specific jump height
+        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * jumpHeight *-1);
+        //Apply a velocity vertically
+        this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
     }
 
     protected void dash()
@@ -173,7 +131,7 @@ public class Character : MonoBehaviour {
         Debug.Log("Stun");
     }
 
-    private void cooldown(float time)
+    private void cooldown(float time) //Trouver un moyen de faire un cooldown commun?
     {
 
     }
