@@ -136,3 +136,6 @@ public class Character : MonoBehaviour {
 
     }
 }
+
+//NOTE
+// notation des membre de la classe utilisation du this.
