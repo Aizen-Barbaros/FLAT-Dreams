@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Character : MonoBehaviour
 {
+    //CamSpeed
+    protected float camSpeed;
+    
     //Jump
     protected float speed;
     protected float jumpHeight;
-
-    //CamSpeed
-    protected float camSpeed;
 
     //Stun
     protected GameObject StunBall;
@@ -17,6 +18,12 @@ public class Character : MonoBehaviour
     //Cam
     protected float iniCamX;
     protected float iniCamY;
+
+    //Sort vitesse
+    protected bool resetSpeedBoost;
+    protected float lastSpeedBoost;
+    protected float speedBoostDuration;
+    protected float speedBoostCooldown;
 
     //Dash
     protected bool resetDash;
@@ -28,12 +35,6 @@ public class Character : MonoBehaviour
     protected float lastStun;
     protected float stunCooldown;
 
-    //Sort vitesse
-    protected bool resetSpeedBoost;
-    protected float lastSpeedBoost;
-    protected float speedBoostDuration;
-    protected float speedBoostCooldown;
-
     //Position of the mouse in the screen for the cam
     protected Vector3 position;
 
@@ -41,6 +42,7 @@ public class Character : MonoBehaviour
 
     protected bool isGrounded;
     private float step;
+
 
     private void Start()
     {
@@ -51,15 +53,18 @@ public class Character : MonoBehaviour
         this.stunCooldown = 0;
     }
 
+
     private void Update()
     {
         
     }
 
+
     protected virtual void FixedUpdate()
     {
         this.position = GetComponent<Transform>().position; // C'EST QUOI?
     }
+
 
     protected virtual void OnCollisionEnter(Collision collision) //TO DO
     {
@@ -70,6 +75,7 @@ public class Character : MonoBehaviour
         }
     }
 
+
     protected virtual void OnCollisionExit(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
@@ -78,6 +84,7 @@ public class Character : MonoBehaviour
             Debug.Log("Leave Grounded");
         }
     }
+
 
     protected void Move()
     {
@@ -90,6 +97,7 @@ public class Character : MonoBehaviour
         float h = camSpeed * Input.GetAxis("Mouse X");
         this.transform.Rotate(0, h, 0);
     }
+
 
     protected void Move(Vector3 target)
     {
@@ -104,6 +112,7 @@ public class Character : MonoBehaviour
         this.transform.LookAt(target);
     }
 
+
     protected void Jump()
     {
         //Mathematic function who give the velocity for a specific jump height
@@ -111,6 +120,7 @@ public class Character : MonoBehaviour
         //Apply a velocity vertically
         this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
     }
+
 
     protected void SortVitesse()
     {
@@ -120,6 +130,7 @@ public class Character : MonoBehaviour
         this.resetSpeedBoost = true;
     }
 
+
     protected void Dash()   // MEME CHOSE QUE LE SORT DE VITESSE
     {
         this.speed = 40;
@@ -127,6 +138,7 @@ public class Character : MonoBehaviour
         this.dashCooldown = 6;
         this.resetDash = true;
     }
+
 
     protected void Stun()
     {
