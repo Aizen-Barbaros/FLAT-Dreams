@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     protected float jumpHeight;
 
     //Stun
-    protected GameObject StunBall;
+    public GameObject StunBall;
 
     //Cam
     protected float iniCamX;
@@ -34,6 +34,7 @@ public class Character : MonoBehaviour
     //Stun
     protected float lastStun;
     protected float stunCooldown;
+    protected GameObject stunBall;
 
     //Position of the mouse in the screen for the cam
     protected Vector3 position;
@@ -46,7 +47,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        this.speed = 7;
+        this.speed = 10;
         this.jumpHeight = 1.5f;
         this.camSpeed = 10;
         this.iniCamX = Input.mousePosition.x;
@@ -54,12 +55,6 @@ public class Character : MonoBehaviour
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
-    }
-
-
-    private void Update()
-    {
-        
     }
 
     protected virtual void OnCollisionEnter(Collision collision) //TO DO
@@ -114,7 +109,6 @@ public class Character : MonoBehaviour
         float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
         //Apply a velocity vertically
         this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
-        Debug.Log("Saut");
     }
 
 
@@ -129,7 +123,7 @@ public class Character : MonoBehaviour
 
     protected void Dash()   // MEME CHOSE QUE LE SORT DE VITESSE
     {
-        this.speed = 40;
+        this.speed = 30;
         this.lastDash = Time.time;
         this.dashCooldown = 6;
         this.resetDash = true;
@@ -139,7 +133,9 @@ public class Character : MonoBehaviour
     protected void Stun()
     {
         this.position = GetComponent<Transform>().position;
-        Instantiate(StunBall,new Vector3(position.x, position.y+4, position.z), Quaternion.identity);
+        Quaternion rotation = GetComponent<Transform>().rotation;
+        stunBall=Instantiate(StunBall,new Vector3(position.x, position.y+2, position.z), rotation);
+        stunBall.GetComponent<Rigidbody>().AddRelativeForce(-5,0,0,ForceMode.Impulse);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
     }
