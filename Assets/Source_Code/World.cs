@@ -21,9 +21,13 @@ public class World : MonoBehaviour
     public GameObject oakTree;
     public GameObject pineTree;
     public GameObject lollipopTree;
+    public GameObject hellTree;
 
     // Key
     public GameObject key;
+
+    // Point Light
+    public Light pointLight;
 
     // Monster
     public GameObject zombie;
@@ -86,7 +90,7 @@ public class World : MonoBehaviour
         {
             for (int z = 0; z < mapSize; z += chunkSize)
             {
-                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree);
+                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree, hellTree, pointLight);
             }
         }
     }
@@ -103,6 +107,8 @@ public class World : MonoBehaviour
             this.terrainType = TerrainTypes.HILLS;
         else
             this.terrainType = TerrainTypes.MOUNTAINS;
+
+        wType = 2;
 
         if (wType == 0)
         {
@@ -130,7 +136,7 @@ public class World : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Color.black;
-            RenderSettings.fogDensity = 0.02f;
+            RenderSettings.fogDensity = 0.05f;
         }
 
         else
