@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMouvement : MonoBehaviour {
-    public float verticalSpeed;
+public class CameraMouvement : MonoBehaviour
+{
+    private float verticalSpeed;
     private float iniCamY;
-    public Vector3 positionCam;
-    // Use this for initialization
-    void Start () {
-        iniCamY = Input.mousePosition.y;
-        positionCam = transform.position;
+    private Vector3 positionCam;
+
+    void Start ()
+    {
+        this.verticalSpeed = 7.5f;
+        this.iniCamY = Input.mousePosition.y;
+        this.positionCam = transform.position;
     }
 
-    // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
         float v = verticalSpeed * Input.GetAxis("Mouse Y");
         transform.Rotate(-v, 0, 0);
         positionCam = transform.position;

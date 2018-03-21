@@ -46,6 +46,9 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        this.speed = 7;
+        this.jumpHeight = 1.5f;
+        this.camSpeed = 10;
         this.iniCamX = Input.mousePosition.x;
         this.iniCamY = Input.mousePosition.y;
         this.dashCooldown = 0;

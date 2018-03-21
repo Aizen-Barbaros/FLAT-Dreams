@@ -24,7 +24,7 @@ public class Enemy : Character
 
     public void chasePlayer(Vector3 target)
     {
-        base.move(target);
+        base.Move(target);
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -32,7 +32,7 @@ public class Enemy : Character
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag != "Player")
         {
-            jump();
+            base.Jump();
         }
     }
 
