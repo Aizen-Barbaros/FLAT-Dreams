@@ -8,12 +8,10 @@ public class StunBall : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        transform.Translate(0, 0, 0);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(1, 0, 0);
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -23,7 +21,7 @@ public class StunBall : MonoBehaviour {
         }
         else
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
             Debug.Log("hit"+collision.gameObject.tag);
         }
     }
