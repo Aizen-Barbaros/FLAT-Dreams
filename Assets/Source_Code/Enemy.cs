@@ -14,7 +14,7 @@ public class Enemy : Character
         //base.FixedUpdate();
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        if (colliders.Length > 1)
+        if (colliders.Length >= 1)
         {
             this.player = colliders[0].GetComponent<Player>();
             this.chasePlayer(this.player.transform.position);

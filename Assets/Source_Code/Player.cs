@@ -32,11 +32,9 @@ public class Player : Character
     void FixedUpdate ()
     {
         base.Move();
-        Debug.Log("OK");
         if (Input.GetKeyDown("space"))//&& base.isGrounded)
         {
             base.Jump();
-            Debug.Log("Saut");
         }
             
 
