@@ -9,6 +9,11 @@ public class Enemy : Character
     private Collider[] colliders;
     private Player player;
 
+    private void Start()
+    {
+        base.speed = 5;
+    }
+
     protected void FixedUpdate()
     {
         //base.FixedUpdate();
@@ -34,7 +39,7 @@ public class Enemy : Character
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag != "Player")
         {
-            //base.Jump();
+            base.Jump();
         }
     }
 
