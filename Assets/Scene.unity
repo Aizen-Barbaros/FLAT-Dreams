@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -113,7 +113,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &896724633
+--- !u!1001 &711116616
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -122,15 +122,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_LocalRotation.x
@@ -150,38 +150,100 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54577370395519812, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54577370395519812, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: m_AngularDrag
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &896724634 stripped
+--- !u!1 &711116617 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1665603157629200, guid: 00a3e3f61c029bc40a65b21a092bcf97,
     type: 2}
-  m_PrefabInternal: {fileID: 896724633}
---- !u!1 &1042251111
+  m_PrefabInternal: {fileID: 711116616}
+--- !u!1 &1218602119
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1042251113}
-  - component: {fileID: 1042251112}
+  - component: {fileID: 1218602121}
+  - component: {fileID: 1218602120}
   m_Layer: 0
-  m_Name: Directional light
+  m_Name: world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!108 &1042251112
+--- !u!114 &1218602120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1218602119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154436e823dd0684ba1072b68d07f896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 711116617}
+  textureAtlas: {fileID: 2100000, guid: 19edf9fb64e580e43a55bc77a6bd59c3, type: 2}
+  skyNormal: {fileID: 2100000, guid: 45aedcb95cf834148ab2c5eec9645c7b, type: 2}
+  skySnowy: {fileID: 2100000, guid: 063023252f8703d48a52e431fafa8b20, type: 2}
+  skyHell: {fileID: 2100000, guid: d001018be761d6549a197046ebe8bcdd, type: 2}
+  skyDreamy: {fileID: 2100000, guid: 618e01a62c459464794482b8b73297a9, type: 2}
+  oakTree: {fileID: 100002, guid: 6604a410b4b12c14b86adf9b2cb46284, type: 3}
+  pineTree: {fileID: 100002, guid: 0f0f564ab6bc48f41870238cf009a91e, type: 3}
+  lollipopTree: {fileID: 100002, guid: 5b4a1d0aba0963240b91d4cfcc836a9a, type: 3}
+  key: {fileID: 100002, guid: 1ade44edcdb35914fb110799270170d6, type: 3}
+  zombie: {fileID: 100002, guid: 6cce881c3d1f9504d924576d19a57bb8, type: 3}
+  littleMonster: {fileID: 100002, guid: bb27c3bf264d3eb4380b97f98daa47e8, type: 3}
+--- !u!4 &1218602121
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1218602119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1760153665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1760153667}
+  - component: {fileID: 1760153666}
+  m_Layer: 0
+  m_Name: Directional Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1760153666
 Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1042251111}
+  m_GameObject: {fileID: 1760153665}
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
@@ -212,12 +274,12 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!4 &1042251113
+--- !u!4 &1760153667
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1042251111}
+  m_GameObject: {fileID: 1760153665}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -225,57 +287,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1373051985
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1373051987}
-  - component: {fileID: 1373051986}
-  m_Layer: 0
-  m_Name: World
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1373051986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1373051985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154436e823dd0684ba1072b68d07f896, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 896724634}
-  textureAtlas: {fileID: 2100000, guid: 19edf9fb64e580e43a55bc77a6bd59c3, type: 2}
-  skyNormal: {fileID: 2100000, guid: 45aedcb95cf834148ab2c5eec9645c7b, type: 2}
-  skySnowy: {fileID: 2100000, guid: 063023252f8703d48a52e431fafa8b20, type: 2}
-  skyHell: {fileID: 2100000, guid: d001018be761d6549a197046ebe8bcdd, type: 2}
-  skyDreamy: {fileID: 2100000, guid: 618e01a62c459464794482b8b73297a9, type: 2}
-  oakTree: {fileID: 1158135088450998, guid: b9ff8a34c107b7d4281cad40a0ca8ef6, type: 2}
-  pineTree: {fileID: 1256484093794888, guid: edffce6ff314ffb419220c41e3a286e3, type: 2}
-  lollipopTree: {fileID: 1435430740969860, guid: aec0b94983b3c054bbfdea63a2cf7cc0,
-    type: 2}
-  key: {fileID: 1967048097105674, guid: a2f8636abf6f33541acdf3e5a6d4da77, type: 2}
-  zombie: {fileID: 1864756716239624, guid: 0eac856d87299804c8f1068c17472611, type: 2}
-  littleMonster: {fileID: 1442962235632924, guid: 76f1e041766db344690e9809bb11cbf8,
-    type: 2}
---- !u!4 &1373051987
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1373051985}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.815563, y: 41.32598, z: 83.7545}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

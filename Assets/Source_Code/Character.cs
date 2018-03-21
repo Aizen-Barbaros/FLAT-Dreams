@@ -59,13 +59,6 @@ public class Character : MonoBehaviour
         
     }
 
-
-    protected virtual void FixedUpdate()
-    {
-        this.position = GetComponent<Transform>().position; // C'EST QUOI?
-    }
-
-
     protected virtual void OnCollisionEnter(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
@@ -90,7 +83,6 @@ public class Character : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * this.speed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * this.speed;
-        Debug.Log(position.y);
 
         this.transform.Translate(-z, 0, x);
 
@@ -119,6 +111,7 @@ public class Character : MonoBehaviour
         float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
         //Apply a velocity vertically
         this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+        Debug.Log("Saut");
     }
 
 
@@ -146,6 +139,5 @@ public class Character : MonoBehaviour
         Instantiate(StunBall,new Vector3(position.x, position.y+4, position.z), Quaternion.identity);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
-        Debug.Log("Stun");
     }
 }

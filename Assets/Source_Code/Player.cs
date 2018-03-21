@@ -14,6 +14,10 @@ public class Player : Character
         base.iniCamX = Input.mousePosition.x;
         base.iniCamY = Input.mousePosition.y;
 
+        base.jumpHeight = 10;
+
+        base.camSpeed = 10;
+
         base.speed = 5;
 
         base.dashCooldown = 0;
@@ -28,8 +32,8 @@ public class Player : Character
     void Update ()
     {
         base.Move();
-
-        if (Input.GetKeyDown("space") && base.isGrounded)
+        Debug.Log("OK");
+        if (Input.GetKeyDown("space")&& base.isGrounded)
             base.Jump();
 
         if (Input.GetKeyDown("e") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
