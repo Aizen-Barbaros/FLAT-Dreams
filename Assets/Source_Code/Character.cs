@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
     protected float jumpHeight;
 
     //Stun
-    protected GameObject StunBall;
+    public GameObject StunBall;
 
     //Cam
     protected float iniCamX;
@@ -129,7 +129,7 @@ public class Character : MonoBehaviour
 
     protected void Dash()   // MEME CHOSE QUE LE SORT DE VITESSE
     {
-        this.speed = 40;
+        this.speed = 30;
         this.lastDash = Time.time;
         this.dashCooldown = 6;
         this.resetDash = true;
@@ -139,7 +139,7 @@ public class Character : MonoBehaviour
     protected void Stun()
     {
         this.position = GetComponent<Transform>().position;
-        Instantiate(StunBall,new Vector3(position.x, position.y+4, position.z), Quaternion.identity);
+        Instantiate(StunBall,new Vector3(position.x, position.y+2, position.z), Quaternion.identity);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
     }

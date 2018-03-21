@@ -218,9 +218,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4428044076328668, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.05
+      value: -0.04
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 33298339326042726, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+    - {fileID: 23475780786111394, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &711116617 stripped
