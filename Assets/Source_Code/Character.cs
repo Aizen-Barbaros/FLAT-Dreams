@@ -46,7 +46,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        this.speed = 7;
+        this.speed = 10;
         this.jumpHeight = 1.5f;
         this.camSpeed = 10;
         this.iniCamX = Input.mousePosition.x;
@@ -54,12 +54,6 @@ public class Character : MonoBehaviour
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
-    }
-
-
-    private void Update()
-    {
-        
     }
 
     protected virtual void OnCollisionEnter(Collision collision) //TO DO
@@ -114,7 +108,6 @@ public class Character : MonoBehaviour
         float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
         //Apply a velocity vertically
         this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
-        Debug.Log("Saut");
     }
 
 

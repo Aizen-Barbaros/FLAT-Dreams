@@ -14,7 +14,9 @@ public class Enemy : Character
         //base.FixedUpdate();
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        if (colliders.Length > 1)
+        Debug.Log("Collider : " + colliders.Length);
+
+        if (colliders.Length >= 1)
         {
             this.player = colliders[0].GetComponent<Player>();
             this.chasePlayer(this.player.transform.position);
@@ -32,7 +34,7 @@ public class Enemy : Character
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag != "Player")
         {
-            base.Jump();
+            //base.Jump();
         }
     }
 
