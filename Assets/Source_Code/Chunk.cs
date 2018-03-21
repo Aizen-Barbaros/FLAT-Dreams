@@ -16,6 +16,7 @@ public class Chunk
     {
         this.chunk = new GameObject((int)position.x + "_" + (int)position.y + "_" + (int)position.z);
         this.chunk.transform.position = position;
+        this.chunk.tag = "Ground";
         this.textureAtlas = textureAtlas;
         this.oakTree = oakTree;
         this.pineTree = pineTree;
