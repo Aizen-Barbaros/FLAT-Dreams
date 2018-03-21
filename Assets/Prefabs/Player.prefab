@@ -86,7 +86,7 @@ Transform:
   m_GameObject: {fileID: 1665603157629200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 160, y: 62, z: 160}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4790697113482434}
   m_Father: {fileID: 0}
@@ -197,7 +197,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &65716185868908200
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -228,8 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df20848f801b2a4097efc42f76ee462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verticalSpeed: 7.5
-  positionCam: {x: 0, y: 0, z: 0}
 --- !u!114 &114670555462709398
 MonoBehaviour:
   m_ObjectHideFlags: 1

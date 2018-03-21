@@ -14,7 +14,7 @@ public class Player : Character
         base.iniCamX = Input.mousePosition.x;
         base.iniCamY = Input.mousePosition.y;
 
-        base.jumpHeight = 10;
+        base.jumpHeight = 1.5f;
 
         base.camSpeed = 10;
 
@@ -33,8 +33,12 @@ public class Player : Character
     {
         base.Move();
         Debug.Log("OK");
-        if (Input.GetKeyDown("space")&& base.isGrounded)
+        if (Input.GetKeyDown("space"))//&& base.isGrounded)
+        {
             base.Jump();
+            Debug.Log("Saut");
+        }
+            
 
         if (Input.GetKeyDown("e") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
             base.SortVitesse();

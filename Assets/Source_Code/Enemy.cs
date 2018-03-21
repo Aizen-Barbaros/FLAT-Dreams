@@ -32,7 +32,7 @@ public class Enemy : Character
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag != "Player")
         {
-            Jump();
+            base.Jump();
         }
     }
 

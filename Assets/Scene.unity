@@ -187,6 +187,35 @@ Prefab:
       propertyPath: m_AllowMSAA
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4495191571182908, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1303356345625290, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542543442690874, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665603157629200, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 54577370395519812, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
   m_IsPrefabParent: 0
@@ -228,12 +257,14 @@ MonoBehaviour:
   skySnowy: {fileID: 2100000, guid: 063023252f8703d48a52e431fafa8b20, type: 2}
   skyHell: {fileID: 2100000, guid: d001018be761d6549a197046ebe8bcdd, type: 2}
   skyDreamy: {fileID: 2100000, guid: 618e01a62c459464794482b8b73297a9, type: 2}
-  oakTree: {fileID: 100002, guid: 6604a410b4b12c14b86adf9b2cb46284, type: 3}
-  pineTree: {fileID: 100002, guid: 0f0f564ab6bc48f41870238cf009a91e, type: 3}
-  lollipopTree: {fileID: 100002, guid: 5b4a1d0aba0963240b91d4cfcc836a9a, type: 3}
-  key: {fileID: 100002, guid: 1ade44edcdb35914fb110799270170d6, type: 3}
-  zombie: {fileID: 100002, guid: 6cce881c3d1f9504d924576d19a57bb8, type: 3}
-  littleMonster: {fileID: 100002, guid: bb27c3bf264d3eb4380b97f98daa47e8, type: 3}
+  oakTree: {fileID: 1158135088450998, guid: b9ff8a34c107b7d4281cad40a0ca8ef6, type: 2}
+  pineTree: {fileID: 1256484093794888, guid: edffce6ff314ffb419220c41e3a286e3, type: 2}
+  lollipopTree: {fileID: 1435430740969860, guid: aec0b94983b3c054bbfdea63a2cf7cc0,
+    type: 2}
+  key: {fileID: 1967048097105674, guid: a2f8636abf6f33541acdf3e5a6d4da77, type: 2}
+  zombie: {fileID: 1864756716239624, guid: 0eac856d87299804c8f1068c17472611, type: 2}
+  littleMonster: {fileID: 1442962235632924, guid: 76f1e041766db344690e9809bb11cbf8,
+    type: 2}
 --- !u!4 &1218602121
 Transform:
   m_ObjectHideFlags: 0
