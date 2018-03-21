@@ -2,140 +2,138 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour {
-
-    //============================================================
-    //Public
-    //============================================================
+public class Character : MonoBehaviour
+{
     //Jump
-    public float speed;                                             //Speed de GAB
-    public float jumpHeight;
+    protected float speed;
+    protected float jumpHeight;
 
-    //Speed
-    public float horizontalSpeed;                                   //Speed de Félix; Même speed que le premier à revoir
+    //CamSpeed
+    protected float camSpeed;
 
     //Stun
-    public GameObject StunBall;
+    protected GameObject StunBall;
 
-    //Cooldown
-    public float cooldownDash;
-    public float cooldownStun;
-    //============================================================
-
-    //============================================================
-    //Protected
-    //============================================================
     //Cam
     protected float iniCamX;
     protected float iniCamY;
 
     //Dash
-    protected float dernierDash;
     protected bool resetDash;
-    protected float tempsActifDash;
+    protected float lastDash;
+    protected float dashDuration;
+    protected float dashCooldown;
 
     //Stun
-    protected float dernierStun;
+    protected float lastStun;
+    protected float stunCooldown;
+
+    //Sort vitesse
+    protected bool resetSpeedBoost;
+    protected float lastSpeedBoost;
+    protected float speedBoostDuration;
+    protected float speedBoostCooldown;
 
     //Position of the mouse in the screen for the cam
-    protected Vector3 Position;
+    protected Vector3 position;
 
-    protected bool isJumping { get; set; }                              //TO DO
-    //============================================================
+    protected bool IsJumping { get; set; }                              //TO DO
 
-    //============================================================
-    //Private
-    //============================================================
+    protected bool isGrounded;
     private float step;
 
-    private bool isGrounded;
-    //============================================================
-    
     private void Start()
     {
-        iniCamX = Input.mousePosition.x;
-        iniCamY = Input.mousePosition.y;
-        cooldownDash = 0;
-        tempsActifDash = 0.3f;
-        cooldownStun = 0;
+        this.iniCamX = Input.mousePosition.x;
+        this.iniCamY = Input.mousePosition.y;
+        this.dashCooldown = 0;
+        this.dashDuration = 0.3f;
+        this.stunCooldown = 0;
+    }
+
+    private void Update()
+    {
+        
     }
 
     protected virtual void FixedUpdate()
     {
-        Position = GetComponent<Transform>().position; // C'EST QUOI?
+        this.position = GetComponent<Transform>().position; // C'EST QUOI?
     }
 
     protected virtual void OnCollisionEnter(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
         {
-            isGrounded = true;
+            this.isGrounded = true;
             Debug.Log("Grounded");
         }
     }
 
     protected virtual void OnCollisionExit(Collision collision) //TO DO
     {
-        if(collision.gameObject.tag == "Grounded")
+        if(collision.gameObject.tag == "Ground")
         {
-            isGrounded = false;
+            this.isGrounded = false;
             Debug.Log("Leave Grounded");
         }
     }
 
-    protected void move()
+    protected void Move()
     {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-        Debug.Log(Position.y);
-        transform.Translate(-z, 0, x);
-        float h = horizontalSpeed * Input.GetAxis("Mouse X");
-        transform.Rotate(0, h, 0);
+        float x = Input.GetAxis("Horizontal") * Time.deltaTime * this.speed;
+        float z = Input.GetAxis("Vertical") * Time.deltaTime * this.speed;
+        Debug.Log(position.y);
+
+        this.transform.Translate(-z, 0, x);
+
+        float h = camSpeed * Input.GetAxis("Mouse X");
+        this.transform.Rotate(0, h, 0);
     }
 
-    protected void move(Vector3 target)
+    protected void Move(Vector3 target)
     {
         this.step = this.speed * Time.deltaTime;
 
         //Follow the player
         target.y = 0;                                                                           //A REVOIR
-        this.transform.position = Vector3.MoveTowards(this.transform.position, target, step);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
 
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
     }
 
-    protected void jump()
+    protected void Jump()
     {
         //Mathematic function who give the velocity for a specific jump height
-        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * jumpHeight *-1);
+        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
         //Apply a velocity vertically
         this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
     }
 
-    protected void dash()
+    protected void SortVitesse()
     {
-        speed = 40;
-        dernierDash = Time.time;
-        cooldownDash = 6;
-        resetDash = true;
+        this.speed = 10;
+        this.lastSpeedBoost = Time.time;
+        this.speedBoostCooldown = this.speedBoostDuration + 5;
+        this.resetSpeedBoost = true;
     }
 
-    protected void stun()
+    protected void Dash()   // MEME CHOSE QUE LE SORT DE VITESSE
     {
-        Position = GetComponent<Transform>().position;
-        Instantiate(StunBall,new Vector3(Position.x,Position.y+4,Position.z),Quaternion.identity);
-        cooldownStun = 3;
-        dernierStun = Time.time;
+        this.speed = 40;
+        this.lastDash = Time.time;
+        this.dashCooldown = 6;
+        this.resetDash = true;
+    }
+
+    protected void Stun()
+    {
+        this.position = GetComponent<Transform>().position;
+        Instantiate(StunBall,new Vector3(position.x, position.y+4, position.z), Quaternion.identity);
+        this.stunCooldown = 3;
+        this.lastStun = Time.time;
         Debug.Log("Stun");
     }
-
-    private void cooldown(float time) //Trouver un moyen de faire un cooldown commun?
-    {
-
-    }
 }
-
-//NOTE
-// notation des membre de la classe utilisation du this.

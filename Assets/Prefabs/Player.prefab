@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1665603157629200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -1, z: 0}
+  m_LocalPosition: {x: 160, y: 62, z: 160}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4790697113482434}
@@ -242,13 +242,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  jump: 2800
-  StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
-  positionCam: {x: 0, y: 0, z: 0}
-  tempsActifSortVitesse: 2
+  jumpHeight: 0
   horizontalSpeed: 10
+  StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
   cooldownDash: 0
   cooldownStun: 3
+  tempsActifSortVitesse: 2
+  jumper: 0
 --- !u!124 &124042531200009550
 Behaviour:
   m_ObjectHideFlags: 1

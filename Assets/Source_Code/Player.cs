@@ -2,105 +2,68 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Character {
+public class Player : Character
+{
+    private int lives;
+    private int currentLives;
+    private int keyCaught;
 
-    private int Lives { get; set; }
-    private int CurrentLives { get; set; }
-    private int KeyCaught { get; set; }
-    private Rigidbody Rb { get; set; }
-    
-    private Vector3 position;
-    
-    public float tempsActifSortVitesse;
-    private bool resetSortVitesse;
-
-    public float jumper; //C'EST QUOI
-
-
-    private float dernierSortVitesse;
-    private float cooldownSortVitesse;
- 
 
     void Start()
     {
-        Rb = GetComponent<Rigidbody>();
-        
         base.iniCamX = Input.mousePosition.x;
         base.iniCamY = Input.mousePosition.y;
-        dernierSortVitesse = Time.time;
-        cooldownSortVitesse = 0;
-        base.cooldownDash = 0; 
-        base.tempsActifDash = 0.3f;
-    }
-	
-	void Update ()
-    {
-        //cooldown.text = "Cooldown Dash: " + placeholder.ToString().Normalize();
-        move();
-        
-        if (Input.GetKeyDown("e")&& dernierSortVitesse + cooldownSortVitesse <= Time.time)
-        { 
-                SortVitesse();  
-        }
-        if (dernierSortVitesse+tempsActifSortVitesse<=Time.time && resetSortVitesse)
-        {
-            speed = 5;
-            resetSortVitesse = false;
-        }
-        if (base.dernierDash + base.tempsActifDash <= Time.time && resetDash)
-        {
-            speed = 5;
-            resetDash = false;
-        }
-        if (Input.GetKeyDown("space")&&(Rb.velocity.y>=-1&&Rb.velocity.y<=1))
-        {
-            base.jump();
-        }
-        if(Input.GetKeyDown("q")&& base.cooldownDash + base.dernierDash <= Time.time)
-        {
-            base.dash();
-        }
-        if (Input.GetMouseButton(1) && base.cooldownStun + base.dernierStun <= Time.time)
-        {
-            base.stun();
-        }
+
+        base.speed = 5;
+
+        base.dashCooldown = 0;
+        base.dashDuration = 0.3f;
+
+        base.speedBoostDuration = 2;
+        base.lastSpeedBoost = Time.time;
+        base.speedBoostCooldown = 0;
     }
 
-    /*private void Jump()
+
+    void Update ()
     {
-        Rb.AddRelativeForce(new Vector3(20f, jumper, 0), ForceMode.Impulse);
-    }*/
+        base.Move();
+
+        if (Input.GetKeyDown("space") && base.isGrounded)
+            base.Jump();
+
+        if (Input.GetKeyDown("e") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
+            base.SortVitesse();
+
+        if (Input.GetKeyDown("q") && base.dashCooldown + base.lastDash <= Time.time)
+            base.Dash();
+
+        if (Input.GetMouseButton(1) && base.stunCooldown + base.lastStun <= Time.time)
+            base.Stun();
+
+        if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
+        {
+            base.speed = 5;
+            base.resetSpeedBoost = false;
+        }
+
+        if (base.lastDash + base.dashDuration <= Time.time && resetDash)
+        {
+            base.speed = 5;
+            base.resetDash = false;
+        }        
+    }
+
 
     public void Caught()
     {
 
     }
 
-    private void SortVitesse()
-    {
-        speed=10;
-        dernierSortVitesse = Time.time;
-        resetSortVitesse = true;
-        cooldownSortVitesse =tempsActifSortVitesse+5;
-    }
-
-    private void Dash()
-    {
-        
-    }
-
-    private void Stun()
-    {
-
-    }
 
     void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Ennemy")
-        {
             Caught();
-        }
     }
-
-
 }

@@ -155,6 +155,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &896724634 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1665603157629200, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+    type: 2}
+  m_PrefabInternal: {fileID: 896724633}
 --- !u!1 &1042251111
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154436e823dd0684ba1072b68d07f896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1665603157629200, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
+  player: {fileID: 896724634}
   textureAtlas: {fileID: 2100000, guid: 19edf9fb64e580e43a55bc77a6bd59c3, type: 2}
   skyNormal: {fileID: 2100000, guid: 45aedcb95cf834148ab2c5eec9645c7b, type: 2}
   skySnowy: {fileID: 2100000, guid: 063023252f8703d48a52e431fafa8b20, type: 2}
