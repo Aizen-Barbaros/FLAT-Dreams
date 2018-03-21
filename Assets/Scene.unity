@@ -220,6 +220,12 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: -0.04
       objectReference: {fileID: 0}
+    - target: {fileID: 114670555462709398, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: StunBall
+      value: 
+      objectReference: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 33298339326042726, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
     - {fileID: 23475780786111394, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
