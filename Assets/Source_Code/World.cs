@@ -220,7 +220,7 @@ public class World : MonoBehaviour
 
     public void GenerateMonsters()
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 10; i++)
         {
             this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector(), Quaternion.identity) as GameObject;
         }
