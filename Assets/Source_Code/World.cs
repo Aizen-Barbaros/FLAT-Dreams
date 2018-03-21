@@ -108,8 +108,6 @@ public class World : MonoBehaviour
         else
             this.terrainType = TerrainTypes.MOUNTAINS;
 
-        wType = 2;
-
         if (wType == 0)
         {
             worldType = WorldTypes.NORMAL;
