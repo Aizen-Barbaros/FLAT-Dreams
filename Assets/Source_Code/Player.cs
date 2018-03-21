@@ -29,7 +29,7 @@ public class Player : Character
     }
 
 
-    void Update ()
+    void FixedUpdate ()
     {
         base.Move();
         Debug.Log("OK");
