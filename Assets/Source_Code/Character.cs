@@ -94,7 +94,7 @@ public class Character : MonoBehaviour
         this.step = this.speed * Time.deltaTime;
 
         //Follow the player
-        target.y = 0;                                                                           //A REVOIR
+        //target.y = 0;                                                                           //A REVOIR
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
 
         //Rotation facing toward the player
@@ -134,7 +134,7 @@ public class Character : MonoBehaviour
     {
         this.position = GetComponent<Transform>().position;
         Quaternion rotation = GetComponent<Transform>().rotation;
-        stunBall=Instantiate(StunBall,new Vector3(position.x, position.y+2, position.z),rotation);
+        stunBall=Instantiate(StunBall,new Vector3(position.x, position.y+2, position.z), rotation);
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(-5,0,0,ForceMode.Impulse);
         this.stunCooldown = 3;
         this.lastStun = Time.time;

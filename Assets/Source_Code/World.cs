@@ -105,6 +105,8 @@ public class World : MonoBehaviour
         else
             this.terrainType = TerrainTypes.MOUNTAINS;
 
+        wType = 2;
+
         if (wType == 0)
         {
             worldType = WorldTypes.NORMAL;
@@ -217,9 +219,10 @@ public class World : MonoBehaviour
 
     public void GenerateMonsters()
     {
-        for (int i = 0; i < 10; i++)
+
+        for (int i = 0; i < 30; i++)
         {
-            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector(), Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector() , Quaternion.identity) as GameObject;
         }
     }
 
