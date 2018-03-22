@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4790697113482434}
-  - component: {fileID: 33298339326042726}
   - component: {fileID: 23475780786111394}
   - component: {fileID: 54577370395519812}
   - component: {fileID: 65716185868908200}
@@ -86,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 1665603157629200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 160, y: 62, z: 160}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4790697113482434}
   m_Father: {fileID: 0}
@@ -176,13 +175,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33298339326042726
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1303356345625290}
-  m_Mesh: {fileID: 4300000, guid: c879018f8b8d9794ca4ff237228baeea, type: 3}
 --- !u!54 &54577370395519812
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -239,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227c4bfe03fcf841aa09e88fd2e65f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StunBall: {fileID: 0}
 --- !u!124 &124042531200009550
 Behaviour:
   m_ObjectHideFlags: 1
