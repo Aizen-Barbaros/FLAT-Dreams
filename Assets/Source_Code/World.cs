@@ -26,9 +26,6 @@ public class World : MonoBehaviour
     // Key
     public GameObject key;
 
-    // Point Light
-    public Light pointLight;
-
     // Monster
     public GameObject zombie;
     public GameObject littleMonster;/*
@@ -90,7 +87,7 @@ public class World : MonoBehaviour
         {
             for (int z = 0; z < mapSize; z += chunkSize)
             {
-                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree, hellTree, pointLight);
+                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree, hellTree);
             }
         }
     }
@@ -107,6 +104,8 @@ public class World : MonoBehaviour
             this.terrainType = TerrainTypes.HILLS;
         else
             this.terrainType = TerrainTypes.MOUNTAINS;
+
+        wType = 2;
 
         if (wType == 0)
         {
@@ -134,7 +133,7 @@ public class World : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Color.black;
-            RenderSettings.fogDensity = 0.05f;
+            RenderSettings.fogDensity = 0.01f;
         }
 
         else
@@ -220,9 +219,10 @@ public class World : MonoBehaviour
 
     public void GenerateMonsters()
     {
-        for (int i = 0; i < 10; i++)
+
+        for (int i = 0; i < 30; i++)
         {
-            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector(), Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector() , Quaternion.identity) as GameObject;
         }
     }
 

@@ -11,10 +11,9 @@ public class Chunk
     private GameObject pineTree;
     private GameObject lollipopTree;
     private GameObject hellTree;
-    private Light pointLight;
 
 
-    public Chunk(Vector3 position, Material textureAtlas, GameObject oakTree, GameObject pineTree, GameObject lollipopTree, GameObject hellTree, Light pointLight)
+    public Chunk(Vector3 position, Material textureAtlas, GameObject oakTree, GameObject pineTree, GameObject lollipopTree, GameObject hellTree)
     {
         this.chunk = new GameObject((int)position.x + "_" + (int)position.y + "_" + (int)position.z);
         this.chunk.transform.position = position;
@@ -24,8 +23,6 @@ public class Chunk
         this.pineTree = pineTree;
         this.lollipopTree = lollipopTree;
         this.hellTree = hellTree;
-
-        this.pointLight = pointLight;
 
         this.CreateChunk();
         this.CombineCubes();
@@ -94,9 +91,7 @@ public class Chunk
                 else if (World.worldType == World.WorldTypes.HELL && Random.Range(0, 300) == 0)
                 {
                     GameObject tree = MonoBehaviour.Instantiate(this.hellTree, new Vector3((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z), Quaternion.identity) as GameObject;
-                    Light light = MonoBehaviour.Instantiate(this.pointLight, new Vector3(tree.transform.position.x, tree.transform.position.y + 4, tree.transform.position.z), Quaternion.identity) as Light;
                 }
-
             }
         }
     }
