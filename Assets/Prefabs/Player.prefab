@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1303356345625290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 54, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4428044076328668}
@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6227c4bfe03fcf841aa09e88fd2e65f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
 --- !u!124 &124042531200009550
 Behaviour:
   m_ObjectHideFlags: 1
