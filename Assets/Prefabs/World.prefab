@@ -63,7 +63,6 @@ MonoBehaviour:
     type: 2}
   hellTree: {fileID: 1993062357505148, guid: 8822c161a67ac724799b4dbd74a530cc, type: 2}
   key: {fileID: 1967048097105674, guid: a2f8636abf6f33541acdf3e5a6d4da77, type: 2}
-  pointLight: {fileID: 0}
   zombie: {fileID: 1864756716239624, guid: 0eac856d87299804c8f1068c17472611, type: 2}
   littleMonster: {fileID: 1442962235632924, guid: 76f1e041766db344690e9809bb11cbf8,
     type: 2}

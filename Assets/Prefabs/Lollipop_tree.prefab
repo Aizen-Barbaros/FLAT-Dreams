@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 64993560963966298}
   m_Layer: 0
   m_Name: Lollipop_tree
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 23769986077150160}
   m_Layer: 0
   m_Name: Lollipop_tree
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

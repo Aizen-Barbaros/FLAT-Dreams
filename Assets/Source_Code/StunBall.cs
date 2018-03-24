@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StunBall : MonoBehaviour {
-
-    private float Speed;
-    // Use this for initialization
-    void Start()
-    {
-    }
-	
-	// Update is called once per frame
-	void Update () {
-    }
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Terrain")|| collision.gameObject.CompareTag("Ennemy"))
         {
-         
+            Destroy(this.gameObject);
+            Debug.Log("hit" + collision.gameObject.tag);
         }
         else
         {
             //Destroy(this.gameObject);
-            Debug.Log("hit"+collision.gameObject.tag);
+            //Debug.Log("hit"+collision.gameObject.tag);
         }
     }
 }
