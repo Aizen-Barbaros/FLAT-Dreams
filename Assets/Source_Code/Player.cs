@@ -18,7 +18,7 @@ public class Player : Character
 
         base.camSpeed = 10;
 
-        base.speed = 5;
+        base.speed = 8;
 
         base.dashCooldown = 0;
         base.dashDuration = 0.3f;
