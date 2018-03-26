@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 54810099079431354}
   m_Layer: 0
   m_Name: Little_monster
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114780078846952018}
   m_Layer: 0
   m_Name: Little_monster
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StunBall: {fileID: 0}
+<<<<<<< HEAD
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -169,6 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StunBall: {fileID: 0}
+=======
+>>>>>>> 9b336cdb7c9cef35dea485804efc07f727ac03a6
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
