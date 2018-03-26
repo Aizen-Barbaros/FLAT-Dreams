@@ -113,6 +113,10 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f2f120c9b3ae4d4cd846a36160dfcb5c161ca1eb
 --- !u!1 &272460412
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +148,11 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
+<<<<<<< HEAD
     m_Type: 0
+=======
+    m_Type: 2
+>>>>>>> f2f120c9b3ae4d4cd846a36160dfcb5c161ca1eb
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -179,6 +187,12 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -3, z: 0}
 --- !u!1001 &2033480478
+<<<<<<< HEAD
+=======
+=======
+--- !u!1001 &1177449976
+>>>>>>> 911db2d8619545ece413e3c0cf281eb920797c3d
+>>>>>>> f2f120c9b3ae4d4cd846a36160dfcb5c161ca1eb
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -221,9 +235,16 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 1303356345625290, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
       propertyPath: m_TagString
       value: Player
+=======
+    - target: {fileID: 20711165576868348, guid: 00a3e3f61c029bc40a65b21a092bcf97,
+        type: 2}
+      propertyPath: m_AllowMSAA
+      value: 0
+>>>>>>> f2f120c9b3ae4d4cd846a36160dfcb5c161ca1eb
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00a3e3f61c029bc40a65b21a092bcf97, type: 2}
