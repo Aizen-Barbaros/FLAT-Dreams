@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23452508347905062}
   - component: {fileID: 54459837023904878}
   - component: {fileID: 114958871377808754}
+  - component: {fileID: 65553993925996946}
   m_Layer: 0
   m_Name: Little_monster
   m_TagString: Ennemy
@@ -128,6 +129,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65553993925996946
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1865739537567014}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.975, y: 0.97500014, z: 1.2750001}
+  m_Center: {x: 0.03750001, y: 1.6875001, z: -0.037499994}
 --- !u!114 &114958871377808754
 MonoBehaviour:
   m_ObjectHideFlags: 1

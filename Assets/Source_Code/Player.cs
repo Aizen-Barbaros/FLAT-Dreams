@@ -44,7 +44,7 @@ public class Player : Character
         if (Input.GetKeyDown("q") && base.dashCooldown + base.lastDash <= Time.time)
             base.Dash();
 
-        if (Input.GetMouseButton(1) && base.stunCooldown + base.lastStun <= Time.time)
+        if (Input.GetMouseButton(0) && base.stunCooldown + base.lastStun <= Time.time)
             base.Stun();
 
         if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)

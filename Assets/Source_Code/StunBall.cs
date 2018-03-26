@@ -12,8 +12,7 @@ public class StunBall : MonoBehaviour {
         }
         else
         {
-            //Destroy(this.gameObject);
-            //Debug.Log("hit"+collision.gameObject.tag);
+
         }
     }
 }
