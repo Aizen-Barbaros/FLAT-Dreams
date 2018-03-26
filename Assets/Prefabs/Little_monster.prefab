@@ -39,6 +39,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4454482026860866}
+  - component: {fileID: 114780078846952018}
   m_Layer: 0
   m_Name: Little_monster
   m_TagString: Untagged
@@ -152,6 +153,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af25d215d39fcb4dbfab6d99c611b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StunBall: {fileID: 0}
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &114780078846952018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442962235632924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4af25d215d39fcb4dbfab6d99c611b9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StunBall: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
