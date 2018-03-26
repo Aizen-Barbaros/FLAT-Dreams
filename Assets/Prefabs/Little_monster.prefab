@@ -22,13 +22,8 @@ GameObject:
   - component: {fileID: 33486791660690384}
   - component: {fileID: 23452508347905062}
   - component: {fileID: 54459837023904878}
-<<<<<<< HEAD
   - component: {fileID: 114958871377808754}
   - component: {fileID: 65553993925996946}
-=======
-  - component: {fileID: 114818943888199228}
-  - component: {fileID: 65072665719784652}
->>>>>>> a643e4d39e7f8ad5be49a1737084abb7a9dce84f
   m_Layer: 0
   m_Name: Little_monster
   m_TagString: Ennemy
