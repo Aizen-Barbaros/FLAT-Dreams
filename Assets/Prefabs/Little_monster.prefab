@@ -22,8 +22,13 @@ GameObject:
   - component: {fileID: 33486791660690384}
   - component: {fileID: 23452508347905062}
   - component: {fileID: 54459837023904878}
+<<<<<<< HEAD
   - component: {fileID: 114958871377808754}
   - component: {fileID: 65553993925996946}
+=======
+  - component: {fileID: 114818943888199228}
+  - component: {fileID: 65072665719784652}
+>>>>>>> a643e4d39e7f8ad5be49a1737084abb7a9dce84f
   m_Layer: 0
   m_Name: Little_monster
   m_TagString: Ennemy
@@ -127,9 +132,13 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+<<<<<<< HEAD
 --- !u!65 &65553993925996946
+=======
+--- !u!65 &65072665719784652
+>>>>>>> a643e4d39e7f8ad5be49a1737084abb7a9dce84f
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -141,7 +150,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.975, y: 0.97500014, z: 1.2750001}
   m_Center: {x: 0.03750001, y: 1.6875001, z: -0.037499994}
+<<<<<<< HEAD
 --- !u!114 &114958871377808754
+=======
+--- !u!114 &114818943888199228
+>>>>>>> a643e4d39e7f8ad5be49a1737084abb7a9dce84f
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -152,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af25d215d39fcb4dbfab6d99c611b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
+  StunBall: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
