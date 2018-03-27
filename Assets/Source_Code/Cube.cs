@@ -18,7 +18,20 @@ public class Cube
                                              {new Vector2(0.2f, 0.2f), new Vector2(0.4f, 0.2f), new Vector2(0.2f, 0.4f), new Vector2(0.4f, 0.4f)},              // HELL UNDER SIDE
                                              {new Vector2(0.0f, 0.4f), new Vector2(0.2f, 0.4f), new Vector2(0.0f, 0.6f), new Vector2(0.2f, 0.6f)},              // DREAMY TOP TOP
 	                                         {new Vector2(0.2f, 0.4f), new Vector2(0.4f, 0.4f), new Vector2(0.2f, 0.6f), new Vector2(0.4f, 0.6f)},              // DREAMY TOP SIDE
-		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)}};             // DREAMY UNDER SIDE
+		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)},              // DREAMY UNDER SIDE
+                                             {new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f), new Vector2(0.6f, 1.0f), new Vector2(0.8f, 1.0f)},              // METAL TOP TOP
+	                                         {new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f), new Vector2(0.6f, 1.0f), new Vector2(0.8f, 1.0f)},              // METAL TOP SIDE
+		                                     {new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f), new Vector2(0.6f, 1.0f), new Vector2(0.8f, 1.0f)},              // METAL UNDER SIDE
+                                             {new Vector2(0.6f, 0.6f), new Vector2(0.8f, 0.6f), new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f)},              // CHEESE TOP TOP
+	                                         {new Vector2(0.8f, 0.6f), new Vector2(1.0f, 0.6f), new Vector2(0.8f, 0.8f), new Vector2(1.0f, 0.8f)},              // CHEESE TOP SIDE
+		                                     {new Vector2(0.8f, 0.6f), new Vector2(1.0f, 0.6f), new Vector2(0.8f, 0.8f), new Vector2(1.0f, 0.8f)},              // CHEESE UNDER SIDE
+                                             {new Vector2(0.6f, 0.4f), new Vector2(0.8f, 0.4f), new Vector2(0.6f, 0.6f), new Vector2(0.8f, 0.6f)},              // AUTUMN TOP TOP
+	                                         {new Vector2(0.8f, 0.4f), new Vector2(1.0f, 0.4f), new Vector2(0.8f, 0.6f), new Vector2(1.0f, 0.6f)},              // AUTUMN TOP SIDE
+		                                     {new Vector2(0.4f, 0.8f), new Vector2(0.6f, 0.8f), new Vector2(0.4f, 1.0f), new Vector2(0.6f, 1.0f)},              // AUTUMN UNDER SIDE
+                                             {new Vector2(0.0f, 0.0f), new Vector2(0.2f, 0.0f), new Vector2(0.0f, 0.2f), new Vector2(0.2f, 0.2f)},              // ROTTING TOP TOP
+	                                         {new Vector2(0.2f, 0.0f), new Vector2(0.4f, 0.0f), new Vector2(0.2f, 0.2f), new Vector2(0.4f, 0.2f)},              // ROTTING TOP SIDE
+		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)}};             // ROTTING UNDER SIDE
+                                            
 
     private GameObject parent;
     private Vector3 position;
