@@ -11,7 +11,7 @@ public class Enemy : Character
 
     private void Start()
     {
-        base.speed = 5;
+        base.speed = 8;
     }
 
     protected void FixedUpdate()
@@ -19,7 +19,7 @@ public class Enemy : Character
         //base.FixedUpdate();
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        Debug.Log("Collider : " + colliders.Length);
+        //Debug.Log("Collider : " + colliders.Length);
 
         if (colliders.Length >= 1)
         {
