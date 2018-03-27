@@ -133,10 +133,9 @@ public class Character : MonoBehaviour
     protected void Stun()
     {
         this.position = GetComponent<Transform>().position;
-        Quaternion rotation = GetComponent<Transform>().rotation;
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         stunBall=Instantiate(StunBall,new Vector3(position.x, position.y+4, position.z),camOrientation);
-        stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,10,ForceMode.Impulse);
+        stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
     }
