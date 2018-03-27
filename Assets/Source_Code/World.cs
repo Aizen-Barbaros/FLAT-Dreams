@@ -78,7 +78,7 @@ public class World : MonoBehaviour
         player.SetActive(false);
 
         this.GenerateWorld();
-        this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
         //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
     }
 
