@@ -75,9 +75,11 @@ public class World : MonoBehaviour
 
     public void Start()
     {
-        //this.GenerateWorld();
-        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
-        this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        player.SetActive(false);
+
+        this.GenerateWorld();
+        this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
     }
 
 
@@ -142,8 +144,8 @@ public class World : MonoBehaviour
                 string terrainTypeRead = reader.ReadLine();
                 this.maxHeight = int.Parse(reader.ReadLine());
                 this.octaves = int.Parse(reader.ReadLine());
-                this.smooth = int.Parse(reader.ReadLine());
-                this.persistence = int.Parse(reader.ReadLine());
+                this.smooth = float.Parse(reader.ReadLine());
+                this.persistence = float.Parse(reader.ReadLine());
 
                 int wType;
                 int tType;
@@ -159,9 +161,9 @@ public class World : MonoBehaviour
                     wType = 3;
 
                 // TERRAIN TYPE
-                if (terrainTypeRead == "PLAIN")
+                if (terrainTypeRead == "PLAINS")
                     tType = 0;
-                else if (terrainTypeRead == "HILLSs")
+                else if (terrainTypeRead == "HILLS")
                     tType = 1;
                 else
                     tType = 2;
@@ -171,18 +173,22 @@ public class World : MonoBehaviour
                 // GENERATE TERRAIN
                 this.GenerateSurfaceHeights();
                 this.GenerateTerrain();
-
+                
                 reader.ReadLine();
 
                 // PLAYER
-                player.transform.position = new Vector3(int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()));
+                string text = reader.ReadLine();
+                string[] bits = text.Split(' ');
+                player.transform.position = new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
 
                 reader.ReadLine();
 
                 // KEYS
                 for(int i = 0; i < this.keys.Length; i++)
                 {
-                    this.keys[i] = Instantiate(this.key, new Vector3(int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine())), Quaternion.identity) as GameObject;
+                    text = reader.ReadLine();
+                    bits = text.Split(' ');
+                    this.keys[i] = Instantiate(this.key, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
                 }
 
                 reader.ReadLine();
@@ -190,7 +196,9 @@ public class World : MonoBehaviour
                 // MONSTERS
                 for (int i = 0; i < this.monsters.Length; i++)
                 {
-                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine())), Quaternion.identity) as GameObject;
+                    text = reader.ReadLine();
+                    bits = text.Split(' ');
+                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
                 }
 
                 reader.ReadLine();
@@ -198,11 +206,13 @@ public class World : MonoBehaviour
                 // TREES
                 for (int i = 0; i < this.trees.Length; i++)
                 {
-                    this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine())), Quaternion.identity) as GameObject;
+                    text = reader.ReadLine();
+                    bits = text.Split(' ');
+                    this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
                 }
-            }
 
-            player.SetActive(true);
+                player.SetActive(true);
+            }
         }
 
         catch (System.Exception exception)
