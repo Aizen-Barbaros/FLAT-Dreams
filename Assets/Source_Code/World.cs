@@ -9,7 +9,7 @@ public class World : MonoBehaviour
     // CHARACTER
     public GameObject player;
 
-    // AT:AS
+    // ATLAS
     public Material textureAtlas;
 
     // SKYS
@@ -75,9 +75,9 @@ public class World : MonoBehaviour
 
     public void Start()
     {
-        this.GenerateWorld();
-        this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
-        //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        //this.GenerateWorld();
+        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
     }
 
 
@@ -92,7 +92,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.ChooseTerrainAndWorldType();
+        this.ChooseTerrainAndWorldType(Random.Range(0, 4), Random.Range(0, 3));
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
@@ -140,14 +140,39 @@ public class World : MonoBehaviour
                 // TERRAIN VALUES
                 string worldTypeRead = reader.ReadLine();
                 string terrainTypeRead = reader.ReadLine();
-
-                // TODO
-                // TRANSFORM STRINGS TO VALUES AND PUT FOG AND STUFF...
-
                 this.maxHeight = int.Parse(reader.ReadLine());
                 this.octaves = int.Parse(reader.ReadLine());
                 this.smooth = int.Parse(reader.ReadLine());
                 this.persistence = int.Parse(reader.ReadLine());
+
+                int wType;
+                int tType;
+
+                // WORLD TYPE
+                if (worldTypeRead == "NORMAL")
+                    wType = 0;
+                else if (worldTypeRead == "SNOWY")
+                    wType = 1;
+                else if (worldTypeRead == "HELL")
+                    wType = 2;
+                else
+                    wType = 3;
+
+                // TERRAIN TYPE
+                if (terrainTypeRead == "PLAIN")
+                    tType = 0;
+                else if (terrainTypeRead == "HILLSs")
+                    tType = 1;
+                else
+                    tType = 2;
+
+                this.ChooseTerrainAndWorldType(wType, tType);
+
+                // GENERATE TERRAIN
+                this.GenerateSurfaceHeights();
+                this.GenerateTerrain();
+
+                reader.ReadLine();
 
                 // PLAYER
                 player.transform.position = new Vector3(int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()), int.Parse(reader.ReadLine()));
@@ -177,8 +202,6 @@ public class World : MonoBehaviour
                 }
             }
 
-            this.GenerateSurfaceHeights();
-            this.GenerateTerrain();
             player.SetActive(true);
         }
 
@@ -206,6 +229,8 @@ public class World : MonoBehaviour
                 writer.WriteLine(octaves);
                 writer.WriteLine(smooth);
                 writer.WriteLine(persistence);
+
+                writer.WriteLine();
 
                 // PLAYER
                 writer.WriteLine(player.transform.position.x + " " + player.transform.position.y + " " + player.transform.position.z);
@@ -249,18 +274,8 @@ public class World : MonoBehaviour
     }
 
 
-    public void ChooseTerrainAndWorldType()
+    public void ChooseTerrainAndWorldType(int wType, int tType)
     {
-        int tType = Random.Range(0, 3);
-        int wType = Random.Range(0, 4);
-
-        if (tType == 0)
-            this.terrainType = TerrainTypes.PLAINS;
-        else if (tType == 1)
-            this.terrainType = TerrainTypes.HILLS;
-        else
-            this.terrainType = TerrainTypes.MOUNTAINS;
-
         if (wType == 0)
         {
             worldType = WorldTypes.NORMAL;
@@ -296,6 +311,13 @@ public class World : MonoBehaviour
 
             RenderSettings.skybox = skyDreamy;
         }
+
+        if (tType == 0)
+            this.terrainType = TerrainTypes.PLAINS;
+        else if (tType == 1)
+            this.terrainType = TerrainTypes.HILLS;
+        else
+            this.terrainType = TerrainTypes.MOUNTAINS;
     }
 
 

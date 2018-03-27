@@ -11,7 +11,7 @@ public class Enemy : Character
 
     private void Start()
     {
-        base.speed = 8;
+        base.speed = 5;
     }
 
     protected void FixedUpdate()
