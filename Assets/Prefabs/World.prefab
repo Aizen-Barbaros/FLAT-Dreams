@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1169352990878094}
+  m_RootGameObject: {fileID: 1358091594361398}
   m_IsPrefabParent: 1
---- !u!1 &1169352990878094
+--- !u!1 &1358091594361398
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4670474735835462}
-  - component: {fileID: 114834190682719468}
+  - component: {fileID: 4996842827305968}
+  - component: {fileID: 114275230371335930}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -27,12 +27,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4670474735835462
+--- !u!4 &4996842827305968
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1169352990878094}
+  m_GameObject: {fileID: 1358091594361398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.815563, y: 41.32598, z: 83.7545}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,12 +40,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114834190682719468
+--- !u!114 &114275230371335930
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1169352990878094}
+  m_GameObject: {fileID: 1358091594361398}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 154436e823dd0684ba1072b68d07f896, type: 3}
@@ -64,5 +64,5 @@ MonoBehaviour:
   hellTree: {fileID: 1993062357505148, guid: 8822c161a67ac724799b4dbd74a530cc, type: 2}
   key: {fileID: 1967048097105674, guid: a2f8636abf6f33541acdf3e5a6d4da77, type: 2}
   zombie: {fileID: 1864756716239624, guid: 0eac856d87299804c8f1068c17472611, type: 2}
-  littleMonster: {fileID: 1442962235632924, guid: 76f1e041766db344690e9809bb11cbf8,
+  littleMonster: {fileID: 1891609495820104, guid: dffa351f86c070c4cb0e3500201205e5,
     type: 2}
