@@ -26,6 +26,12 @@ public class Enemy : Character
             this.player = colliders[0].GetComponent<Player>();
             this.chasePlayer(this.player.transform.position);
         }
+        if (base.lastfreeze + base.freezeDuration <= Time.time && resetfreeze)
+        {
+            Debug.Log("Stun finished");
+            base.speed = 5;
+            base.resetfreeze = false;
+        }
     }
 
 
