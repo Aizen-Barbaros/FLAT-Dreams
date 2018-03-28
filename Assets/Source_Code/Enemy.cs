@@ -26,6 +26,12 @@ public class Enemy : Character
             this.player = colliders[0].GetComponent<Player>();
             this.chasePlayer(this.player.transform.position);
         }
+        if (base.lastfreeze + base.freezeDuration <= Time.time && resetfreeze)
+        {
+            Debug.Log("Stun finished");
+            base.speed = 5;
+            base.resetfreeze = false;
+        }
     }
 
 
@@ -41,6 +47,18 @@ public class Enemy : Character
         {
             base.Jump();
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            this.onCatch();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "StunBall")
+        {
+            base.stunned();
+        }
     }
 
     private void shortPath()
@@ -50,11 +68,6 @@ public class Enemy : Character
 
     private void onCatch()
     {
-
-    }
-
-    public void stunned()
-    {
-
+        
     }
 }

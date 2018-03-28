@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 64888367689553302}
   m_Layer: 0
   m_Name: Key
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 1ade44edcdb35914fb110799270170d6, type: 3}
+  - {fileID: 2100000, guid: c0d1166d5fc6eb44f921cd7d4bd07a92, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

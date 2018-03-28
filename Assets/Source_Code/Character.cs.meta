@@ -5,7 +5,8 @@ licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

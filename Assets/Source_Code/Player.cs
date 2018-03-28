@@ -6,7 +6,7 @@ public class Player : Character
 {
     private int lives;
     private int currentLives;
-    private int keyCaught;
+    private int keyCaught=0;
 
 
     void Start()
@@ -57,19 +57,31 @@ public class Player : Character
         {
             base.speed = 8;
             base.resetDash = false;
-        }        
+        }
+        if (keyCaught>=3)
+        {
+            Debug.Log("CONGRAT");
+        }
     }
 
 
     public void Caught()
     {
-
+        Debug.Log("Caught!");
+        this.gameObject.SetActive(false);
     }
 
 
-    void OnCollisionStay(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "Ennemy")
             Caught();
+        if (collision.gameObject.tag == "Key")
+        {
+            keyCaught++;
+            GameObject.Destroy(collision.gameObject);
+            Debug.Log(keyCaught);
+        }
     }
 }

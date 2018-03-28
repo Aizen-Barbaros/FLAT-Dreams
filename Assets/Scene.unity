@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -113,7 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1001 &1237678029
+=======
+--- !u!1001 &668028662
+>>>>>>> bd3b0dcf0422262d2d7fa1e9702101e9697b9c1a
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -152,6 +156,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+=======
+    - target: {fileID: 54525064453311074, guid: 45186f34d93e46c48824b5f2671ed4d5,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+>>>>>>> bd3b0dcf0422262d2d7fa1e9702101e9697b9c1a
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
   m_IsPrefabParent: 0

@@ -31,6 +31,11 @@ public class Character : MonoBehaviour
     protected float dashDuration;
     protected float dashCooldown;
 
+    //Freeze
+    protected bool resetfreeze;
+    protected float lastfreeze;
+    protected float freezeDuration;
+
     //Stun
     protected float lastStun;
     protected float stunCooldown;
@@ -55,6 +60,7 @@ public class Character : MonoBehaviour
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
+        this.freezeDuration = 5.0f;
     }
 
     protected virtual void OnCollisionEnter(Collision collision) //TO DO
@@ -138,5 +144,14 @@ public class Character : MonoBehaviour
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
+    }
+
+    public void stunned()
+    {
+        Debug.Log("Stunned!");
+        this.freezeDuration = 5.0f;
+        this.speed = 0;
+        this.lastfreeze = Time.time;
+        this.resetfreeze = true;
     }
 }
