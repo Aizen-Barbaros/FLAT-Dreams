@@ -40,9 +40,9 @@ public class Enemy : Character
         base.Move(target);
     }
 
-    protected override void OnCollisionEnter(Collision collision)
+    protected /*override*/ void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
+        //base.OnCollisionEnter(collision);
         if (collision.gameObject.tag != "Player")
         {
             base.Jump();

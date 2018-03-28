@@ -63,7 +63,7 @@ public class Character : MonoBehaviour
         this.freezeDuration = 5.0f;
     }
 
-    protected virtual void OnCollisionEnter(Collision collision) //TO DO
+    protected virtual void OnCollisionStay(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
         {
@@ -111,10 +111,13 @@ public class Character : MonoBehaviour
 
     protected void Jump()
     {
-        //Mathematic function who give the velocity for a specific jump height
-        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
-        //Apply a velocity vertically
-        this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+        if (this.isGrounded)
+        {
+            //Mathematic function who give the velocity for a specific jump height
+            float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
+            //Apply a velocity vertically
+            this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+        } 
     }
 
 
