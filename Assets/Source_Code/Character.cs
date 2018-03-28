@@ -121,7 +121,7 @@ public class Character : MonoBehaviour
     }
 
 
-    protected void Dash()   // MEME CHOSE QUE LE SORT DE VITESSE
+    protected void Dash()
     {
         this.speed = 30;
         this.lastDash = Time.time;

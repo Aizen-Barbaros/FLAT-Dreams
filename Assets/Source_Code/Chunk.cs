@@ -7,22 +7,14 @@ public class Chunk
 {
     private GameObject chunk;
     private Material textureAtlas;
-    private GameObject oakTree;
-    private GameObject pineTree;
-    private GameObject lollipopTree;
-    private GameObject hellTree;
 
 
-    public Chunk(Vector3 position, Material textureAtlas, GameObject oakTree, GameObject pineTree, GameObject lollipopTree, GameObject hellTree)
+    public Chunk(Vector3 position, Material textureAtlas)
     {
         this.chunk = new GameObject((int)position.x + "_" + (int)position.y + "_" + (int)position.z);
         this.chunk.transform.position = position;
         //this.chunk.tag = "Ground";
         this.textureAtlas = textureAtlas;
-        this.oakTree = oakTree;
-        this.pineTree = pineTree;
-        this.lollipopTree = lollipopTree;
-        this.hellTree = hellTree;
 
         this.CreateChunk();
         this.CombineCubes();
@@ -72,26 +64,6 @@ public class Chunk
                 
                 Cube cube = new Cube(this.chunk, new Vector3(x, World.surfaceHeights[mapX, mapZ], z), this.textureAtlas, true);
                 cube.DisplayCube();
-                
-                if (World.worldType == World.WorldTypes.NORMAL && Random.Range(0, 100) == 0)
-                {
-                    GameObject tree = MonoBehaviour.Instantiate(this.oakTree, new Vector3((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z), Quaternion.identity) as GameObject;
-                }
-
-                else if (World.worldType == World.WorldTypes.SNOWY && Random.Range(0, 100) == 0)
-                {
-                    GameObject tree = MonoBehaviour.Instantiate(this.pineTree, new Vector3((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z), Quaternion.identity) as GameObject;
-                }
-
-                else if (World.worldType == World.WorldTypes.DREAMY && Random.Range(0, 300) == 0)
-                {
-                    GameObject tree = MonoBehaviour.Instantiate(this.lollipopTree, new Vector3((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z), Quaternion.identity) as GameObject;
-                }
-
-                else if (World.worldType == World.WorldTypes.HELL && Random.Range(0, 300) == 0)
-                {
-                    GameObject tree = MonoBehaviour.Instantiate(this.hellTree, new Vector3((int)this.chunk.transform.position.x + x, World.surfaceHeights[mapX, mapZ], (int)this.chunk.transform.position.z + z), Quaternion.identity) as GameObject;
-                }
             }
         }
     }

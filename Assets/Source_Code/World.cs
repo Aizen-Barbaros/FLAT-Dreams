@@ -1,32 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 
 public class World : MonoBehaviour
 {
-    // Characters
+    // CHARACTER
     public GameObject player;
 
-    // Atlas
+    // ATLAS
     public Material textureAtlas;
 
-    // Skys
+    // SKYS
     public Material skyNormal;
     public Material skySnowy;
     public Material skyHell;
     public Material skyDreamy;
+    public Material skyMetal;
+    public Material skyCheese;
+    public Material skyAutumn;
+    public Material skyRotting;
 
-    // Trees
+    // TREES
     public GameObject oakTree;
     public GameObject pineTree;
     public GameObject lollipopTree;
     public GameObject hellTree;
+    public GameObject autumnTree;
+    public GameObject rottingTree;
 
-    // Key
+    // KEY
     public GameObject key;
 
-    // Monster
+    // MONSTERS
     public GameObject zombie;
     public GameObject littleMonster;/*
     public GameObject reaper;
@@ -36,42 +43,49 @@ public class World : MonoBehaviour
     public GameObject snowMan;
     public GameObject yeti;*/
 
+    // TYPES
     public enum TerrainTypes { PLAINS, HILLS, MOUNTAINS };
-    public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY};
+    public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY, METAL, CHEESE, AUTUMN, ROTTING };
 
+    // SIZES
     public static int mapSize = 320;
     public static int chunkSize = 32;
 
+    // CURRENT TYPES
     public static WorldTypes worldType;
     private TerrainTypes terrainType;
 
+    // TERRAIN VARIABLES
     private int maxHeight;
     private int octaves;
     private float smooth;
     private float persistence;
 
+    // TERRAIN HEIGHTS
     public static int[,] surfaceHeights;
 
+    // NUMBERS OF OBJECTS
+    private int numberOfKeys = 3;
+    private int numberOfMonsters = 30;
+    private int numberOfTrees;
+
+    // TREE MODEL
+    private GameObject treeModel;
+
+    // TERRAIN OBJECTS
     private Chunk[,] chunks;
     private GameObject[] keys;
     private GameObject[] monsters;
+    private GameObject[] trees;
 
 
     public void Start()
     {
-        this.chunks = new Chunk[mapSize, mapSize];
-        this.keys = new GameObject[3];
-        this.monsters = new GameObject[50];
+        player.SetActive(false);
 
-        this.ChooseTerrainAndWorldType();
-        this.ChooseTerrainValues();
-        this.GenerateSurfaceHeights();
-        this.GenerateTerrain();
-        this.GenerateKeys();
-        this.GenerateMonsters();
-
-        player.transform.position = new Vector3(mapSize / 2, surfaceHeights[mapSize / 2, mapSize / 2] + 1, mapSize / 2);
-        player.SetActive(true);
+        this.GenerateWorld();
+        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
     }
 
 
@@ -81,30 +95,217 @@ public class World : MonoBehaviour
     }
 
 
+    public void GenerateWorld()
+    {
+        // CHUNKS
+        this.chunks = new Chunk[mapSize, mapSize];
+
+        this.ChooseTerrainAndWorldType(7, Random.Range(0, 3));
+        this.ChooseTerrainValues();
+        this.GenerateSurfaceHeights();
+        this.GenerateTerrain();
+        
+        // KEYS
+        this.keys = new GameObject[3];
+        this.GenerateKeys();
+
+        // MONSTERS
+        this.monsters = new GameObject[30];
+        this.GenerateMonsters();
+
+        // TREES
+        this.GenerateNumberOfTrees();
+        this.GenerateTreeModel();
+        this.trees = new GameObject[this.numberOfTrees];
+        this.GenerateTrees();
+
+        // PLAYER
+        player.transform.position = new Vector3(mapSize / 2, surfaceHeights[mapSize / 2, mapSize / 2] + 1, mapSize / 2);
+        player.SetActive(true);
+    }
+
+
+    public void GenerateSavedWorld(string fileName)
+    {
+        // CHUNKS
+        this.chunks = new Chunk[mapSize, mapSize];
+
+        // KEYS
+        this.keys = new GameObject[this.numberOfKeys];
+
+        // MONSTERS
+        this.monsters = new GameObject[this.numberOfMonsters];
+
+        try
+        {
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                // TERRAIN VALUES
+                string worldTypeRead = reader.ReadLine();
+                string terrainTypeRead = reader.ReadLine();
+                this.maxHeight = int.Parse(reader.ReadLine());
+                this.octaves = int.Parse(reader.ReadLine());
+                this.smooth = float.Parse(reader.ReadLine());
+                this.persistence = float.Parse(reader.ReadLine());
+
+                int wType;
+                int tType;
+
+                // WORLD TYPE
+                if (worldTypeRead == "NORMAL")
+                    wType = 0;
+                else if (worldTypeRead == "SNOWY")
+                    wType = 1;
+                else if (worldTypeRead == "HELL")
+                    wType = 2;
+                else if (worldTypeRead == "DREAMY")
+                    wType = 3;
+                else if (worldTypeRead == "METAL")
+                    wType = 4;
+                else if (worldTypeRead == "CHEESE")
+                    wType = 5;
+                else if (worldTypeRead == "AUTUMN")
+                    wType = 6;
+                else
+                    wType = 7;
+
+                // TERRAIN TYPE
+                if (terrainTypeRead == "PLAINS")
+                    tType = 0;
+                else if (terrainTypeRead == "HILLS")
+                    tType = 1;
+                else
+                    tType = 2;
+
+                this.ChooseTerrainAndWorldType(wType, tType);
+
+                // GENERATE TERRAIN
+                this.GenerateSurfaceHeights();
+                this.GenerateTerrain();
+                
+                reader.ReadLine();
+
+                // PLAYER
+                string text = reader.ReadLine();
+                string[] coordinates = text.Split(' ');
+                player.transform.position = new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
+
+                reader.ReadLine();
+
+                // KEYS
+                for(int i = 0; i < this.keys.Length; i++)
+                {
+                    text = reader.ReadLine();
+                    coordinates = text.Split(' ');
+                    this.keys[i] = Instantiate(this.key, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
+                }
+
+                reader.ReadLine();
+
+                // MONSTERS
+                for (int i = 0; i < this.monsters.Length; i++)
+                {
+                    text = reader.ReadLine();
+                    coordinates = text.Split(' ');
+                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
+                }
+
+                reader.ReadLine();
+
+                // TREES
+                this.GenerateNumberOfTrees();
+                this.GenerateTreeModel();
+
+                if (this.numberOfTrees > 0)
+                {
+                    this.trees = new GameObject[this.numberOfTrees];
+
+                    for (int i = 0; i < this.trees.Length; i++)
+                    {
+                        text = reader.ReadLine();
+                        coordinates = text.Split(' ');
+                        this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
+                    }
+                }
+
+                player.SetActive(true);
+            }
+        }
+
+        catch (System.Exception exception)
+        {
+            Debug.Log(exception.ToString());
+        }
+    }
+
+    public void SaveWorld(string fileName)
+    {
+        try
+        {
+            if(File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+
+            using (StreamWriter writer = new StreamWriter(fileName))
+            {
+                // TERRAIN VALUES
+                writer.WriteLine(worldType);
+                writer.WriteLine(terrainType);
+                writer.WriteLine(maxHeight);
+                writer.WriteLine(octaves);
+                writer.WriteLine(smooth);
+                writer.WriteLine(persistence);
+
+                writer.WriteLine();
+
+                // PLAYER
+                writer.WriteLine(player.transform.position.x + " " + player.transform.position.y + " " + player.transform.position.z);
+
+                writer.WriteLine();
+
+                // KEYS
+                for (int i = 0; i < this.keys.Length; i++)
+                    writer.WriteLine(this.keys[i].transform.position.x + " " + this.keys[i].transform.position.y + " " + this.keys[i].transform.position.z);
+
+                writer.WriteLine();
+
+                // MONSTERS
+                for (int i = 0; i < this.monsters.Length; i++)
+                    writer.WriteLine(this.monsters[i].transform.position.x + " " + this.monsters[i].transform.position.y + " " + this.monsters[i].transform.position.z);
+
+                writer.WriteLine();
+
+                // TREES
+                if (this.numberOfTrees > 0)
+                {
+                    for (int i = 0; i < this.trees.Length; i++)
+                        writer.WriteLine(this.trees[i].transform.position.x + " " + this.trees[i].transform.position.y + " " + this.trees[i].transform.position.z);
+                }
+            }
+        }
+
+        catch (System.Exception exception)
+        {
+            Debug.Log(exception.ToString());
+        }
+    }
+
+
     public void GenerateTerrain()
     {
         for (int x = 0; x < mapSize; x += chunkSize)
         {
             for (int z = 0; z < mapSize; z += chunkSize)
             {
-                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas, oakTree, pineTree, lollipopTree, hellTree);
+                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas);
             }
         }
     }
 
 
-    public void ChooseTerrainAndWorldType()
+    public void ChooseTerrainAndWorldType(int wType, int tType)
     {
-        int tType = Random.Range(0, 3);
-        int wType = Random.Range(0, 4);
-
-        if (tType == 0)
-            this.terrainType = TerrainTypes.PLAINS;
-        else if (tType == 1)
-            this.terrainType = TerrainTypes.HILLS;
-        else
-            this.terrainType = TerrainTypes.MOUNTAINS;
-
         if (wType == 0)
         {
             worldType = WorldTypes.NORMAL;
@@ -134,12 +335,51 @@ public class World : MonoBehaviour
             RenderSettings.fogDensity = 0.01f;
         }
 
-        else
+        else if (wType == 3)
         {
             worldType = WorldTypes.DREAMY;
 
             RenderSettings.skybox = skyDreamy;
         }
+
+        else if (wType == 4)
+        {
+            worldType = WorldTypes.METAL;
+
+            RenderSettings.skybox = skyMetal;
+        }
+
+        else if (wType == 5)
+        {
+            worldType = WorldTypes.CHEESE;
+
+            RenderSettings.skybox = skyCheese;
+        }
+
+        else if (wType == 6)
+        {
+            worldType = WorldTypes.AUTUMN;
+
+            RenderSettings.skybox = skyAutumn;
+        }
+
+        else
+        {
+            worldType = WorldTypes.ROTTING;
+
+            RenderSettings.skybox = skyRotting;
+            RenderSettings.fog = true;
+            RenderSettings.fogMode = FogMode.Exponential;
+            RenderSettings.fogColor = Color.green;
+            RenderSettings.fogDensity = 0.1f;
+        }
+
+        if (tType == 0)
+            this.terrainType = TerrainTypes.PLAINS;
+        else if (tType == 1)
+            this.terrainType = TerrainTypes.HILLS;
+        else
+            this.terrainType = TerrainTypes.MOUNTAINS;
     }
 
 
@@ -205,31 +445,82 @@ public class World : MonoBehaviour
         return total / maxValue;
     }
 
-    
+
+    public Vector3 GenerateRandomVector(int distanceFromSpawn)
+    {
+        int x, z;
+
+        do
+        {
+            x = Random.Range(0, mapSize);
+            z = Random.Range(0, mapSize);
+        } while (Mathf.Abs(mapSize/2 - x) < distanceFromSpawn && Mathf.Abs(mapSize/2 - z) < distanceFromSpawn);
+
+        return new Vector3(x, surfaceHeights[x, z], z);
+    }
+
+
     public void GenerateKeys()
     {
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < this.keys.Length; i++)
         {
-            this.keys[i] = Instantiate(this.key, this.GenerateRandomVector(), Quaternion.identity) as GameObject;
+            this.keys[i] = Instantiate(this.key, this.GenerateRandomVector(75), Quaternion.identity) as GameObject;
         }
     }
 
 
     public void GenerateMonsters()
     {
-
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < this.monsters.Length; i++)
         {
-            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector() , Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector(30), Quaternion.identity) as GameObject;
         }
     }
 
 
-    public Vector3 GenerateRandomVector()
+    public void GenerateNumberOfTrees()
     {
-        int x = Random.Range(0, 320);
-        int z = Random.Range(0, 320);
+        if (World.worldType == World.WorldTypes.NORMAL)
+            this.numberOfTrees = 1000;
+        else if (World.worldType == World.WorldTypes.SNOWY)
+            this.numberOfTrees = 1000;
+        else if (World.worldType == World.WorldTypes.HELL)
+            this.numberOfTrees = 300;
+        else if (World.worldType == World.WorldTypes.DREAMY)
+            this.numberOfTrees = 500;
+        else if (World.worldType == World.WorldTypes.AUTUMN)
+            this.numberOfTrees = 1000;
+        else if (World.worldType == World.WorldTypes.ROTTING)
+            this.numberOfTrees = 300;
+        else
+            this.numberOfTrees = 0;
+    }
 
-        return new Vector3(x, surfaceHeights[x, z], z);
+
+    public void GenerateTreeModel()
+    {
+        if (World.worldType == World.WorldTypes.NORMAL)
+            this.treeModel = this.oakTree;
+        else if (World.worldType == World.WorldTypes.SNOWY)
+            this.treeModel = this.pineTree;
+        else if (World.worldType == World.WorldTypes.HELL)
+            this.treeModel = this.hellTree;
+        else if (World.worldType == World.WorldTypes.DREAMY)
+            this.treeModel = this.lollipopTree;
+        else if (World.worldType == World.WorldTypes.AUTUMN)
+            this.treeModel = this.autumnTree;
+        else if (World.worldType == World.WorldTypes.ROTTING)
+            this.treeModel = this.rottingTree;
+        else
+            this.treeModel = null;
+    }
+
+
+    public void GenerateTrees()
+    {
+        for (int i = 0; i < this.trees.Length; i++)
+        {
+            this.trees[i] = Instantiate(this.treeModel, this.GenerateRandomVector(15), Quaternion.identity) as GameObject;
+        }
     }
 }
