@@ -100,7 +100,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.ChooseTerrainAndWorldType(Random.Range(0, 8), Random.Range(0, 3));
+        this.ChooseTerrainAndWorldType(3, Random.Range(0, 3));
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
@@ -481,9 +481,9 @@ public class World : MonoBehaviour
     public void GenerateNumberOfTrees()
     {
         if (World.worldType == World.WorldTypes.NORMAL)
-            this.numberOfTrees = 1000;
+            this.numberOfTrees = 1200;
         else if (World.worldType == World.WorldTypes.SNOWY)
-            this.numberOfTrees = 1000;
+            this.numberOfTrees = 1200;
         else if (World.worldType == World.WorldTypes.HELL)
             this.numberOfTrees = 300;
         else if (World.worldType == World.WorldTypes.DREAMY)

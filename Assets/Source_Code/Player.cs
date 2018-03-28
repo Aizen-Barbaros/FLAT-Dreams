@@ -6,7 +6,7 @@ public class Player : Character
 {
     private int lives;
     private int currentLives;
-    private int keyCaught;
+    private int keyCaught=0;
 
 
     void Start()
@@ -73,5 +73,11 @@ public class Player : Character
         base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "Ennemy")
             Caught();
+        if (collision.gameObject.tag == "Key")
+        {
+            keyCaught++;
+            GameObject.Destroy(collision.gameObject);
+            Debug.Log(keyCaught);
+        }
     }
 }
