@@ -9,31 +9,15 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-<<<<<<< HEAD
-  m_RootGameObject: {fileID: 1632159785853002}
-  m_IsPrefabParent: 1
---- !u!1 &1275042835555342
-=======
   m_RootGameObject: {fileID: 1410116891805438}
   m_IsPrefabParent: 1
 --- !u!1 &1107444522630738
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4687373495143492}
-  - component: {fileID: 54027981077464384}
-  - component: {fileID: 65747835133588868}
-  - component: {fileID: 114599390504627714}
-  - component: {fileID: 33946208337735838}
-  m_Layer: 8
-  m_Name: Player
-  m_TagString: Player
-=======
   - component: {fileID: 4237019157417718}
   - component: {fileID: 54554386509262720}
   - component: {fileID: 65027194175798358}
@@ -42,56 +26,33 @@ GameObject:
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1471472287552886
-=======
 --- !u!1 &1410116891805438
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4970019002042564}
-  - component: {fileID: 108047097539056540}
-  m_Layer: 0
-  m_Name: Directional light
-=======
   - component: {fileID: 4964894522631472}
   - component: {fileID: 114286621137976114}
   m_Layer: 0
   m_Name: World
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1493949099532444
-=======
 --- !u!1 &1416169715109382
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4054722085040044}
-  - component: {fileID: 108684939523519930}
-  m_Layer: 0
-  m_Name: Directional light
-  m_TagString: Untagged
-=======
   - component: {fileID: 4099948955836618}
   - component: {fileID: 20982304452913688}
   - component: {fileID: 124841620961953042}
@@ -100,29 +61,19 @@ GameObject:
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1632159785853002
-=======
 --- !u!1 &1500403316534598
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4811941188840822}
-  - component: {fileID: 114749394006236292}
-=======
   - component: {fileID: 4165270085691920}
   - component: {fileID: 108020901632684822}
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -130,22 +81,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1699592949729188
-=======
 --- !u!1 &1909290676373736
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4033176861247594}
-=======
   - component: {fileID: 4950347251920988}
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -153,24 +96,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1828485075098132
-=======
 --- !u!1 &1950002631398786
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4299871574834938}
-  - component: {fileID: 108084519369129940}
-=======
   - component: {fileID: 4652307484906196}
   - component: {fileID: 108219910932849968}
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_Layer: 0
   m_Name: Directional light
   m_TagString: Untagged
@@ -178,42 +112,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1877937069007294
-=======
 --- !u!1 &1977602774729396
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-<<<<<<< HEAD
-  - component: {fileID: 4486500328533936}
-  - component: {fileID: 20250815115100004}
-  - component: {fileID: 124729478735896754}
-  - component: {fileID: 81355862196449250}
-  - component: {fileID: 114029573002792132}
-  m_Layer: 8
-  m_Name: Main Camera
-  m_TagString: MainCamera
-=======
   - component: {fileID: 4014869147479476}
   - component: {fileID: 108562653620386736}
   m_Layer: 0
   m_Name: Directional light
   m_TagString: Untagged
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
---- !u!1 &1919116800723668
-=======
 --- !u!1 &1981797570955898
->>>>>>> 0726d163dc3f8990fa88c3627df124fb098d5f92
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
