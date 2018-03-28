@@ -13,7 +13,7 @@ public class Chunk
     {
         this.chunk = new GameObject((int)position.x + "_" + (int)position.y + "_" + (int)position.z);
         this.chunk.transform.position = position;
-        //this.chunk.tag = "Ground";
+        this.chunk.tag = "Ground";
         this.textureAtlas = textureAtlas;
 
         this.CreateChunk();
@@ -21,6 +21,11 @@ public class Chunk
 
         MeshCollider meshCollider = this.chunk.gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         meshCollider.sharedMesh = this.chunk.transform.GetComponent<MeshFilter>().mesh;
+    }
+
+    public GameObject GetChunk()
+    {
+        return this.chunk;
     }
 
     public void CreateChunk()
