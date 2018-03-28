@@ -21,7 +21,7 @@ public class Cube
 		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)},              // DREAMY UNDER SIDE 11
                                              {new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f), new Vector2(0.6f, 1.0f), new Vector2(0.8f, 1.0f)},              // METAL TOP TOP 12
 	                                         {new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f), new Vector2(0.6f, 1.0f), new Vector2(0.8f, 1.0f)},              // METAL TOP SIDE 13
-		                                     {new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f), new Vector2(0.6f, 1.0f), new Vector2(0.8f, 1.0f)},              // METAL UNDER SIDE 14
+		                                     {new Vector2(0.4f, 0.0f), new Vector2(0.6f, 0.0f), new Vector2(0.4f, 0.2f), new Vector2(0.6f, 0.2f)},              // METAL UNDER SIDE 14
                                              {new Vector2(0.6f, 0.6f), new Vector2(0.8f, 0.6f), new Vector2(0.6f, 0.8f), new Vector2(0.8f, 0.8f)},              // CHEESE TOP TOP 15
 	                                         {new Vector2(0.8f, 0.6f), new Vector2(1.0f, 0.6f), new Vector2(0.8f, 0.8f), new Vector2(1.0f, 0.8f)},              // CHEESE TOP SIDE 16
 		                                     {new Vector2(0.8f, 0.6f), new Vector2(1.0f, 0.6f), new Vector2(0.8f, 0.8f), new Vector2(1.0f, 0.8f)},              // CHEESE UNDER SIDE 17
@@ -30,8 +30,14 @@ public class Cube
 		                                     {new Vector2(0.4f, 0.8f), new Vector2(0.6f, 0.8f), new Vector2(0.4f, 1.0f), new Vector2(0.6f, 1.0f)},              // AUTUMN UNDER SIDE 20
                                              {new Vector2(0.0f, 0.0f), new Vector2(0.2f, 0.0f), new Vector2(0.0f, 0.2f), new Vector2(0.2f, 0.2f)},              // ROTTING TOP TOP 21
 	                                         {new Vector2(0.2f, 0.0f), new Vector2(0.4f, 0.0f), new Vector2(0.2f, 0.2f), new Vector2(0.4f, 0.2f)},              // ROTTING TOP SIDE 22
-		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)}};             // ROTTING UNDER SIDE 23
-                                            
+		                                     {new Vector2(0.4f, 0.4f), new Vector2(0.6f, 0.4f), new Vector2(0.4f, 0.6f), new Vector2(0.6f, 0.6f)},              // ROTTING UNDER SIDE 23
+                                             {new Vector2(0.6f, 0.2f), new Vector2(0.8f, 0.2f), new Vector2(0.6f, 0.4f), new Vector2(0.8f, 0.4f)},              // TROPICAL TOP TOP 24
+	                                         {new Vector2(0.6f, 0.2f), new Vector2(0.8f, 0.2f), new Vector2(0.6f, 0.4f), new Vector2(0.8f, 0.4f)},              // TROPICAL TOP SIDE 25
+		                                     {new Vector2(0.6f, 0.2f), new Vector2(0.8f, 0.2f), new Vector2(0.6f, 0.4f), new Vector2(0.8f, 0.4f)},              // TROPICAL UNDER SIDE 26
+                                             {new Vector2(0.6f, 0.0f), new Vector2(0.8f, 0.0f), new Vector2(0.6f, 0.2f), new Vector2(0.8f, 0.2f)},              // MATRIX TOP TOP 27
+	                                         {new Vector2(0.8f, 0.0f), new Vector2(1.0f, 0.0f), new Vector2(0.8f, 0.2f), new Vector2(1.0f, 0.2f)},              // MATRIX TOP SIDE 28
+		                                     {new Vector2(0.8f, 0.0f), new Vector2(1.0f, 0.0f), new Vector2(0.8f, 0.2f), new Vector2(1.0f, 0.2f)}};             // MATRIX UNDER SIDE 29
+
 
     private GameObject parent;
     private Vector3 position;
@@ -140,11 +146,25 @@ public class Cube
             underSideIndex = 20;
         }
 
-        else
+        else if (World.worldType == World.WorldTypes.ROTTING)
         {
             topTopIndex = 21;
             topSideIndex = 22;
             underSideIndex = 23;
+        }
+
+        else if (World.worldType == World.WorldTypes.TROPICAL)
+        {
+            topTopIndex = 24;
+            topSideIndex = 25;
+            underSideIndex = 26;
+        }
+
+        else
+        {
+            topTopIndex = 27;
+            topSideIndex = 28;
+            underSideIndex = 29;
         }
 
         // SETTING TEXTURES

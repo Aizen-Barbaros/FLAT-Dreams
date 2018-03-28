@@ -23,6 +23,11 @@ public class Chunk
         meshCollider.sharedMesh = this.chunk.transform.GetComponent<MeshFilter>().mesh;
     }
 
+    public GameObject GetChunk()
+    {
+        return this.chunk;
+    }
+
     public void CreateChunk()
     {
         for (int x = 0; x < World.chunkSize; x++)

@@ -45,7 +45,7 @@ public class World : MonoBehaviour
 
     // TYPES
     public enum TerrainTypes { PLAINS, HILLS, MOUNTAINS };
-    public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY, METAL, CHEESE, AUTUMN, ROTTING };
+    public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY, METAL, CHEESE, AUTUMN, ROTTING, TROPICAL, MATRIX };
 
     // SIZES
     public static int mapSize = 320;
@@ -100,7 +100,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.ChooseTerrainAndWorldType(3, Random.Range(0, 3));
+        this.ChooseTerrainAndWorldType(8, Random.Range(0, 3));  
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
@@ -166,8 +166,12 @@ public class World : MonoBehaviour
                     wType = 5;
                 else if (worldTypeRead == "AUTUMN")
                     wType = 6;
-                else
+                else if (worldTypeRead == "ROTTING")
                     wType = 7;
+                else if (worldTypeRead == "TROPICAL")
+                    wType = 8;
+                else
+                    wType = 9;
 
                 // TERRAIN TYPE
                 if (terrainTypeRead == "PLAINS")
@@ -363,7 +367,7 @@ public class World : MonoBehaviour
             RenderSettings.skybox = skyAutumn;
         }
 
-        else
+        else if (wType == 7)
         {
             worldType = WorldTypes.ROTTING;
 
@@ -372,6 +376,20 @@ public class World : MonoBehaviour
             RenderSettings.fogMode = FogMode.Exponential;
             RenderSettings.fogColor = Color.green;
             RenderSettings.fogDensity = 0.1f;
+        }
+
+        else if (wType == 8)
+        {
+            worldType = WorldTypes.TROPICAL;
+
+            RenderSettings.skybox = skyNormal;
+        }
+
+        else
+        {
+            worldType = WorldTypes.MATRIX;
+
+            RenderSettings.skybox = skyNormal;
         }
 
         if (tType == 0)
