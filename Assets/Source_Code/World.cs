@@ -17,12 +17,18 @@ public class World : MonoBehaviour
     public Material skySnowy;
     public Material skyHell;
     public Material skyDreamy;
+    public Material skyMetal;
+    public Material skyCheese;
+    public Material skyAutumn;
+    public Material skyRotting;
 
     // TREES
     public GameObject oakTree;
     public GameObject pineTree;
     public GameObject lollipopTree;
     public GameObject hellTree;
+    public GameObject autumnTree;
+    public GameObject rottingTree;
 
     // KEY
     public GameObject key;
@@ -39,7 +45,7 @@ public class World : MonoBehaviour
 
     // TYPES
     public enum TerrainTypes { PLAINS, HILLS, MOUNTAINS };
-    public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY};
+    public enum WorldTypes { NORMAL, SNOWY, HELL, DREAMY, METAL, CHEESE, AUTUMN, ROTTING };
 
     // SIZES
     public static int mapSize = 320;
@@ -94,7 +100,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.ChooseTerrainAndWorldType(Random.Range(0, 4), Random.Range(0, 3));
+        this.ChooseTerrainAndWorldType(Random.Range(0, 8), Random.Range(0, 3));
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
@@ -130,11 +136,6 @@ public class World : MonoBehaviour
         // MONSTERS
         this.monsters = new GameObject[this.numberOfMonsters];
 
-        // TREES
-        this.GenerateNumberOfTrees();
-        this.GenerateTreeModel();
-        this.trees = new GameObject[this.numberOfTrees];
-
         try
         {
             using (StreamReader reader = new StreamReader(fileName))
@@ -157,8 +158,16 @@ public class World : MonoBehaviour
                     wType = 1;
                 else if (worldTypeRead == "HELL")
                     wType = 2;
-                else
+                else if (worldTypeRead == "DREAMY")
                     wType = 3;
+                else if (worldTypeRead == "METAL")
+                    wType = 4;
+                else if (worldTypeRead == "CHEESE")
+                    wType = 5;
+                else if (worldTypeRead == "AUTUMN")
+                    wType = 6;
+                else
+                    wType = 7;
 
                 // TERRAIN TYPE
                 if (terrainTypeRead == "PLAINS")
@@ -204,11 +213,19 @@ public class World : MonoBehaviour
                 reader.ReadLine();
 
                 // TREES
-                for (int i = 0; i < this.trees.Length; i++)
+                this.GenerateNumberOfTrees();
+                this.GenerateTreeModel();
+
+                if (this.numberOfTrees > 0)
                 {
-                    text = reader.ReadLine();
-                    bits = text.Split(' ');
-                    this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
+                    this.trees = new GameObject[this.numberOfTrees];
+
+                    for (int i = 0; i < this.trees.Length; i++)
+                    {
+                        text = reader.ReadLine();
+                        bits = text.Split(' ');
+                        this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
+                    }
                 }
 
                 player.SetActive(true);
@@ -260,8 +277,11 @@ public class World : MonoBehaviour
                 writer.WriteLine();
 
                 // TREES
-                for (int i = 0; i < this.trees.Length; i++)
-                    writer.WriteLine(this.trees[i].transform.position.x + " " + this.trees[i].transform.position.y + " " + this.trees[i].transform.position.z);
+                if (this.numberOfTrees > 0)
+                {
+                    for (int i = 0; i < this.trees.Length; i++)
+                        writer.WriteLine(this.trees[i].transform.position.x + " " + this.trees[i].transform.position.y + " " + this.trees[i].transform.position.z);
+                }
             }
         }
 
@@ -315,11 +335,43 @@ public class World : MonoBehaviour
             RenderSettings.fogDensity = 0.01f;
         }
 
-        else
+        else if (wType == 3)
         {
             worldType = WorldTypes.DREAMY;
 
             RenderSettings.skybox = skyDreamy;
+        }
+
+        else if (wType == 4)
+        {
+            worldType = WorldTypes.METAL;
+
+            RenderSettings.skybox = skyMetal;
+        }
+
+        else if (wType == 5)
+        {
+            worldType = WorldTypes.CHEESE;
+
+            RenderSettings.skybox = skyCheese;
+        }
+
+        else if (wType == 6)
+        {
+            worldType = WorldTypes.AUTUMN;
+
+            RenderSettings.skybox = skyAutumn;
+        }
+
+        else
+        {
+            worldType = WorldTypes.ROTTING;
+
+            RenderSettings.skybox = skyRotting;
+            RenderSettings.fog = true;
+            RenderSettings.fogMode = FogMode.ExponentialSquared;
+            RenderSettings.fogColor = Color.green;
+            RenderSettings.fogDensity = 0.01f;
         }
 
         if (tType == 0)
@@ -434,8 +486,14 @@ public class World : MonoBehaviour
             this.numberOfTrees = 1000;
         else if (World.worldType == World.WorldTypes.HELL)
             this.numberOfTrees = 300;
-        else
+        else if (World.worldType == World.WorldTypes.DREAMY)
             this.numberOfTrees = 500;
+        else if (World.worldType == World.WorldTypes.AUTUMN)
+            this.numberOfTrees = 1000;
+        else if (World.worldType == World.WorldTypes.ROTTING)
+            this.numberOfTrees = 300;
+        else
+            this.numberOfTrees = 0;
     }
 
 
@@ -447,8 +505,14 @@ public class World : MonoBehaviour
             this.treeModel = this.pineTree;
         else if (World.worldType == World.WorldTypes.HELL)
             this.treeModel = this.hellTree;
-        else
+        else if (World.worldType == World.WorldTypes.DREAMY)
             this.treeModel = this.lollipopTree;
+        else if (World.worldType == World.WorldTypes.AUTUMN)
+            this.treeModel = this.autumnTree;
+        else if (World.worldType == World.WorldTypes.ROTTING)
+            this.treeModel = this.rottingTree;
+        else
+            this.treeModel = null;
     }
 
 

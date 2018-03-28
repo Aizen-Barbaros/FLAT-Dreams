@@ -112,11 +112,39 @@ public class Cube
             underSideIndex = 8;
         }
 
-        else
+        else if(World.worldType == World.WorldTypes.DREAMY)
         {
             topTopIndex = 9;
             topSideIndex = 10;
             underSideIndex = 11;
+        }
+
+        else if (World.worldType == World.WorldTypes.METAL)
+        {
+            topTopIndex = 12;
+            topSideIndex = 13;
+            underSideIndex = 14;
+        }
+
+        else if (World.worldType == World.WorldTypes.CHEESE)
+        {
+            topTopIndex = 15;
+            topSideIndex = 16;
+            underSideIndex = 17;
+        }
+
+        else if (World.worldType == World.WorldTypes.AUTUMN)
+        {
+            topTopIndex = 18;
+            topSideIndex = 19;
+            underSideIndex = 20;
+        }
+
+        else
+        {
+            topTopIndex = 21;
+            topSideIndex = 22;
+            underSideIndex = 23;
         }
 
         // SETTING TEXTURES
