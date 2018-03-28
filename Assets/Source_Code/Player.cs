@@ -67,12 +67,14 @@ public class Player : Character
 
     public void Caught()
     {
-
+        Debug.Log("Caught!");
+        this.gameObject.SetActive(false);
     }
 
 
-    void OnCollisionStay(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
     {
+        base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "Ennemy")
             Caught();
         if (collision.gameObject.tag == "Key")
