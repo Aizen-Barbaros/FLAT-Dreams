@@ -49,13 +49,13 @@ public class Player : Character
 
         if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
         {
-            base.speed = 5;
+            base.speed = 8;
             base.resetSpeedBoost = false;
         }
 
         if (base.lastDash + base.dashDuration <= Time.time && resetDash)
         {
-            base.speed = 5;
+            base.speed = 8;
             base.resetDash = false;
         }        
     }

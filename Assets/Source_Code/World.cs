@@ -100,7 +100,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.ChooseTerrainAndWorldType(Random.Range(0, 8), Random.Range(0, 3));
+        this.ChooseTerrainAndWorldType(7, Random.Range(0, 3));
         this.ChooseTerrainValues();
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
@@ -187,8 +187,8 @@ public class World : MonoBehaviour
 
                 // PLAYER
                 string text = reader.ReadLine();
-                string[] bits = text.Split(' ');
-                player.transform.position = new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2]));
+                string[] coordinates = text.Split(' ');
+                player.transform.position = new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
 
                 reader.ReadLine();
 
@@ -196,8 +196,8 @@ public class World : MonoBehaviour
                 for(int i = 0; i < this.keys.Length; i++)
                 {
                     text = reader.ReadLine();
-                    bits = text.Split(' ');
-                    this.keys[i] = Instantiate(this.key, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
+                    coordinates = text.Split(' ');
+                    this.keys[i] = Instantiate(this.key, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                 }
 
                 reader.ReadLine();
@@ -206,8 +206,8 @@ public class World : MonoBehaviour
                 for (int i = 0; i < this.monsters.Length; i++)
                 {
                     text = reader.ReadLine();
-                    bits = text.Split(' ');
-                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
+                    coordinates = text.Split(' ');
+                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                 }
 
                 reader.ReadLine();
@@ -223,8 +223,8 @@ public class World : MonoBehaviour
                     for (int i = 0; i < this.trees.Length; i++)
                     {
                         text = reader.ReadLine();
-                        bits = text.Split(' ');
-                        this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(bits[0]), int.Parse(bits[1]), int.Parse(bits[2])), Quaternion.identity) as GameObject;
+                        coordinates = text.Split(' ');
+                        this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                     }
                 }
 
@@ -369,9 +369,9 @@ public class World : MonoBehaviour
 
             RenderSettings.skybox = skyRotting;
             RenderSettings.fog = true;
-            RenderSettings.fogMode = FogMode.ExponentialSquared;
+            RenderSettings.fogMode = FogMode.Exponential;
             RenderSettings.fogColor = Color.green;
-            RenderSettings.fogDensity = 0.01f;
+            RenderSettings.fogDensity = 0.1f;
         }
 
         if (tType == 0)
