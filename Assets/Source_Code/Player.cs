@@ -61,6 +61,7 @@ public class Player : Character
         if (keyCaught>=3)
         {
             Debug.Log("CONGRAT");
+            this.gameObject.SetActive(false);
         }
     }
 
