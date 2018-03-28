@@ -41,6 +41,18 @@ public class Enemy : Character
         {
             base.Jump();
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            this.onCatch();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "StunBall")
+        {
+            base.stunned();
+        }
     }
 
     private void shortPath()
@@ -50,11 +62,6 @@ public class Enemy : Character
 
     private void onCatch()
     {
-
-    }
-
-    public void stunned()
-    {
-
+        
     }
 }

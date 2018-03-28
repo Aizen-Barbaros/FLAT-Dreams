@@ -139,4 +139,10 @@ public class Character : MonoBehaviour
         this.stunCooldown = 3;
         this.lastStun = Time.time;
     }
+
+    public void stunned()
+    {
+        Debug.Log("Stunned!");
+
+    }
 }
