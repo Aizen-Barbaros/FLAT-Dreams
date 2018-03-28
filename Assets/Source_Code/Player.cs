@@ -57,7 +57,11 @@ public class Player : Character
         {
             base.speed = 8;
             base.resetDash = false;
-        }        
+        }
+        if (keyCaught>=3)
+        {
+            Debug.Log("CONGRAT");
+        }
     }
 
 

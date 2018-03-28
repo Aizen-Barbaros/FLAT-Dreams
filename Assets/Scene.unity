@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1092022602
+--- !u!1001 &668028662
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -132,20 +132,7 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 83.7545
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 4383057369893630, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
-=======
-<<<<<<< HEAD
     - target: {fileID: 4305032757373272, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-    - target: {fileID: 4670474735835462, guid: 399bf082fe8446e40b7960c467c102d9, type: 2}
-=======
-    - target: {fileID: 4383057369893630, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
->>>>>>> 204eecf079173d6a65317db808d31ea81acf78bf
->>>>>>> 1075e21012ff231b38af9c885b6d7ec11844c189
->>>>>>> d32d0bec4f40759cd047a85a7306cdb3fc8ea471
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -165,12 +152,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 54537120839825418, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: m_AngularDrag
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 54537120839825418, guid: 45186f34d93e46c48824b5f2671ed4d5,
+    - target: {fileID: 54525064453311074, guid: 45186f34d93e46c48824b5f2671ed4d5,
         type: 2}
       propertyPath: m_Constraints
       value: 112

@@ -473,7 +473,7 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < this.monsters.Length; i++)
         {
-            this.monsters[i] = Instantiate(this.littleMonster, this.GenerateRandomVector(30), Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.zombie, this.GenerateRandomVector(30), Quaternion.identity) as GameObject;
         }
     }
 

@@ -20,5 +20,6 @@ public class CameraMouvement : MonoBehaviour
         float v = verticalSpeed * Input.GetAxis("Mouse Y");
         transform.Rotate(-v, 0, 0);
         positionCam = transform.position;
+        Debug.Log(this.gameObject.transform.rotation.eulerAngles.y);
     }
 }
