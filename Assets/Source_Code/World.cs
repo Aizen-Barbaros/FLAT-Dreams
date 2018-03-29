@@ -29,6 +29,7 @@ public class World : MonoBehaviour
     public GameObject hellTree;
     public GameObject autumnTree;
     public GameObject rottingTree;
+    public GameObject palmtree;
 
     // KEY
     public GameObject key;
@@ -510,6 +511,8 @@ public class World : MonoBehaviour
             this.numberOfTrees = 1000;
         else if (World.worldType == World.WorldTypes.ROTTING)
             this.numberOfTrees = 300;
+        else if (World.worldType == World.WorldTypes.TROPICAL)
+            this.numberOfTrees = 500;
         else
             this.numberOfTrees = 0;
     }
@@ -529,6 +532,8 @@ public class World : MonoBehaviour
             this.treeModel = this.autumnTree;
         else if (World.worldType == World.WorldTypes.ROTTING)
             this.treeModel = this.rottingTree;
+        else if (World.worldType == World.WorldTypes.TROPICAL)
+            this.treeModel = this.palmtree;
         else
             this.treeModel = null;
     }
