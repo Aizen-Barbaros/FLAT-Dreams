@@ -123,7 +123,7 @@ public class Character : MonoBehaviour
 
     protected void SortVitesse()
     {
-        this.speed = 10;
+        this.speed *= 2;
         this.lastSpeedBoost = Time.time;
         this.speedBoostCooldown = this.speedBoostDuration + 5;
         this.resetSpeedBoost = true;

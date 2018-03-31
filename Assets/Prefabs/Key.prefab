@@ -21,9 +21,10 @@ GameObject:
   - component: {fileID: 4767973504851058}
   - component: {fileID: 33225630150021190}
   - component: {fileID: 23778156874103198}
+  - component: {fileID: 64687234381196922}
   m_Layer: 0
   m_Name: Key
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,7 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4237950386898878}
-  - component: {fileID: 64888367689553302}
   m_Layer: 0
   m_Name: Key
   m_TagString: Key
@@ -112,12 +112,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775395729465674}
   m_Mesh: {fileID: 4300000, guid: 1ade44edcdb35914fb110799270170d6, type: 3}
---- !u!64 &64888367689553302
+--- !u!64 &64687234381196922
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1967048097105674}
+  m_GameObject: {fileID: 1775395729465674}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

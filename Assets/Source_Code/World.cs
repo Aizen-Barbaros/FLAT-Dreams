@@ -20,7 +20,9 @@ public class World : MonoBehaviour
     public Material skyMetal;
     public Material skyCheese;
     public Material skyAutumn;
+    public Material skyTropical;
     public Material skyRotting;
+    public Material skyMatrix;
 
     // TREES
     public GameObject oakTree;
@@ -35,14 +37,14 @@ public class World : MonoBehaviour
     public GameObject key;
 
     // MONSTERS
-    public GameObject zombie;
-    public GameObject littleMonster;/*
-    public GameObject reaper;
-    public GameObject ghost;
-    public GameObject bear;
-    public GameObject gnome;
+    public GameObject littleMonster;
     public GameObject snowMan;
-    public GameObject yeti;*/
+    public GameObject reaper;
+    public GameObject bear;
+    public GameObject ghost;
+    public GameObject gnome;
+    public GameObject yeti;
+    public GameObject zombie;
 
     // TYPES
     public enum TerrainTypes { PLAINS, HILLS, MOUNTAINS };
@@ -70,8 +72,9 @@ public class World : MonoBehaviour
     private int numberOfMonsters = 30;
     private int numberOfTrees;
 
-    // TREE MODEL
+    // MODELS
     private GameObject treeModel;
+    private GameObject monsterModel;
 
     // TERRAIN OBJECTS
     private Chunk[,] chunks;
@@ -101,8 +104,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.ChooseTerrainAndWorldType(Random.Range(0,8), Random.Range(0, 3));  
-        this.ChooseTerrainValues();
+        this.GenerateWorldValues(Random.Range(0, 10), Random.Range(0, 3));
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
         
@@ -115,8 +117,6 @@ public class World : MonoBehaviour
         this.GenerateMonsters();
 
         // TREES
-        this.GenerateNumberOfTrees();
-        this.GenerateTreeModel();
         this.trees = new GameObject[this.numberOfTrees];
         this.GenerateTrees();
 
@@ -182,7 +182,7 @@ public class World : MonoBehaviour
                 else
                     tType = 2;
 
-                this.ChooseTerrainAndWorldType(wType, tType);
+                this.GenerateWorldValues(wType, tType);
 
                 // GENERATE TERRAIN
                 this.GenerateSurfaceHeights();
@@ -218,9 +218,6 @@ public class World : MonoBehaviour
                 reader.ReadLine();
 
                 // TREES
-                this.GenerateNumberOfTrees();
-                this.GenerateTreeModel();
-
                 if (this.numberOfTrees > 0)
                 {
                     this.trees = new GameObject[this.numberOfTrees];
@@ -297,23 +294,15 @@ public class World : MonoBehaviour
     }
 
 
-    public void GenerateTerrain()
-    {
-        for (int x = 0; x < mapSize; x += chunkSize)
-        {
-            for (int z = 0; z < mapSize; z += chunkSize)
-            {
-                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas);
-            }
-        }
-    }
-
-
-    public void ChooseTerrainAndWorldType(int wType, int tType)
+    public void GenerateWorldValues(int wType, int tType)
     {
         if (wType == 0)
         {
             worldType = WorldTypes.NORMAL;
+
+            this.monsterModel = littleMonster;
+            this.numberOfTrees = 1200;
+            this.treeModel = this.oakTree;
 
             RenderSettings.skybox = skyNormal;
         }
@@ -321,6 +310,10 @@ public class World : MonoBehaviour
         else if (wType == 1)
         {
             worldType = WorldTypes.SNOWY;
+
+            this.monsterModel = this.snowMan;
+            this.numberOfTrees = 1200;
+            this.treeModel = this.pineTree;
 
             RenderSettings.skybox = skySnowy;
             RenderSettings.fog = true;
@@ -333,6 +326,10 @@ public class World : MonoBehaviour
         {
             worldType = WorldTypes.HELL;
 
+            this.monsterModel = this.reaper;
+            this.numberOfTrees = 300;
+            this.treeModel = this.hellTree;
+
             RenderSettings.skybox = skyHell;
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
@@ -344,12 +341,20 @@ public class World : MonoBehaviour
         {
             worldType = WorldTypes.DREAMY;
 
+            this.monsterModel = this.bear;
+            this.numberOfTrees = 500;
+            this.treeModel = this.lollipopTree;
+
             RenderSettings.skybox = skyDreamy;
         }
 
         else if (wType == 4)
         {
             worldType = WorldTypes.METAL;
+
+            this.monsterModel = this.ghost;
+            this.numberOfTrees = 0;
+            this.treeModel = null;
 
             RenderSettings.skybox = skyMetal;
         }
@@ -358,6 +363,10 @@ public class World : MonoBehaviour
         {
             worldType = WorldTypes.CHEESE;
 
+            this.monsterModel = this.gnome;
+            this.numberOfTrees = 0;
+            this.treeModel = null;
+
             RenderSettings.skybox = skyCheese;
         }
 
@@ -365,12 +374,20 @@ public class World : MonoBehaviour
         {
             worldType = WorldTypes.AUTUMN;
 
+            this.monsterModel = this.yeti;
+            this.numberOfTrees = 1000;
+            this.treeModel = this.autumnTree;
+
             RenderSettings.skybox = skyAutumn;
         }
 
         else if (wType == 7)
         {
             worldType = WorldTypes.ROTTING;
+
+            this.monsterModel = this.zombie;
+            this.numberOfTrees = 300;
+            this.treeModel = this.rottingTree;
 
             RenderSettings.skybox = skyRotting;
             RenderSettings.fog = true;
@@ -383,47 +400,59 @@ public class World : MonoBehaviour
         {
             worldType = WorldTypes.TROPICAL;
 
-            RenderSettings.skybox = skyNormal;
+            this.monsterModel = this.littleMonster;
+            this.numberOfTrees = 500;
+            this.treeModel = this.palmtree;
+
+            RenderSettings.skybox = skyTropical;
         }
 
         else
         {
             worldType = WorldTypes.MATRIX;
 
-            RenderSettings.skybox = skyNormal;
+            this.monsterModel = this.reaper;
+            this.numberOfTrees = 0;
+            this.treeModel = null;
+
+            RenderSettings.skybox = skyMatrix;
         }
 
         if (tType == 0)
-            this.terrainType = TerrainTypes.PLAINS;
-        else if (tType == 1)
-            this.terrainType = TerrainTypes.HILLS;
-        else
-            this.terrainType = TerrainTypes.MOUNTAINS;
-    }
-
-
-    public void ChooseTerrainValues()
-    {
-        if (this.terrainType == TerrainTypes.PLAINS)
         {
+            this.terrainType = TerrainTypes.PLAINS;
             this.maxHeight = 50;
             this.smooth = Random.Range(0.007f, 0.009f);
         }
 
-        else if (this.terrainType == TerrainTypes.HILLS)
+        else if (tType == 1)
         {
+            this.terrainType = TerrainTypes.HILLS;
             this.maxHeight = 100;
             this.smooth = Random.Range(0.009f, 0.011f);
         }
 
         else
         {
+            this.terrainType = TerrainTypes.MOUNTAINS;
             this.maxHeight = 150;
             this.smooth = Random.Range(0.011f, 0.013f);
         }
 
         this.octaves = Random.Range(3, 5);
         this.persistence = 0.5f;
+    }
+
+
+    public void GenerateTerrain()
+    {
+        for (int x = 0; x < mapSize; x += chunkSize)
+        {
+            for (int z = 0; z < mapSize; z += chunkSize)
+            {
+                this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas);
+            }
+        }
     }
 
 
@@ -434,18 +463,12 @@ public class World : MonoBehaviour
         for (int x = 0; x < mapSize; x++)
         {
             for (int z = 0; z < mapSize; z++)
-                surfaceHeights[x, z] = this.GenerateHeight(x, z);
+                surfaceHeights[x, z] = (int)Mathf.Lerp(0, this.maxHeight, Mathf.InverseLerp(0, 1, Noise(x * this.smooth, z * this.smooth)));
         }
     }
 
 
-    public int GenerateHeight(float x, float z)
-    {
-        return (int)Mathf.Lerp(0, maxHeight, Mathf.InverseLerp(0, 1, Noise(x * smooth, z * smooth, octaves, persistence)));
-    }
-
-
-    public float Noise(float x, float z, int octaves, float persistence)
+    public float Noise(float x, float z)
     {
         float total = 0;
         float frequency = 1;
@@ -453,11 +476,11 @@ public class World : MonoBehaviour
         float maxValue = 0;
         float offset = 32000f;
 
-        for (int i = 0; i < octaves; i++)
+        for (int i = 0; i < this.octaves; i++)
         {
             total += Mathf.PerlinNoise((x + offset) * frequency, (z + offset) * frequency) * amplitude;
             maxValue += amplitude;
-            amplitude *= persistence;
+            amplitude *= this.persistence;
             frequency *= 2;
         }
 
@@ -465,25 +488,11 @@ public class World : MonoBehaviour
     }
 
 
-    public Vector3 GenerateRandomVector(int distanceFromSpawn)
-    {
-        int x, z;
-
-        do
-        {
-            x = Random.Range(0, mapSize);
-            z = Random.Range(0, mapSize);
-        } while (Mathf.Abs(mapSize/2 - x) < distanceFromSpawn && Mathf.Abs(mapSize/2 - z) < distanceFromSpawn);
-
-        return new Vector3(x, surfaceHeights[x, z], z);
-    }
-
-
     public void GenerateKeys()
     {
         for(int i = 0; i < this.keys.Length; i++)
         {
-            this.keys[i] = Instantiate(this.key, this.GenerateRandomVector(75), Quaternion.identity) as GameObject;
+            this.keys[i] = Instantiate(this.key, this.GenerateRandomVector(75, 0), Quaternion.identity) as GameObject;
         }
     }
 
@@ -492,50 +501,8 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < this.monsters.Length; i++)
         {
-            this.monsters[i] = Instantiate(this.zombie, this.GenerateRandomVector(30), Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.monsterModel, this.GenerateRandomVector(30, 10), Quaternion.identity) as GameObject;
         }
-    }
-
-
-    public void GenerateNumberOfTrees()
-    {
-        if (World.worldType == World.WorldTypes.NORMAL)
-            this.numberOfTrees = 1200;
-        else if (World.worldType == World.WorldTypes.SNOWY)
-            this.numberOfTrees = 1200;
-        else if (World.worldType == World.WorldTypes.HELL)
-            this.numberOfTrees = 300;
-        else if (World.worldType == World.WorldTypes.DREAMY)
-            this.numberOfTrees = 500;
-        else if (World.worldType == World.WorldTypes.AUTUMN)
-            this.numberOfTrees = 1000;
-        else if (World.worldType == World.WorldTypes.ROTTING)
-            this.numberOfTrees = 300;
-        else if (World.worldType == World.WorldTypes.TROPICAL)
-            this.numberOfTrees = 500;
-        else
-            this.numberOfTrees = 0;
-    }
-
-
-    public void GenerateTreeModel()
-    {
-        if (World.worldType == World.WorldTypes.NORMAL)
-            this.treeModel = this.oakTree;
-        else if (World.worldType == World.WorldTypes.SNOWY)
-            this.treeModel = this.pineTree;
-        else if (World.worldType == World.WorldTypes.HELL)
-            this.treeModel = this.hellTree;
-        else if (World.worldType == World.WorldTypes.DREAMY)
-            this.treeModel = this.lollipopTree;
-        else if (World.worldType == World.WorldTypes.AUTUMN)
-            this.treeModel = this.autumnTree;
-        else if (World.worldType == World.WorldTypes.ROTTING)
-            this.treeModel = this.rottingTree;
-        else if (World.worldType == World.WorldTypes.TROPICAL)
-            this.treeModel = this.palmtree;
-        else
-            this.treeModel = null;
     }
 
 
@@ -543,7 +510,21 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < this.trees.Length; i++)
         {
-            this.trees[i] = Instantiate(this.treeModel, this.GenerateRandomVector(15), Quaternion.identity) as GameObject;
+            this.trees[i] = Instantiate(this.treeModel, this.GenerateRandomVector(15, 0), Quaternion.identity) as GameObject;
         }
+    }
+
+
+    public Vector3 GenerateRandomVector(int distanceFromSpawn, int offset)
+    {
+        int x, z;
+
+        do
+        {
+            x = Random.Range(0, mapSize);
+            z = Random.Range(0, mapSize);
+        } while (Mathf.Abs(mapSize / 2 - x) < distanceFromSpawn && Mathf.Abs(mapSize / 2 - z) < distanceFromSpawn);
+
+        return new Vector3(x, surfaceHeights[x, z] + offset, z);
     }
 }
