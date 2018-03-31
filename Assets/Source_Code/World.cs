@@ -45,6 +45,7 @@ public class World : MonoBehaviour
     public GameObject gnome;
     public GameObject yeti;
     public GameObject zombie;
+    public GameObject agentSmith;
 
     // TYPES
     public enum TerrainTypes { PLAINS, HILLS, MOUNTAINS };
@@ -104,7 +105,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize, mapSize];
 
-        this.GenerateWorldValues(8, Random.Range(0, 3));
+        this.GenerateWorldValues(Random.Range(0, 10) , Random.Range(0, 3));                         // HERE TO CHANGE THE WORLD YOU WANT TO TRY
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
         
@@ -411,7 +412,7 @@ public class World : MonoBehaviour
         {
             worldType = WorldTypes.MATRIX;
 
-            this.monsterModel = this.reaper;
+            this.monsterModel = this.agentSmith;
             this.numberOfTrees = 0;
             this.treeModel = null;
 
