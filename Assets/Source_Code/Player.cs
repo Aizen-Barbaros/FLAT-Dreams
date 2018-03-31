@@ -6,13 +6,15 @@ public class Player : Character
 {
     private int lives;
     private int currentLives;
-    private int keyCaught=0;
+    private int keyCaught;
 
 
     void Start()
     {
         base.iniCamX = Input.mousePosition.x;
         base.iniCamY = Input.mousePosition.y;
+
+        this.keyCaught = 0;
 
         base.jumpHeight = 1.5f;
 
