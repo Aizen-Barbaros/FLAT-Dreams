@@ -68,7 +68,7 @@ public class Character : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = true;
-            Debug.Log("Grounded");
+            //Debug.Log("Grounded");
         }
     }
 
@@ -78,7 +78,7 @@ public class Character : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = false;
-            Debug.Log("Leave Grounded");
+            //Debug.Log("Leave Grounded");
         }
     }
 
@@ -149,7 +149,7 @@ public class Character : MonoBehaviour
         this.lastStun = Time.time;
     }
 
-    public void stunned()
+    public void Stunned()
     {
         Debug.Log("Stunned!");
         this.freezeDuration = 5.0f;

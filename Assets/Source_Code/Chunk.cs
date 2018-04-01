@@ -11,8 +11,8 @@ public class Chunk
 
     public Chunk(Vector3 position, Material textureAtlas)
     {
-        this.chunk = new GameObject((int)position.x + "_" + (int)position.y + "_" + (int)position.z);
-        this.chunk.transform.position = position;
+        this.chunk = new GameObject((int)position.x * World.chunkSize + "_" + (int)position.y * World.chunkSize + "_" + (int)position.z * World.chunkSize);
+        this.chunk.transform.position = position * World.chunkSize;
         this.chunk.tag = "Ground";
         this.textureAtlas = textureAtlas;
 
@@ -22,6 +22,7 @@ public class Chunk
         MeshCollider meshCollider = this.chunk.gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         meshCollider.sharedMesh = this.chunk.transform.GetComponent<MeshFilter>().mesh;
     }
+
 
     public void CreateChunk()
     {
@@ -66,6 +67,14 @@ public class Chunk
                 cube.DisplayCube();
             }
         }
+    }
+
+    public void DeleteChunk()
+    {
+        MonoBehaviour.Destroy(this.chunk.GetComponent<MeshCollider>());
+        MonoBehaviour.Destroy(this.chunk.GetComponent<MeshFilter>());
+        MonoBehaviour.Destroy(this.chunk.GetComponent<MeshRenderer>());
+        MonoBehaviour.Destroy(this.chunk);
     }
 
 

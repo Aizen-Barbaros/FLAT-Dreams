@@ -85,27 +85,32 @@ public class World : MonoBehaviour
 
 
     public void Start()
-    {
-        player.SetActive(false);
-
+    {   
         this.GenerateWorld();
         //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
         //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
+        //this.DeleteWorld();
     }
 
 
-    public void Update()
+    public void FixedUpdate()
     {
-        
+        /*
+        if (player.gameObject.GetComponent<Player>().GetCurrentLives() == 0)
+        {
+            player.SetActive(false);
+            Debug.Log("Dead");
+        }
+        */
     }
 
 
     public void GenerateWorld()
     {
         // CHUNKS
-        this.chunks = new Chunk[mapSize, mapSize];
+        this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
 
-        this.GenerateWorldValues(Random.Range(0, 10) , Random.Range(0, 3));                         // HERE TO CHANGE THE WORLD YOU WANT TO TRY
+        this.GenerateWorldValues(Random.Range(0, 10) , Random.Range(0, 3));
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
         
@@ -122,7 +127,7 @@ public class World : MonoBehaviour
         this.GenerateTrees();
 
         // PLAYER
-        player.transform.position = new Vector3(mapSize / 2, surfaceHeights[mapSize / 2, mapSize / 2] + 1, mapSize / 2);
+        player.transform.position = this.GenerateRandomVector(0, 1);
         player.SetActive(true);
     }
 
@@ -130,7 +135,7 @@ public class World : MonoBehaviour
     public void GenerateSavedWorld(string fileName)
     {
         // CHUNKS
-        this.chunks = new Chunk[mapSize, mapSize];
+        this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
 
         // KEYS
         this.keys = new GameObject[this.numberOfKeys];
@@ -183,9 +188,8 @@ public class World : MonoBehaviour
                 else
                     tType = 2;
 
-                this.GenerateWorldValues(wType, tType);
-
                 // GENERATE TERRAIN
+                this.GenerateWorldValues(wType, tType);
                 this.GenerateSurfaceHeights();
                 this.GenerateTerrain();
                 
@@ -230,7 +234,7 @@ public class World : MonoBehaviour
                         this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                     }
                 }
-
+                
                 player.SetActive(true);
             }
         }
@@ -291,6 +295,26 @@ public class World : MonoBehaviour
         catch (System.Exception exception)
         {
             Debug.Log(exception.ToString());
+        }
+    }
+
+    public void DeleteWorld()
+    {
+        player.SetActive(false);
+
+        for (int i = 0; i < this.keys.Length; i++)
+            GameObject.Destroy(this.keys[i]);
+
+        for (int i = 0; i < this.monsters.Length; i++)
+            GameObject.Destroy(this.monsters[i]);
+
+        for (int i = 0; i < this.trees.Length; i++)
+            GameObject.Destroy(this.trees[i]);
+
+        for (int x = 0; x < this.chunks.GetLength(0); x += 1)
+        {
+            for (int z = 0; z < chunks.GetLength(1); z += 1)
+                this.chunks[x, z].DeleteChunk();
         }
     }
 
@@ -447,9 +471,9 @@ public class World : MonoBehaviour
 
     public void GenerateTerrain()
     {
-        for (int x = 0; x < mapSize; x += chunkSize)
+        for (int x = 0; x < this.chunks.GetLength(0); x += 1)
         {
-            for (int z = 0; z < mapSize; z += chunkSize)
+            for (int z = 0; z < this.chunks.GetLength(1); z += 1)
             {
                 this.chunks[x, z] = new Chunk(new Vector3(x, 0, z), this.textureAtlas);
             }
@@ -502,7 +526,7 @@ public class World : MonoBehaviour
     {
         for (int i = 0; i < this.monsters.Length; i++)
         {
-            this.monsters[i] = Instantiate(this.monsterModel, this.GenerateRandomVector(30, 10), Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.monsterModel, this.GenerateRandomVector(30, 1), Quaternion.identity) as GameObject;
         }
     }
 

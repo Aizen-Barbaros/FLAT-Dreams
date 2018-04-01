@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : Character
 {
-    private int lives;
     private int currentLives;
     private int keyCaught;
 
@@ -14,6 +13,7 @@ public class Player : Character
         base.iniCamX = Input.mousePosition.x;
         base.iniCamY = Input.mousePosition.y;
 
+        this.currentLives = 3;
         this.keyCaught = 0;
 
         base.jumpHeight = 1.5f;
@@ -34,6 +34,7 @@ public class Player : Character
     void FixedUpdate ()
     {
         base.Move();
+
         if (Input.GetKeyDown("space"))
         {
             base.Jump();
@@ -60,31 +61,33 @@ public class Player : Character
             base.speed = 8;
             base.resetDash = false;
         }
-        if (keyCaught>=3)
-        {
-            Debug.Log("CONGRAT");
-            this.gameObject.SetActive(false);
-        }
     }
 
 
-    public void Caught()
+    public int GetCurrentLives()
     {
-        Debug.Log("Caught!");
-        this.gameObject.SetActive(false);
+        return this.currentLives;
+    }
+
+    public int GetKeyCaught()
+    {
+        return this.keyCaught;
     }
 
 
-    protected /*override*/ void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
-        //base.OnCollisionEnter(collision);
         if (collision.gameObject.tag == "Ennemy")
-            Caught();
+        {
+            this.currentLives--;
+            //this.gameObject.SetActive(false);
+            Debug.Log(this.currentLives);
+        }
+
         if (collision.gameObject.tag == "Key")
         {
-            keyCaught++;
+            this.keyCaught++;
             GameObject.Destroy(collision.gameObject);
-            Debug.Log(keyCaught);
         }
     }
 }
