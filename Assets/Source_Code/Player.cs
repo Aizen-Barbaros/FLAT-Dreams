@@ -30,6 +30,11 @@ public class Player : Character
         base.speedBoostCooldown = 0;
     }
 
+    public int GetKeyGaught()
+    {
+        return this.keyCaught;
+    }
+
 
     void FixedUpdate ()
     {

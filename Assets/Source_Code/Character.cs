@@ -117,7 +117,7 @@ public class Character : MonoBehaviour
             float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
             //Apply a velocity vertically
             this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
-        } 
+        }
     }
 
 

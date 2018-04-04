@@ -93,18 +93,6 @@ public class World : MonoBehaviour
     }
 
 
-    public void FixedUpdate()
-    {
-        /*
-        if (player.gameObject.GetComponent<Player>().GetCurrentLives() == 0)
-        {
-            player.SetActive(false);
-            Debug.Log("Dead");
-        }
-        */
-    }
-
-
     public void GenerateWorld()
     {
         // CHUNKS
@@ -113,7 +101,11 @@ public class World : MonoBehaviour
         this.GenerateWorldValues(Random.Range(0, 10), Random.Range(0, 3));
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
-        
+
+        //PLAYER
+        //player = Instantiate(this.playerPrefab, this.GenerateRandomVector(1), Quaternion.identity) as GameObject;
+        player.transform.position = this.GenerateRandomVector(1);
+
         // KEYS
         this.keys = new GameObject[3];
         this.GenerateKeys();
@@ -127,7 +119,6 @@ public class World : MonoBehaviour
         this.GenerateTrees();
 
         // PLAYER
-        player.transform.position = this.GenerateRandomVector(0, 1);
         player.SetActive(true);
     }
 
@@ -198,6 +189,7 @@ public class World : MonoBehaviour
                 // PLAYER
                 string text = reader.ReadLine();
                 string[] coordinates = text.Split(' ');
+                //player = Instantiate(this.playerPrefab, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                 player.transform.position = new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
 
                 reader.ReadLine();
@@ -539,6 +531,14 @@ public class World : MonoBehaviour
         }
     }
 
+    public Vector3 GenerateRandomVector(int offset)
+    {
+        int x = Random.Range(0, mapSize);
+        int z = Random.Range(0, mapSize);
+
+        return new Vector3(x, surfaceHeights[x, z] + offset, z);
+    }
+
 
     public Vector3 GenerateRandomVector(int distanceFromSpawn, int offset)
     {
@@ -548,7 +548,7 @@ public class World : MonoBehaviour
         {
             x = Random.Range(0, mapSize);
             z = Random.Range(0, mapSize);
-        } while (Mathf.Abs(mapSize / 2 - x) < distanceFromSpawn && Mathf.Abs(mapSize / 2 - z) < distanceFromSpawn);
+        } while (Mathf.Abs(player.transform.position.x - x) < distanceFromSpawn && Mathf.Abs(player.transform.position.z - z) < distanceFromSpawn);
 
         return new Vector3(x, surfaceHeights[x, z] + offset, z);
     }
