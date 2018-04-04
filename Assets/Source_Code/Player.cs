@@ -80,7 +80,7 @@ public class Player : Character
         if (collision.gameObject.tag == "Ennemy")
         {
             this.currentLives--;
-            //this.gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
             Debug.Log(this.currentLives);
         }
 
