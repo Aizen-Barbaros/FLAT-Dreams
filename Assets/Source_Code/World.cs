@@ -93,6 +93,15 @@ public class World : MonoBehaviour
     }
 
 
+    public void FixedUpdate()
+    {
+        if (player.activeSelf == false)
+        {
+            Debug.Log("MORT");
+        }
+    }
+
+
     public void GenerateWorld()
     {
         // CHUNKS
@@ -103,7 +112,6 @@ public class World : MonoBehaviour
         this.GenerateTerrain();
 
         //PLAYER
-        //player = Instantiate(this.playerPrefab, this.GenerateRandomVector(1), Quaternion.identity) as GameObject;
         player.transform.position = this.GenerateRandomVector(1);
 
         // KEYS
@@ -189,7 +197,6 @@ public class World : MonoBehaviour
                 // PLAYER
                 string text = reader.ReadLine();
                 string[] coordinates = text.Split(' ');
-                //player = Instantiate(this.playerPrefab, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                 player.transform.position = new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
 
                 reader.ReadLine();
@@ -336,7 +343,7 @@ public class World : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Color.white;
-            RenderSettings.fogDensity = 0.02f;
+            RenderSettings.fogDensity = 0.03f;
         }
 
         else if (wType == 2)

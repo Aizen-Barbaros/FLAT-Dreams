@@ -30,11 +30,6 @@ public class Player : Character
         base.speedBoostCooldown = 0;
     }
 
-    public int GetKeyGaught()
-    {
-        return this.keyCaught;
-    }
-
 
     void FixedUpdate ()
     {
@@ -73,6 +68,7 @@ public class Player : Character
     {
         return this.currentLives;
     }
+
 
     public int GetKeyCaught()
     {
