@@ -21,6 +21,10 @@ public class Chunk
 
         MeshCollider meshCollider = this.chunk.gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         meshCollider.sharedMesh = this.chunk.transform.GetComponent<MeshFilter>().mesh;
+
+        //Test de Gab
+        meshCollider.material.staticFriction = 0;
+        meshCollider.material.dynamicFriction = 0;
     }
 
 

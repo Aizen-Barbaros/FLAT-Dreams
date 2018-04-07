@@ -88,6 +88,12 @@ public class Character : MonoBehaviour
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * this.speed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * this.speed;
 
+        //float h = camSpeed * Input.GetAxis("Mouse X");
+        //this.transform.Rotate(0,h,0);
+
+        //Quaternion deltaRotation = Quaternion.Euler(new Vector3(h, 0, 0) * Time.deltaTime);
+        //this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * deltaRotation);
+        //this.GetComponent<Rigidbody>().MovePosition(this.transform.position + new Vector3(-z, 0, x));
         this.transform.Translate(-z, 0, x);
 
         float h = camSpeed * Input.GetAxis("Mouse X");
