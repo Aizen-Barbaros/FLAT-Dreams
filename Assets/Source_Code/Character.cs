@@ -41,6 +41,18 @@ public class Character : MonoBehaviour
     protected float stunCooldown;
     protected GameObject stunBall;
 
+    //Sort Fog
+    protected bool resetFog;
+    protected float lastFog;
+    protected float FogDuration;
+    protected float FogCooldown;
+    protected bool normalFog;
+
+    //Rocket
+    protected float lastRocket;
+    protected float RocketCooldown;
+    protected float RocketHeight;
+
     //Position of the mouse in the screen for the cam
     protected Vector3 position;
 
@@ -153,6 +165,31 @@ public class Character : MonoBehaviour
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
+    }
+
+    protected void HighSenses()
+    {
+        this.lastFog = Time.time;
+        this.FogCooldown = 30;
+        this.resetFog = true;
+        if (RenderSettings.fog)
+        {
+            RenderSettings.fog = false;
+            normalFog = true;
+        }
+        else
+            normalFog = false;
+    }
+
+    protected void Rockets()
+    {
+        this.RocketCooldown = 30;
+        this.lastRocket = Time.time;
+        //Mathematic function who give the velocity for a specific jump height
+        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * RocketHeight * -1);
+        //Apply a velocity vertically
+        this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+
     }
 
     public void Stunned()
