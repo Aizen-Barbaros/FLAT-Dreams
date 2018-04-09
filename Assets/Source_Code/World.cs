@@ -95,10 +95,8 @@ public class World : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (player.activeSelf == false)
-        {
-            Debug.Log("MORT");
-        }
+        if (player.GetComponentInChildren<Player>().GetCaught() == true)
+            player.SetActive(false);
     }
 
 

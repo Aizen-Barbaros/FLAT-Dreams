@@ -6,6 +6,7 @@ public class Player : Character
 {
     private int currentLives;
     private int keyCaught;
+    private bool isCaught;
 
 
     void Start()
@@ -15,6 +16,7 @@ public class Player : Character
 
         this.currentLives = 3;
         this.keyCaught = 0;
+        this.isCaught = false;
 
         base.jumpHeight = 1.5f;
 
@@ -75,13 +77,19 @@ public class Player : Character
         return this.keyCaught;
     }
 
+    
+    public bool GetCaught()
+    {
+        return this.isCaught;
+    }
+
 
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ennemy")
         {
             this.currentLives--;
-            this.gameObject.SetActive(false);
+            this.isCaught = true;
             Debug.Log(this.currentLives);
         }
 
