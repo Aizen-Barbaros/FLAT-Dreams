@@ -183,7 +183,7 @@ public class Character : MonoBehaviour
 
     protected void Rockets()
     {
-        this.RocketCooldown = 30;
+        this.RocketCooldown = 60;
         this.lastRocket = Time.time;
         //Mathematic function who give the velocity for a specific jump height
         float velocity = Mathf.Sqrt(2 * Physics.gravity.y * RocketHeight * -1);
