@@ -45,7 +45,6 @@ public class Player : Character
         {
             base.Jump();
         }
-            
 
         if (Input.GetKeyDown("1") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
             base.SortVitesse();
@@ -103,13 +102,24 @@ public class Player : Character
     }
 
 
+    public void SetCaught(bool isCaught)
+    {
+        this.isCaught = isCaught;
+    }
+
+    
+    public bool IsActive()
+    {
+        return this.gameObject.activeSelf;
+    }
+
+
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ennemy")
         {
             this.currentLives--;
             this.isCaught = true;
-            Debug.Log(this.currentLives);
         }
 
         if (collision.gameObject.tag == "Key")

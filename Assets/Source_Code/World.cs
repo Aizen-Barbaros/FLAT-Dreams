@@ -85,18 +85,35 @@ public class World : MonoBehaviour
 
 
     public void Start()
-    {   
+    {
         this.GenerateWorld();
-        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
-        //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\world.txt");
-        //this.DeleteWorld();
     }
 
 
     public void FixedUpdate()
     {
-        if (player.GetComponentInChildren<Player>().GetCaught() == true)
-            player.SetActive(false);
+        if (player.activeSelf == true)
+        {
+            if (player.GetComponentInChildren<Player>().GetKeyCaught() == 3)
+            {
+                Debug.Log("3 CLEFS");
+                this.DeleteWorld();
+            }
+
+            if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
+            {
+                Debug.Log("0 VIES");
+                this.DeleteWorld();
+            }
+
+            if (player.GetComponentInChildren<Player>().GetCaught() == true)
+            {
+                Debug.Log("ATTRAPE");
+                player.GetComponentInChildren<Player>().SetCaught(false);
+                this.DeleteWorld();
+                this.GenerateWorld();
+            }
+        }
     }
 
 
@@ -110,7 +127,10 @@ public class World : MonoBehaviour
         this.GenerateTerrain();
 
         //PLAYER
-        player.transform.position = this.GenerateRandomVector(1);
+        Vector3 pos = this.GenerateRandomVector(20);
+        Debug.Log(pos);
+        player.transform.position = pos;
+        //player.transform.position = this.GenerateRandomVector(1);
 
         // KEYS
         this.keys = new GameObject[3];
@@ -242,6 +262,7 @@ public class World : MonoBehaviour
         }
     }
 
+
     public void SaveWorld(string fileName)
     {
         try
@@ -294,6 +315,7 @@ public class World : MonoBehaviour
             Debug.Log(exception.ToString());
         }
     }
+
 
     public void DeleteWorld()
     {
