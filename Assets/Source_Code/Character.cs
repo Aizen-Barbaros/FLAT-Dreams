@@ -61,6 +61,10 @@ public class Character : MonoBehaviour
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
         this.freezeDuration = 5.0f;
+
+        //test Gab
+        this.GetComponent<BoxCollider>().material.staticFriction = 0;
+        this.GetComponent<BoxCollider>().material.dynamicFriction = 0;
     }
 
     protected virtual void OnCollisionStay(Collision collision) //TO DO
@@ -85,19 +89,30 @@ public class Character : MonoBehaviour
 
     protected void Move()
     {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * this.speed;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * this.speed;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
+        Vector3 movement = new Vector3(vertical, 0f, horizontal);
+        movement = movement.normalized * this.speed * Time.deltaTime;
+        this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
+
+        Vector3 target = Input.mousePosition;
+        target.y = this.transform.position.y;
+        this.transform.LookAt(target);
+
+        //float x = Input.GetAxis("Horizontal");// * Time.deltaTime * this.speed;
+        //float z = Input.GetAxis("Vertical");// * Time.deltaTime * this.speed;
         //float h = camSpeed * Input.GetAxis("Mouse X");
+
         //this.transform.Rotate(0,h,0);
 
         //Quaternion deltaRotation = Quaternion.Euler(new Vector3(h, 0, 0) * Time.deltaTime);
         //this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * deltaRotation);
-        //this.GetComponent<Rigidbody>().MovePosition(this.transform.position + new Vector3(-z, 0, x));
-        this.transform.Translate(-z, 0, x);
+        //this.GetComponent<Rigidbody>().MovePosition(this.transform.position + new Vector3(x, 0, z));
+        //this.transform.Translate(-z, 0, x);
 
-        float h = camSpeed * Input.GetAxis("Mouse X");
-        this.transform.Rotate(0, h, 0);
+        //float h = camSpeed * Input.GetAxis("Mouse X");
+        //this.transform.Rotate(0, h, 0);
     }
 
 
