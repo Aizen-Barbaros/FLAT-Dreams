@@ -6,6 +6,7 @@ public class Player : Character
 {
     private int currentLives;
     private int keyCaught;
+    private bool isCaught;
 
 
     void Start()
@@ -15,6 +16,7 @@ public class Player : Character
 
         this.currentLives = 3;
         this.keyCaught = 0;
+        this.isCaught = false;
 
         base.jumpHeight = 1.5f;
 
@@ -25,9 +27,13 @@ public class Player : Character
         base.dashCooldown = 0;
         base.dashDuration = 0.3f;
 
+        base.FogDuration = 2;
+
         base.speedBoostDuration = 2;
         base.lastSpeedBoost = Time.time;
         base.speedBoostCooldown = 0;
+
+        base.RocketHeight = 60;
     }
 
 
@@ -39,21 +45,35 @@ public class Player : Character
         {
             base.Jump();
         }
-            
 
-        if (Input.GetKeyDown("e") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
+        if (Input.GetKeyDown("1") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
             base.SortVitesse();
 
-        if (Input.GetKeyDown("q") && base.dashCooldown + base.lastDash <= Time.time)
+        if (Input.GetKeyDown("2") && base.dashCooldown + base.lastDash <= Time.time)
             base.Dash();
 
         if (Input.GetMouseButton(0) && base.stunCooldown + base.lastStun <= Time.time)
             base.Stun();
 
+        if (Input.GetKeyDown("4") && base.FogCooldown + base.lastFog <= Time.time)
+            base.HighSenses();
+
+        if (Input.GetKeyDown("3") && base.RocketCooldown + base.lastRocket <= Time.time)
+            base.Rockets();
+
         if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
         {
             base.speed = 8;
             base.resetSpeedBoost = false;
+        }
+
+        if (base.lastFog + base.FogDuration <= Time.time && resetFog)
+        {
+            if(normalFog)
+            {
+                RenderSettings.fog = true;
+            }
+            base.resetFog = false;
         }
 
         if (base.lastDash + base.dashDuration <= Time.time && resetDash)
@@ -75,14 +95,31 @@ public class Player : Character
         return this.keyCaught;
     }
 
+    
+    public bool GetCaught()
+    {
+        return this.isCaught;
+    }
+
+
+    public void SetCaught(bool isCaught)
+    {
+        this.isCaught = isCaught;
+    }
+
+    
+    public bool IsActive()
+    {
+        return this.gameObject.activeSelf;
+    }
+
 
     protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ennemy")
         {
             this.currentLives--;
-            this.gameObject.SetActive(false);
-            Debug.Log(this.currentLives);
+            this.isCaught = true;
         }
 
         if (collision.gameObject.tag == "Key")

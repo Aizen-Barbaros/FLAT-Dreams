@@ -5,13 +5,11 @@ using UnityEngine;
 public class CameraMouvement : MonoBehaviour
 {
     private float verticalSpeed;
-    private float iniCamY;
     private Vector3 positionCam;
 
     void Start ()
     {
         this.verticalSpeed = 7.5f;
-        this.iniCamY = Input.mousePosition.y;
         this.positionCam = transform.position;
     }
 
