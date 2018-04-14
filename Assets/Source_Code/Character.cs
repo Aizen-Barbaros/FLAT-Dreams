@@ -54,9 +54,7 @@ public class Character : MonoBehaviour
     protected float RocketHeight;
 
     //Position of the mouse in the screen for the cam
-    protected Vector3 position;
-
-    protected bool IsJumping { get; set; }                              //TO DO
+    protected Vector3 position;                                         //Félix -> Trouver un autre nom, mélangeant
 
     protected bool isGrounded;
     private float step;
@@ -73,10 +71,6 @@ public class Character : MonoBehaviour
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
         this.freezeDuration = 5.0f;
-
-        //test Gab
-        this.GetComponent<BoxCollider>().material.staticFriction = 0;
-        this.GetComponent<BoxCollider>().material.dynamicFriction = 0;
     }
 
     protected virtual void OnCollisionStay(Collision collision) //TO DO
@@ -88,7 +82,6 @@ public class Character : MonoBehaviour
         }
     }
 
-
     protected virtual void OnCollisionExit(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
@@ -98,13 +91,14 @@ public class Character : MonoBehaviour
         }
     }
 
-
     protected void Move()
     {
+        //Gettting input
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-
         float h = camSpeed * Input.GetAxis("Mouse X");
+
+        //Applied rotation on the Rigidbody
         Quaternion rotation = Quaternion.Euler(0, h, 0);
         this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
 

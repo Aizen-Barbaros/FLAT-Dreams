@@ -41,8 +41,17 @@ public class Enemy : Character
     
     protected void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Player")
+        if (collision.contacts.Length > 5)
+        {
             base.Jump();
+            Debug.Log("Jumping mob ;)");
+        }
+        
+        if (collision.gameObject.tag != "Player")
+        {
+            base.Jump();
+            //Debug.Log("Jumping mob lol");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
