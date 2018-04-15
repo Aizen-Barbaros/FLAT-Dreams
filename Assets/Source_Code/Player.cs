@@ -115,14 +115,8 @@ public class Player : Character
         return this.gameObject.activeSelf;
     }
 
-
     protected void OnCollisionEnter(Collision collision)
     {
-        foreach(ContactPoint contact in collision.contacts)
-        {
-            Debug.Log(contact.thisCollider.name + " hit " + contact.otherCollider.name);
-        }
-
         if (collision.gameObject.tag == "Ennemy")
         {
             this.currentLives--;

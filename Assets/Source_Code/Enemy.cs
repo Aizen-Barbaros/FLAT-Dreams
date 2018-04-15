@@ -38,19 +38,12 @@ public class Enemy : Character
         base.Move(target);
     }
 
-    
-    protected void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionStay(Collision collision)
     {
-        if (collision.contacts.Length > 5)
+        base.OnCollisionStay(collision);
+        if (collision.contacts.Length > 1)
         {
             base.Jump();
-            Debug.Log("Jumping mob ;)");
-        }
-        
-        if (collision.gameObject.tag != "Player")
-        {
-            base.Jump();
-            //Debug.Log("Jumping mob lol");
         }
     }
 
