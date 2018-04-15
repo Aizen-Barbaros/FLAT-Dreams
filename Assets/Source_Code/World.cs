@@ -70,7 +70,7 @@ public class World : MonoBehaviour
 
     // NUMBERS OF OBJECTS
     private int numberOfKeys = 3;
-    private int numberOfMonsters = 30;
+    private int numberOfMonsters = 50;
     private int numberOfTrees;
 
     // MODELS
@@ -94,10 +94,12 @@ public class World : MonoBehaviour
     {
         if (player.activeSelf == true)
         {
-            if (player.GetComponentInChildren<Player>().GetKeyCaught() == 3)
+            if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
             {
                 Debug.Log("3 CLEFS");
+                player.GetComponentInChildren<Player>().SetKeyCaught(0);
                 this.DeleteWorld();
+                this.GenerateWorld();
             }
 
             if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
@@ -127,17 +129,14 @@ public class World : MonoBehaviour
         this.GenerateTerrain();
 
         //PLAYER
-        Vector3 pos = this.GenerateRandomVector(20);
-        Debug.Log(pos);
-        player.transform.position = pos;
-        //player.transform.position = this.GenerateRandomVector(1);
+        player.transform.position = this.GenerateRandomVector(1);
 
         // KEYS
-        this.keys = new GameObject[3];
+        this.keys = new GameObject[this.numberOfKeys];
         this.GenerateKeys();
 
         // MONSTERS
-        this.monsters = new GameObject[30];
+        this.monsters = new GameObject[this.numberOfMonsters];
         this.GenerateMonsters();
 
         // TREES
@@ -330,9 +329,9 @@ public class World : MonoBehaviour
         for (int i = 0; i < this.trees.Length; i++)
             GameObject.Destroy(this.trees[i]);
 
-        for (int x = 0; x < this.chunks.GetLength(0); x += 1)
+        for (int x = 0; x < this.chunks.GetLength(0); x++)
         {
-            for (int z = 0; z < chunks.GetLength(1); z += 1)
+            for (int z = 0; z < chunks.GetLength(1); z++)
                 this.chunks[x, z].DeleteChunk();
         }
     }
@@ -349,6 +348,7 @@ public class World : MonoBehaviour
             this.treeModel = this.oakTree;
 
             RenderSettings.skybox = skyNormal;
+            RenderSettings.fog = false;
         }
 
         else if (wType == 1)
@@ -390,6 +390,7 @@ public class World : MonoBehaviour
             this.treeModel = this.lollipopTree;
 
             RenderSettings.skybox = skyDreamy;
+            RenderSettings.fog = false;
         }
 
         else if (wType == 4)
@@ -401,6 +402,7 @@ public class World : MonoBehaviour
             this.treeModel = null;
 
             RenderSettings.skybox = skyMetal;
+            RenderSettings.fog = false;
         }
 
         else if (wType == 5)
@@ -412,6 +414,7 @@ public class World : MonoBehaviour
             this.treeModel = null;
 
             RenderSettings.skybox = skyCheese;
+            RenderSettings.fog = false;
         }
 
         else if (wType == 6)
@@ -423,6 +426,7 @@ public class World : MonoBehaviour
             this.treeModel = this.autumnTree;
 
             RenderSettings.skybox = skyAutumn;
+            RenderSettings.fog = false;
         }
 
         else if (wType == 7)
@@ -449,6 +453,7 @@ public class World : MonoBehaviour
             this.treeModel = this.palmtree;
 
             RenderSettings.skybox = skyTropical;
+            RenderSettings.fog = false;
         }
 
         else
@@ -460,6 +465,7 @@ public class World : MonoBehaviour
             this.treeModel = null;
 
             RenderSettings.skybox = skyMatrix;
+            RenderSettings.fog = false;
         }
 
         if (tType == 0)

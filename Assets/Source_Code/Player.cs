@@ -95,6 +95,12 @@ public class Player : Character
         return this.keyCaught;
     }
 
+
+    public void SetKeyCaught(int keyCaught)
+    {
+        this.keyCaught = keyCaught;
+    }
+
     
     public bool GetCaught()
     {

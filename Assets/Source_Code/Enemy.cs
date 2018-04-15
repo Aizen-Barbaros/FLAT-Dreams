@@ -33,6 +33,12 @@ public class Enemy : Character
     }
 
 
+    public void IncreaseSpeed()
+    {
+        base.speed += 0.25f;
+    }
+
+
     public void ChasePlayer(Vector3 target)
     {
         base.Move(target);
