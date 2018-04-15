@@ -54,9 +54,7 @@ public class Character : MonoBehaviour
     protected float RocketHeight;
 
     //Position of the mouse in the screen for the cam
-    protected Vector3 position;
-
-    protected bool IsJumping { get; set; }                              //TO DO
+    protected Vector3 position;                                         //Félix -> Trouver un autre nom, mélangeant
 
     protected bool isGrounded;
     private float step;
@@ -64,10 +62,10 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        this.speed = 10;
+        //this.speed = 10; //Pourquoi ic? il n'est pas initialisé dans les classes filles?
         this.jumpHeight = 1.5f;
         this.camSpeed = 10;
-        this.iniCamX = Input.mousePosition.x;
+        this.iniCamX = Input.mousePosition.x; //Les paramêtre de la caméra ne devrait pas être dans Player?
         this.iniCamY = Input.mousePosition.y;
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
@@ -84,7 +82,6 @@ public class Character : MonoBehaviour
         }
     }
 
-
     protected virtual void OnCollisionExit(Collision collision) //TO DO
     {
         if(collision.gameObject.tag == "Ground")
@@ -94,22 +91,21 @@ public class Character : MonoBehaviour
         }
     }
 
-
     protected void Move()
     {
-        float x = Input.GetAxis("Horizontal") * Time.deltaTime * this.speed;
-        float z = Input.GetAxis("Vertical") * Time.deltaTime * this.speed;
-
-        //float h = camSpeed * Input.GetAxis("Mouse X");
-        //this.transform.Rotate(0,h,0);
-
-        //Quaternion deltaRotation = Quaternion.Euler(new Vector3(h, 0, 0) * Time.deltaTime);
-        //this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * deltaRotation);
-        //this.GetComponent<Rigidbody>().MovePosition(this.transform.position + new Vector3(-z, 0, x));
-        this.transform.Translate(-z, 0, x);
-
+        //Gettting input
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         float h = camSpeed * Input.GetAxis("Mouse X");
-        this.transform.Rotate(0, h, 0);
+
+        //Applied rotation on the Rigidbody
+        Quaternion rotation = Quaternion.Euler(0, h, 0);
+        this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
+
+        //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
+        Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
+        movement = movement.normalized * this.speed * Time.deltaTime;
+        this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
     }
 
 

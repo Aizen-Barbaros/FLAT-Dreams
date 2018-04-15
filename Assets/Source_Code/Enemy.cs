@@ -44,11 +44,13 @@ public class Enemy : Character
         base.Move(target);
     }
 
-    
-    protected void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag != "Player")
+        base.OnCollisionStay(collision);
+        if (collision.contacts.Length > 1)
+        {
             base.Jump();
+        }
     }
 
     private void OnTriggerEnter(Collider other)

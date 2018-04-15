@@ -36,11 +36,13 @@ public class Player : Character
         base.RocketHeight = 60;
     }
 
-
+    private void Update()
+    {
+        base.Move();    
+    }
+    
     void FixedUpdate ()
     {
-        base.Move();
-
         if (Input.GetKeyDown("space"))
         {
             base.Jump();
@@ -118,7 +120,6 @@ public class Player : Character
     {
         return this.gameObject.activeSelf;
     }
-
 
     protected void OnCollisionEnter(Collision collision)
     {
