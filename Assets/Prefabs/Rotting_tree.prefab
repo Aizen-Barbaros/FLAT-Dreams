@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4628290278666708}
   - component: {fileID: 33537342109714316}
   - component: {fileID: 23168741123184094}
+  - component: {fileID: 64817998826687490}
   m_Layer: 0
   m_Name: Rotting_tree
   m_TagString: Ground
@@ -81,4 +82,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1172924607476586}
+  m_Mesh: {fileID: 4300000, guid: 4dda73092cc73384f801e458b1a5493b, type: 3}
+--- !u!64 &64817998826687490
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1172924607476586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 4dda73092cc73384f801e458b1a5493b, type: 3}

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4154554376831818}
   - component: {fileID: 33949411770005548}
   - component: {fileID: 23335522957935172}
+  - component: {fileID: 64608726745864414}
   m_Layer: 0
   m_Name: Autumn_tree
   m_TagString: Ground
@@ -81,4 +82,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1038780466133128}
+  m_Mesh: {fileID: 4300000, guid: fbd92e6a4afd38d478c453f3ffc2d31d, type: 3}
+--- !u!64 &64608726745864414
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1038780466133128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: fbd92e6a4afd38d478c453f3ffc2d31d, type: 3}

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4786626598320392}
   - component: {fileID: 33799956449465974}
   - component: {fileID: 23737446535738064}
+  - component: {fileID: 64507334431643836}
   m_Layer: 0
   m_Name: Oak_tree
   m_TagString: Ground
@@ -81,4 +82,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1751893058911884}
+  m_Mesh: {fileID: 4300000, guid: 6604a410b4b12c14b86adf9b2cb46284, type: 3}
+--- !u!64 &64507334431643836
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751893058911884}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 6604a410b4b12c14b86adf9b2cb46284, type: 3}
