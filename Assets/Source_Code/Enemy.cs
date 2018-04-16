@@ -9,13 +9,6 @@ public class Enemy : Character
     private Collider[] colliders;
     private Player player; 
 
-
-    private void Start()
-    {
-
-    }
-
-
     protected void FixedUpdate()
     {
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
@@ -56,7 +49,7 @@ public class Enemy : Character
     protected override void OnCollisionStay(Collision collision)
     {
         base.OnCollisionStay(collision);
-        if (collision.contacts.Length > 1)
+        if (collision.contacts.Length > 5)
             base.Jump();
     }
 
