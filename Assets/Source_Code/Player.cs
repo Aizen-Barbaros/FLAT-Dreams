@@ -8,11 +8,14 @@ public class Player : Character
     private int keyCaught;
     private bool isCaught;
 
+    private float iniCamX;
+    private float iniCamY;
+
 
     void Start()
     {
-        base.iniCamX = Input.mousePosition.x;
-        base.iniCamY = Input.mousePosition.y;
+        this.iniCamX = Input.mousePosition.x;
+        this.iniCamY = Input.mousePosition.y;
 
         this.currentLives = 3;
         this.keyCaught = 0;

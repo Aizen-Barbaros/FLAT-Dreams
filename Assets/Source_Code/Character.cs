@@ -18,10 +18,6 @@ public class Character : MonoBehaviour
     //Stun
     public GameObject StunBall;
 
-    //Cam
-    protected float iniCamX;
-    protected float iniCamY;
-
     //Sort vitesse
     protected bool resetSpeedBoost;
     protected float lastSpeedBoost;
@@ -56,8 +52,8 @@ public class Character : MonoBehaviour
     protected float RocketCooldown;
     protected float RocketHeight;
 
-    //Position of the mouse in the screen for the cam
-    protected Vector3 position;                                         //Félix -> Trouver un autre nom, mélangeant
+    //Position of the player
+    protected Vector3 playerPosition;                                         
 
     protected bool isGrounded;
     private float step;
@@ -67,9 +63,6 @@ public class Character : MonoBehaviour
     {
         //this.speed = 10; //Pourquoi ic? il n'est pas initialisé dans les classes filles?
         this.jumpHeight = 1.5f;
-        this.camSpeed = 10;
-        this.iniCamX = Input.mousePosition.x; //Les paramêtre de la caméra ne devrait pas être dans Player?
-        this.iniCamY = Input.mousePosition.y;
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
@@ -140,6 +133,7 @@ public class Character : MonoBehaviour
 
     protected void SortVitesse()
     {
+        //Increase the player's speed for a short time
         this.speed *= 2;
         this.lastSpeedBoost = Time.time;
         this.speedBoostCooldown = this.speedBoostDuration + 5;
@@ -149,6 +143,7 @@ public class Character : MonoBehaviour
 
     protected void Dash()
     {
+        //Increase the player's speed significantly for a realy short time
         this.speed *= 4;
         this.lastDash = Time.time;
         this.dashCooldown = 6;
@@ -158,9 +153,15 @@ public class Character : MonoBehaviour
 
     protected void Stun()
     {
-        this.position = GetComponent<Transform>().position;
+        //Create a StunBall which immobilize ennemies on contact 
+
+        //Take the player's position
+        this.playerPosition = GetComponent<Transform>().position;
+        //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
-        stunBall=Instantiate(StunBall,new Vector3(position.x, position.y+4, position.z),camOrientation);
+        //Create the StunBall at the player's position and with the camera's orientation
+        stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+4, playerPosition.z),camOrientation);
+        //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
         this.stunCooldown = 3;
         this.lastStun = Time.time;
@@ -168,6 +169,7 @@ public class Character : MonoBehaviour
 
     protected void HighSenses()
     {
+        //delete the fog of the world if it exists for a short time
         this.lastFog = Time.time;
         this.FogCooldown = 30;
         this.resetFog = true;
@@ -182,6 +184,7 @@ public class Character : MonoBehaviour
 
     protected void Rockets()
     {
+        //Make the player go up very high
         this.RocketCooldown = 60;
         this.lastRocket = Time.time;
         //Mathematic function who give the velocity for a specific jump height
@@ -193,7 +196,7 @@ public class Character : MonoBehaviour
 
     public void Stunned()
     {
-        Debug.Log("Stunned!");
+        //Immobilize the character when called
         this.freezeDuration = 5.0f;
         this.speed = 0;
         this.lastfreeze = Time.time;
