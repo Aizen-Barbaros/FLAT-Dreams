@@ -7,12 +7,14 @@ public class Enemy : Character
     public LayerMask targetLayerMask;
     
     private Collider[] colliders;
-    private Player player;
+    private Player player; 
+
 
     private void Start()
     {
-        base.speed = 5;
+
     }
+
 
     protected void FixedUpdate()
     {
@@ -26,16 +28,22 @@ public class Enemy : Character
 
         if (base.lastfreeze + base.freezeDuration <= Time.time && resetfreeze)
         {
-            Debug.Log("Stun finished");
-            base.speed = 5;
+            base.speed = base.normalSpeed;
             base.resetfreeze = false;
         }
     }
 
 
-    public void IncreaseSpeed()
+    public float GetNormalSpeed()
     {
-        base.speed += 0.25f;
+        return base.normalSpeed;
+    }
+
+
+    public void SetNormalSpeed(float normalSpeed)
+    {
+        base.normalSpeed = normalSpeed;
+        base.speed = base.normalSpeed;
     }
 
 
@@ -44,14 +52,14 @@ public class Enemy : Character
         base.Move(target);
     }
 
+
     protected override void OnCollisionStay(Collision collision)
     {
         base.OnCollisionStay(collision);
         if (collision.contacts.Length > 1)
-        {
             base.Jump();
-        }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

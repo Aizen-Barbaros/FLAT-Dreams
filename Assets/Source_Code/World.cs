@@ -83,9 +83,18 @@ public class World : MonoBehaviour
     private GameObject[] monsters;
     private GameObject[] trees;
 
+    // LEVEL
+    private int level;
+    private float normalSpeed;
+
 
     public void Start()
     {
+        player.SetActive(false);
+
+        this.level = 1;
+        this.normalSpeed = 5.0f;
+
         this.GenerateWorld();
     }
 
@@ -96,21 +105,22 @@ public class World : MonoBehaviour
         {
             if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
             {
-                Debug.Log("3 CLEFS");
                 player.GetComponentInChildren<Player>().SetKeyCaught(0);
+
+                if (this.level++ <= 30)
+                    this.normalSpeed += 0.75f;
+
                 this.DeleteWorld();
                 this.GenerateWorld();
             }
 
-            if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
+            else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
             {
-                Debug.Log("0 VIES");
                 this.DeleteWorld();
             }
 
-            if (player.GetComponentInChildren<Player>().GetCaught() == true)
+            else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
             {
-                Debug.Log("ATTRAPE");
                 player.GetComponentInChildren<Player>().SetCaught(false);
                 this.DeleteWorld();
                 this.GenerateWorld();
@@ -130,6 +140,7 @@ public class World : MonoBehaviour
 
         //PLAYER
         player.transform.position = this.GenerateRandomVector(1);
+        Debug.Log("POSITION " + player.transform.position);
 
         // KEYS
         this.keys = new GameObject[this.numberOfKeys];
@@ -143,8 +154,18 @@ public class World : MonoBehaviour
         this.trees = new GameObject[this.numberOfTrees];
         this.GenerateTrees();
 
+        // SPEEDS
+        player.GetComponentInChildren<Player>().SetNormalSpeed(this.normalSpeed + 3.0f);
+
+        for (int i = 0; i < this.numberOfMonsters; i++)
+            this.monsters[i].GetComponentInChildren<Enemy>().SetNormalSpeed(this.normalSpeed);
+
         // PLAYER
         player.SetActive(true);
+
+        Debug.Log("LEVEL " + this.level);
+        Debug.Log("\nPLAYER SPEED " + player.GetComponentInChildren<Player>().GetNormalSpeed());
+        Debug.Log("\nMONSTER SPEED " + this.monsters[0].GetComponentInChildren<Enemy>().GetNormalSpeed());
     }
 
 

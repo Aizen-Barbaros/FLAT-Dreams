@@ -22,8 +22,6 @@ public class Player : Character
 
         base.camSpeed = 10;
 
-        base.speed = 8;
-
         base.dashCooldown = 0;
         base.dashDuration = 0.3f;
 
@@ -44,9 +42,7 @@ public class Player : Character
     void FixedUpdate ()
     {
         if (Input.GetKeyDown("space"))
-        {
             base.Jump();
-        }
 
         if (Input.GetKeyDown("1") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
             base.SortVitesse();
@@ -65,24 +61,35 @@ public class Player : Character
 
         if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
         {
-            base.speed = 8;
+            base.speed = base.normalSpeed;
             base.resetSpeedBoost = false;
         }
 
         if (base.lastFog + base.FogDuration <= Time.time && resetFog)
         {
             if(normalFog)
-            {
                 RenderSettings.fog = true;
-            }
             base.resetFog = false;
         }
 
         if (base.lastDash + base.dashDuration <= Time.time && resetDash)
         {
-            base.speed = 8;
+            base.speed = base.normalSpeed;
             base.resetDash = false;
         }
+    }
+
+
+    public float GetNormalSpeed()
+    {
+        return base.normalSpeed;
+    }
+
+
+    public void SetNormalSpeed(float normalSpeed)
+    {
+        base.normalSpeed = normalSpeed;
+        base.speed = base.normalSpeed;
     }
 
 
@@ -115,11 +122,6 @@ public class Player : Character
         this.isCaught = isCaught;
     }
 
-    
-    public bool IsActive()
-    {
-        return this.gameObject.activeSelf;
-    }
 
     protected void OnCollisionEnter(Collision collision)
     {

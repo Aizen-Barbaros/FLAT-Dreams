@@ -7,9 +7,12 @@ public class Character : MonoBehaviour
 {
     //CamSpeed
     protected float camSpeed;
-    
-    //Jump
+
+    //Speeds
+    protected float normalSpeed;
     protected float speed;
+
+    //Jump
     protected float jumpHeight;
 
     //Stun
@@ -146,7 +149,7 @@ public class Character : MonoBehaviour
 
     protected void Dash()
     {
-        this.speed = 30;
+        this.speed *= 4;
         this.lastDash = Time.time;
         this.dashCooldown = 6;
         this.resetDash = true;
