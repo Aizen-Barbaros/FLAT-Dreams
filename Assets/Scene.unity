@@ -113,147 +113,45 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1359025384
+--- !u!1001 &1288837530
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4099346708641344, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+    - target: {fileID: 4574077885182166, guid: cb358728affed68448dd29652a585b91, type: 2}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: oakTree
-      value: 
-      objectReference: {fileID: 1751893058911884, guid: b9ff8a34c107b7d4281cad40a0ca8ef6,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: pineTree
-      value: 
-      objectReference: {fileID: 1307768421931476, guid: edffce6ff314ffb419220c41e3a286e3,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: lollipopTree
-      value: 
-      objectReference: {fileID: 1726375852119494, guid: aec0b94983b3c054bbfdea63a2cf7cc0,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: hellTree
-      value: 
-      objectReference: {fileID: 1295102876212250, guid: 8822c161a67ac724799b4dbd74a530cc,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: autumnTree
-      value: 
-      objectReference: {fileID: 1038780466133128, guid: 9508d00bf2fb24e4690f4ae9b1717c40,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: rottingTree
-      value: 
-      objectReference: {fileID: 1172924607476586, guid: c42f2d7a2986ac54c818d8db3afe2ec3,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: palmtree
-      value: 
-      objectReference: {fileID: 1857386151853936, guid: f77686aa9dc329a4288de014195254b5,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: key
-      value: 
-      objectReference: {fileID: 1674861417239672, guid: a2f8636abf6f33541acdf3e5a6d4da77,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: littleMonster
-      value: 
-      objectReference: {fileID: 1101169839716826, guid: dffa351f86c070c4cb0e3500201205e5,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: snowMan
-      value: 
-      objectReference: {fileID: 1871271894131468, guid: 6018f6e69ccb4b5479b888e9a24633c6,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: reaper
-      value: 
-      objectReference: {fileID: 1399951583453210, guid: 9bf1c7fbb2eeabe448ae1b47cf1894ae,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: bear
-      value: 
-      objectReference: {fileID: 1885414144483158, guid: 1ed93925f09bfd24eb3db7f5e7f40ef7,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: ghost
-      value: 
-      objectReference: {fileID: 1651736398124110, guid: be6265085403f2d40acc419b19a4cd8d,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: gnome
-      value: 
-      objectReference: {fileID: 1515905815565828, guid: 12664d610b4a9604e82279c04da6fdde,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: yeti
-      value: 
-      objectReference: {fileID: 1086311411959932, guid: 4bb13c2205c98804db675a77bb48c6f9,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: zombie
-      value: 
-      objectReference: {fileID: 1683988045441132, guid: 0eac856d87299804c8f1068c17472611,
-        type: 2}
-    - target: {fileID: 114680604291283650, guid: 45186f34d93e46c48824b5f2671ed4d5,
-        type: 2}
-      propertyPath: agentSmith
-      value: 
-      objectReference: {fileID: 1368355780122668, guid: cc8c450b9bca15b49ae844fdb9531141,
-        type: 2}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 45186f34d93e46c48824b5f2671ed4d5, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: cb358728affed68448dd29652a585b91, type: 2}
   m_IsPrefabParent: 0
