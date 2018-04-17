@@ -36,6 +36,9 @@ public class World : MonoBehaviour
     // KEY
     public GameObject key;
 
+    // HEART
+    public GameObject heart;
+
     // MONSTERS
     public GameObject littleMonster;
     public GameObject snowMan;
@@ -82,6 +85,7 @@ public class World : MonoBehaviour
     private GameObject[] keys;
     private GameObject[] monsters;
     private GameObject[] trees;
+    private GameObject life;
 
     // LEVEL
     private int level;
@@ -96,6 +100,8 @@ public class World : MonoBehaviour
         this.normalSpeed = 5.0f;
 
         this.GenerateWorld();
+        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\World.txt");
+        //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\World.txt");
     }
 
 
@@ -140,11 +146,13 @@ public class World : MonoBehaviour
 
         //PLAYER
         player.transform.position = this.GenerateRandomVector(1);
-        Debug.Log("POSITION " + player.transform.position);
 
         // KEYS
         this.keys = new GameObject[this.numberOfKeys];
         this.GenerateKeys();
+
+        // LIFE
+        this.GenerateLife();
 
         // MONSTERS
         this.monsters = new GameObject[this.numberOfMonsters];
@@ -162,10 +170,6 @@ public class World : MonoBehaviour
 
         // PLAYER
         player.SetActive(true);
-
-        Debug.Log("LEVEL " + this.level);
-        Debug.Log("\nPLAYER SPEED " + player.GetComponentInChildren<Player>().GetNormalSpeed());
-        Debug.Log("\nMONSTER SPEED " + this.monsters[0].GetComponentInChildren<Enemy>().GetNormalSpeed());
     }
 
 
@@ -249,6 +253,13 @@ public class World : MonoBehaviour
 
                 reader.ReadLine();
 
+                // LIFE
+                text = reader.ReadLine();
+                coordinates = text.Split(' ');
+                this.life = Instantiate(heart, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
+
+                reader.ReadLine();
+
                 // MONSTERS
                 for (int i = 0; i < this.monsters.Length; i++)
                 {
@@ -315,6 +326,11 @@ public class World : MonoBehaviour
 
                 writer.WriteLine();
 
+                // LIFE
+                writer.WriteLine(this.life.transform.position.x + " " + this.life.transform.position.y + " " + this.life.transform.position.z);
+
+                writer.WriteLine();
+
                 // MONSTERS
                 for (int i = 0; i < this.monsters.Length; i++)
                     writer.WriteLine(this.monsters[i].transform.position.x + " " + this.monsters[i].transform.position.y + " " + this.monsters[i].transform.position.z);
@@ -343,6 +359,8 @@ public class World : MonoBehaviour
 
         for (int i = 0; i < this.keys.Length; i++)
             GameObject.Destroy(this.keys[i]);
+
+        GameObject.Destroy(this.life);
 
         for (int i = 0; i < this.monsters.Length; i++)
             GameObject.Destroy(this.monsters[i]);
@@ -568,11 +586,17 @@ public class World : MonoBehaviour
     }
 
 
+    public void GenerateLife()
+    {
+        this.life = Instantiate(heart, this.GenerateRandomVector(0, 1), Quaternion.identity) as GameObject;
+    }
+
+
     public void GenerateMonsters()
     {
         for (int i = 0; i < this.monsters.Length; i++)
         {
-            this.monsters[i] = Instantiate(this.monsterModel, this.GenerateRandomVector(30, 1), Quaternion.identity) as GameObject;
+            this.monsters[i] = Instantiate(this.monsterModel, this.GenerateRandomVector(30, 0), Quaternion.identity) as GameObject;
         }
     }
 
@@ -584,6 +608,7 @@ public class World : MonoBehaviour
             this.trees[i] = Instantiate(this.treeModel, this.GenerateRandomVector(15, 0), Quaternion.identity) as GameObject;
         }
     }
+
 
     public Vector3 GenerateRandomVector(int offset)
     {

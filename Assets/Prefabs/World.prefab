@@ -483,6 +483,7 @@ MonoBehaviour:
     type: 2}
   palmtree: {fileID: 1857386151853936, guid: f77686aa9dc329a4288de014195254b5, type: 2}
   key: {fileID: 1674861417239672, guid: a2f8636abf6f33541acdf3e5a6d4da77, type: 2}
+  heart: {fileID: 1483372814680724, guid: c0c9fa2061fd46d44a9645f69ac79c30, type: 2}
   littleMonster: {fileID: 1101169839716826, guid: dffa351f86c070c4cb0e3500201205e5,
     type: 2}
   snowMan: {fileID: 1871271894131468, guid: 6018f6e69ccb4b5479b888e9a24633c6, type: 2}

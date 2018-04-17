@@ -128,16 +128,23 @@ public class Player : Character
 
     protected void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ennemy")
-        {
-            this.currentLives--;
-            this.isCaught = true;
-        }
-
         if (collision.gameObject.tag == "Key")
         {
             this.keyCaught++;
             GameObject.Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Life")
+        {
+            if (this.currentLives < 3)
+                this.currentLives++;
+            GameObject.Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Ennemy")
+        {
+            this.currentLives--;
+            this.isCaught = true;
         }
     }
 }
