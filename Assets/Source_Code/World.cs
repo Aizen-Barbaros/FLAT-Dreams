@@ -112,9 +112,7 @@ public class World : MonoBehaviour
             if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
             {
                 player.GetComponentInChildren<Player>().SetKeyCaught(0);
-
-                if (this.level++ <= 30)
-                    this.normalSpeed += 0.75f;
+                this.normalSpeed += 0.75f;
 
                 this.DeleteWorld();
                 this.GenerateWorld();
@@ -140,7 +138,8 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
 
-        this.GenerateWorldValues(Random.Range(0, 10), Random.Range(0, 3));
+        this.GenerateWorldValues(Random.Range(0, 10));
+        this.GenerateTerrainValues(Random.Range(0, 3));
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
 
@@ -191,13 +190,13 @@ public class World : MonoBehaviour
                 // TERRAIN VALUES
                 string worldTypeRead = reader.ReadLine();
                 string terrainTypeRead = reader.ReadLine();
+                this.level = int.Parse(reader.ReadLine());
                 this.maxHeight = int.Parse(reader.ReadLine());
                 this.octaves = int.Parse(reader.ReadLine());
                 this.smooth = float.Parse(reader.ReadLine());
                 this.persistence = float.Parse(reader.ReadLine());
 
                 int wType;
-                int tType;
 
                 // WORLD TYPE
                 if (worldTypeRead == "NORMAL")
@@ -223,14 +222,14 @@ public class World : MonoBehaviour
 
                 // TERRAIN TYPE
                 if (terrainTypeRead == "PLAINS")
-                    tType = 0;
+                    this.terrainType = TerrainTypes.PLAINS;
                 else if (terrainTypeRead == "HILLS")
-                    tType = 1;
+                    this.terrainType = TerrainTypes.HILLS;
                 else
-                    tType = 2;
+                    this.terrainType = TerrainTypes.MOUNTAINS;
 
                 // GENERATE TERRAIN
-                this.GenerateWorldValues(wType, tType);
+                this.GenerateWorldValues(wType);
                 this.GenerateSurfaceHeights();
                 this.GenerateTerrain();
                 
@@ -282,7 +281,13 @@ public class World : MonoBehaviour
                         this.trees[i] = Instantiate(this.treeModel, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                     }
                 }
-                
+
+                // SPEEDS
+                player.GetComponentInChildren<Player>().SetNormalSpeed(this.normalSpeed + 3.0f + (this.level - 1) * 0.75f);
+
+                for (int i = 0; i < this.numberOfMonsters; i++)
+                    this.monsters[i].GetComponentInChildren<Enemy>().SetNormalSpeed(this.normalSpeed + (this.level - 1) * 0.75f);
+
                 player.SetActive(true);
             }
         }
@@ -308,6 +313,7 @@ public class World : MonoBehaviour
                 // TERRAIN VALUES
                 writer.WriteLine(worldType);
                 writer.WriteLine(terrainType);
+                writer.WriteLine(this.level);
                 writer.WriteLine(maxHeight);
                 writer.WriteLine(octaves);
                 writer.WriteLine(smooth);
@@ -376,7 +382,7 @@ public class World : MonoBehaviour
     }
 
 
-    public void GenerateWorldValues(int wType, int tType)
+    public void GenerateWorldValues(int wType)
     {
         if (wType == 0)
         {
@@ -506,7 +512,11 @@ public class World : MonoBehaviour
             RenderSettings.skybox = skyMatrix;
             RenderSettings.fog = false;
         }
+    }
 
+
+    public void GenerateTerrainValues(int tType)
+    {
         if (tType == 0)
         {
             this.terrainType = TerrainTypes.PLAINS;
@@ -527,7 +537,7 @@ public class World : MonoBehaviour
             this.maxHeight = 150;
             this.smooth = Random.Range(0.011f, 0.013f);
         }
-
+        
         this.octaves = Random.Range(3, 5);
         this.persistence = 0.5f;
     }
