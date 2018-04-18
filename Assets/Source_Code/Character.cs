@@ -98,10 +98,18 @@ public class Character : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, h, 0);
         this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
 
-        //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
-        Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
-        movement = movement.normalized * this.speed * Time.deltaTime;
-        this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
+        if (horizontal != 0 || vertical != 0)
+        {
+            //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
+            Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
+            movement = movement.normalized * this.speed * Time.deltaTime;
+            this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
+        }
+        else
+        {
+            if(this.isGrounded)
+                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y,0f);
+        }
     }
 
 
@@ -126,7 +134,7 @@ public class Character : MonoBehaviour
             //Mathematic function who give the velocity for a specific jump height
             float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
             //Apply a velocity vertically
-            this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+            this.GetComponent<Rigidbody>().velocity = new Vector3(0f, velocity, 0f);
         }
     }
 

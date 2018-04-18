@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 4277738352114552}
   - component: {fileID: 54471074813702432}
   - component: {fileID: 114259449221504532}
-  - component: {fileID: 136717169690829568}
+  - component: {fileID: 136502347487429446}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -163,7 +163,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624950614006934}
   m_Enabled: 1
---- !u!136 &136717169690829568
+--- !u!136 &136502347487429446
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
