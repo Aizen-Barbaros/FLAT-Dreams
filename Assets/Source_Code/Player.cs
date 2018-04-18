@@ -16,7 +16,6 @@ public class Player : Character
     {
         this.iniCamX = Input.mousePosition.x;
         this.iniCamY = Input.mousePosition.y;
-
         this.currentLives = 3;
         this.keyCaught = 0;
         this.isCaught = false;
