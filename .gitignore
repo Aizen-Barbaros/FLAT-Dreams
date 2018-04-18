@@ -7,5 +7,3 @@
 *.sln
 /ProjectSettings
 *.vox.meta
-*.unity
-*.unity.meta
