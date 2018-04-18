@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StunBall : MonoBehaviour {
+
+
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Terrain")|| collision.gameObject.CompareTag("Ennemy")||collision.gameObject.CompareTag("Ground"))
+        if(collision.gameObject.CompareTag("Ennemy"))
         {
             Destroy(this.gameObject);
-            Debug.Log("hit" + collision.gameObject.tag);
+            
         }
-        else
+        else if (collision.gameObject.CompareTag("Ground"))
         {
-
+            Destroy(this.gameObject);
         }
     }
 }

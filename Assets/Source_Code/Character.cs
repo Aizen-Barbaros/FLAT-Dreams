@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    //Sound
+    protected AudioSource source;
+
     //CamSpeed
     protected float camSpeed;
 
@@ -29,6 +32,7 @@ public class Character : MonoBehaviour
     protected float lastDash;
     protected float dashDuration;
     protected float dashCooldown;
+    public AudioClip dashSound;
 
     //Freeze
     protected bool resetfreeze;
@@ -39,6 +43,7 @@ public class Character : MonoBehaviour
     protected float lastStun;
     protected float stunCooldown;
     protected GameObject stunBall;
+    public AudioClip stunSound;
 
     //Sort Fog
     protected bool resetFog;
@@ -67,6 +72,7 @@ public class Character : MonoBehaviour
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
         this.freezeDuration = 5.0f;
+        this.source = GetComponent<AudioSource>();
     }
 
     protected virtual void OnCollisionStay(Collision collision) //TO DO
@@ -168,7 +174,7 @@ public class Character : MonoBehaviour
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
-        stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+4, playerPosition.z),camOrientation);
+        stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+2, playerPosition.z),camOrientation);
         //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
         this.stunCooldown = 3;
@@ -206,6 +212,7 @@ public class Character : MonoBehaviour
     {
         //Immobilize the character when called
         this.freezeDuration = 5.0f;
+        source.PlayOneShot(stunSound,1f);
         this.speed = 0;
         this.lastfreeze = Time.time;
         this.resetfreeze = true;

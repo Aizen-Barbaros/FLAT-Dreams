@@ -94,7 +94,7 @@ public class World : MonoBehaviour
 
     public void Start()
     {
-        player.SetActive(false);
+        player.SetActive(true);
 
         this.level = 1;
         this.normalSpeed = 5.0f;
@@ -113,7 +113,6 @@ public class World : MonoBehaviour
             {
                 player.GetComponentInChildren<Player>().SetKeyCaught(0);
                 this.normalSpeed += 0.75f;
-
                 this.DeleteWorld();
                 this.GenerateWorld();
             }
@@ -125,7 +124,7 @@ public class World : MonoBehaviour
 
             else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
             {
-                player.GetComponentInChildren<Player>().SetCaught(false);
+                player.GetComponentInChildren<Player>().SetCaught(false);;
                 this.DeleteWorld();
                 this.GenerateWorld();
             }
