@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Utilities : MonoBehaviour
 {
-    private string fileDirection = "C:\\Users\\Arthur\\Desktop\\fileName.txt";
+    private string fileDirection = "fileName.txt";
 
     public void PrepareWorldLaunch(string fileName)
     {

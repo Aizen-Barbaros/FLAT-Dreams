@@ -7,18 +7,20 @@ public class Player : Character
     private int currentLives;
     private int keyCaught;
     private bool isCaught;
+    private bool isFrozen;
 
-    private float iniCamX;
-    private float iniCamY;
+    //private float iniCamX;
+    //private float iniCamY;
 
 
     void Start()
     {
-        this.iniCamX = Input.mousePosition.x;
-        this.iniCamY = Input.mousePosition.y;
+        //this.iniCamX = Input.mousePosition.x;
+        //this.iniCamY = Input.mousePosition.y;
         this.currentLives = 3;
         this.keyCaught = 0;
         this.isCaught = false;
+        this.isFrozen = false;
 
         base.jumpHeight = 1.5f;
 
@@ -45,6 +47,33 @@ public class Player : Character
     {
         if (Input.GetKeyDown("space"))
             base.Jump();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isFrozen)
+            {
+                this.isFrozen = false;
+
+                // Freeze Player
+                this.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+                // Freeze Camera
+                this.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Skybox;
+                this.GetComponentInChildren<Camera>().cullingMask = 1;
+            }
+
+            else
+            {
+                this.isFrozen = true;
+
+                // Freeze Player
+                this.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+
+                // Freeze Camera
+                this.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Nothing;
+                this.GetComponentInChildren<Camera>().cullingMask = 0;
+            }
+        }
 
         if (Input.GetKeyDown("1") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
             base.SortVitesse();
@@ -80,6 +109,29 @@ public class Player : Character
         {
             base.speed = base.normalSpeed;
             base.resetDash = false;
+        }
+    }
+
+
+    protected void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Key")
+        {
+            this.keyCaught++;
+            GameObject.Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Life")
+        {
+            if (this.currentLives < 3)
+                this.currentLives++;
+            GameObject.Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "Ennemy")
+        {
+            this.currentLives--;
+            this.isCaught = true;
         }
     }
 
@@ -120,7 +172,7 @@ public class Player : Character
         this.keyCaught = keyCaught;
     }
 
-    
+
     public bool GetCaught()
     {
         return this.isCaught;
@@ -133,25 +185,14 @@ public class Player : Character
     }
 
 
-    protected void OnCollisionEnter(Collision collision)
+    public bool GetIsFrozen()
     {
-        if (collision.gameObject.tag == "Key")
-        {
-            this.keyCaught++;
-            GameObject.Destroy(collision.gameObject);
-        }
+        return this.isFrozen;
+    }
 
-        if (collision.gameObject.tag == "Life")
-        {
-            if (this.currentLives < 3)
-                this.currentLives++;
-            GameObject.Destroy(collision.gameObject);
-        }
 
-        if (collision.gameObject.tag == "Ennemy")
-        {
-            this.currentLives--;
-            this.isCaught = true;
-        }
+    public void SetIsFrozen(bool isFrozen)
+    {
+        this.isFrozen = isFrozen;
     }
 }

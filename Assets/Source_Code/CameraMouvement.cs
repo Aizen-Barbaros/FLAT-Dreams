@@ -15,8 +15,7 @@ public class CameraMouvement : MonoBehaviour
 
     void Update ()
     {
-        float v = verticalSpeed * Input.GetAxis("Mouse Y");
-        transform.Rotate(-v, 0, 0);
+        transform.Rotate(-this.verticalSpeed * Input.GetAxis("Mouse Y"), 0, 0);
         positionCam = transform.position;
     }
 }

@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
+    // CANVAS
+    public Canvas canvas;
+
     // CHARACTER
     public GameObject player;
 
@@ -94,12 +97,17 @@ public class World : MonoBehaviour
     // FILENAME
     private string fileName;
 
+    // PLAYER IS FROZEN
+    private bool playerIsFrozen;
+
 
     public void Start()
     {
+        canvas.enabled = false;
+
         try
         {
-            using (StreamReader reader = new StreamReader("C:\\Users\\Arthur\\Desktop\\fileName.txt"))
+            using (StreamReader reader = new StreamReader("fileName.txt"))
                 this.fileName = reader.ReadLine();
         }
 
@@ -115,6 +123,7 @@ public class World : MonoBehaviour
 
             this.level = 1;
             this.normalSpeed = 5.0f;
+            this.playerIsFrozen = false;
 
             this.GenerateSavedWorld(this.fileName);
         }
@@ -125,6 +134,7 @@ public class World : MonoBehaviour
 
             this.level = 1;
             this.normalSpeed = 5.0f;
+            this.playerIsFrozen = false;
 
             this.GenerateWorld();
         }
@@ -135,6 +145,26 @@ public class World : MonoBehaviour
     {
         if (player.activeSelf == true)
         {
+            if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
+            {
+                this.playerIsFrozen = true;
+
+                for (int i = 0; i < this.numberOfMonsters; i++)
+                    this.monsters[i].SetActive(false);
+
+                canvas.enabled = true;
+            }
+
+            else if (player.GetComponentInChildren<Player>().GetIsFrozen() == false && this.playerIsFrozen == true)
+            {
+                this.playerIsFrozen = false;
+
+                for (int i = 0; i < this.numberOfMonsters; i++)
+                    this.monsters[i].SetActive(true);
+
+                canvas.enabled = false;
+            }
+
             if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
             {
                 player.GetComponentInChildren<Player>().SetKeyCaught(0);
@@ -198,7 +228,7 @@ public class World : MonoBehaviour
     }
 
 
-    public void GenerateSavedWorld(string fileName)
+    public void GenerateSavedWorld(string fileName)                                 // TO DEBUG
     {
         // CHUNKS
         this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
@@ -327,14 +357,14 @@ public class World : MonoBehaviour
     }
 
 
-    public void SaveWorld(string fileName)
+    public void SaveWorld()                             // TO DEBUG
     {
         try
         {
-            if(File.Exists(fileName))
-                File.Delete(fileName);
+            if(File.Exists(this.fileName))
+                File.Delete(this.fileName);
 
-            using (StreamWriter writer = new StreamWriter(fileName))
+            using (StreamWriter writer = new StreamWriter(this.fileName))
             {
                 // TERRAIN VALUES
                 writer.WriteLine(worldType);
