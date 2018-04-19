@@ -105,6 +105,30 @@ public class World : MonoBehaviour
     }
 
 
+    public World(bool newWorld, string fileName)
+    {
+        if(newWorld)
+        {
+            player.SetActive(false);
+
+            this.level = 1;
+            this.normalSpeed = 5.0f;
+
+            this.GenerateWorld();
+        }
+
+        else
+        {
+            player.SetActive(false);
+
+            this.level = 1;
+            this.normalSpeed = 5.0f;
+
+            this.GenerateSavedWorld(fileName);
+        }
+    }
+
+
     public void FixedUpdate()
     {
         if (player.activeSelf == true)
@@ -121,6 +145,7 @@ public class World : MonoBehaviour
             else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
             {
                 this.DeleteWorld();
+                // DELETE FILE                                  // DELETE FILE
             }
 
             else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
@@ -239,6 +264,8 @@ public class World : MonoBehaviour
                 string text = reader.ReadLine();
                 string[] coordinates = text.Split(' ');
                 player.transform.position = new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
+                player.GetComponentInChildren<Player>().SetCurrentLives(int.Parse(reader.ReadLine()));
+                player.GetComponentInChildren<Player>().SetKeyCaught(int.Parse(reader.ReadLine()));
 
                 reader.ReadLine();
 
@@ -323,6 +350,8 @@ public class World : MonoBehaviour
 
                 // PLAYER
                 writer.WriteLine(player.transform.position.x + " " + player.transform.position.y + " " + player.transform.position.z);
+                writer.WriteLine(player.GetComponentInChildren<Player>().GetCurrentLives());
+                writer.WriteLine(player.GetComponentInChildren<Player>().GetKeyCaught());
 
                 writer.WriteLine();
 

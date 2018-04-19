@@ -4,6 +4,7 @@ using UnityEditor;
 
 public class TextureAtlasProcessing : AssetPostprocessor
 {
+    /*
     void OnPreprocessTexture ()
     {
         TextureImporter textureImporter = (TextureImporter)assetImporter;
@@ -48,5 +49,5 @@ public class TextureAtlasProcessing : AssetPostprocessor
         TextureImporter textureImporter = (TextureImporter)assetImporter;
         textureImporter.spritesheet = metas.ToArray();
     }
- 
+    */
 }

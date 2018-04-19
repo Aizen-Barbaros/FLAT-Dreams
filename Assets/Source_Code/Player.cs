@@ -102,6 +102,12 @@ public class Player : Character
     }
 
 
+    public void SetCurrentLives(int currentLives)
+    {
+        this.currentLives = currentLives;
+    }
+
+
     public int GetKeyCaught()
     {
         return this.keyCaught;
