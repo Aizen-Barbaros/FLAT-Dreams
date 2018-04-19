@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4482447, g: 0.49827182, b: 0.5755813, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -113,29 +113,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/World.unity
---- !u!1001 &1205502454
-=======
---- !u!1 &700060730 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1480378407643508, guid: cb358728affed68448dd29652a585b91,
-    type: 2}
-  m_PrefabInternal: {fileID: 1288837530}
---- !u!136 &700060731
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 700060730}
-  m_Material: {fileID: 13400000, guid: 5b717ae23ad4c494480e23b023fa56d8, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
---- !u!1001 &1288837530
->>>>>>> b7fc902efe1c67335a42e932f5edb997b075e1be:Assets/Scene.unity
+--- !u!1001 &2024625624
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -174,31 +152,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< HEAD:Assets/Scenes/World.unity
     m_RemovedComponents: []
-=======
-    - target: {fileID: 114778940381679254, guid: cb358728affed68448dd29652a585b91,
-        type: 2}
-      propertyPath: heart
-      value: 
-      objectReference: {fileID: 1483372814680724, guid: c0c9fa2061fd46d44a9645f69ac79c30,
-        type: 2}
-    - target: {fileID: 54311716003681506, guid: cb358728affed68448dd29652a585b91,
-        type: 2}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425541537625714, guid: cb358728affed68448dd29652a585b91, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 54311716003681506, guid: cb358728affed68448dd29652a585b91,
-        type: 2}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 136741336744016710, guid: cb358728affed68448dd29652a585b91, type: 2}
->>>>>>> b7fc902efe1c67335a42e932f5edb997b075e1be:Assets/Scene.unity
   m_ParentPrefab: {fileID: 100100000, guid: cb358728affed68448dd29652a585b91, type: 2}
   m_IsPrefabParent: 0

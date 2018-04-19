@@ -91,30 +91,32 @@ public class World : MonoBehaviour
     private int level;
     private float normalSpeed;
 
+    // FILENAME
+    private string fileName;
+
 
     public void Start()
     {
-        player.SetActive(true);
+        try
+        {
+            using (StreamReader reader = new StreamReader("C:\\Users\\Arthur\\Desktop\\fileName.txt"))
+                this.fileName = reader.ReadLine();
+        }
 
-        this.level = 1;
-        this.normalSpeed = 5.0f;
-
-        this.GenerateWorld();
-        //this.SaveWorld("C:\\Users\\Arthur\\Desktop\\World.txt");
-        //this.GenerateSavedWorld("C:\\Users\\Arthur\\Desktop\\World.txt");
-    }
+        catch (System.Exception exception)
+        {
+            Debug.Log(exception.ToString());
+        }
 
 
-    public World(bool newWorld, string fileName)
-    {
-        if(newWorld)
+        if (File.Exists(this.fileName))
         {
             player.SetActive(false);
 
             this.level = 1;
             this.normalSpeed = 5.0f;
 
-            this.GenerateWorld();
+            this.GenerateSavedWorld(this.fileName);
         }
 
         else
@@ -124,7 +126,7 @@ public class World : MonoBehaviour
             this.level = 1;
             this.normalSpeed = 5.0f;
 
-            this.GenerateSavedWorld(fileName);
+            this.GenerateWorld();
         }
     }
 
@@ -144,7 +146,7 @@ public class World : MonoBehaviour
             else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
             {
                 this.DeleteWorld();
-                // DELETE FILE                                  // DELETE FILE
+                File.Delete(this.fileName);
             }
 
             else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
@@ -330,9 +332,7 @@ public class World : MonoBehaviour
         try
         {
             if(File.Exists(fileName))
-            {
                 File.Delete(fileName);
-            }
 
             using (StreamWriter writer = new StreamWriter(fileName))
             {
