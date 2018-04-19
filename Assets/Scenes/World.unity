@@ -182,6 +182,11 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114189886701650160, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: StunBall
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb358728affed68448dd29652a585b91, type: 2}
   m_IsPrefabParent: 0

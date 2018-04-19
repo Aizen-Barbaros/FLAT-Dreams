@@ -9,14 +9,9 @@ public class Player : Character
     private bool isCaught;
     private bool isFrozen;
 
-    //private float iniCamX;
-    //private float iniCamY;
-
 
     void Start()
     {
-        //this.iniCamX = Input.mousePosition.x;
-        //this.iniCamY = Input.mousePosition.y;
         this.currentLives = 3;
         this.keyCaught = 0;
         this.isCaught = false;

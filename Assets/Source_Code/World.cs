@@ -368,12 +368,12 @@ public class World : MonoBehaviour
             {
                 // TERRAIN VALUES
                 writer.WriteLine(worldType);
-                writer.WriteLine(terrainType);
+                writer.WriteLine(this.terrainType);
                 writer.WriteLine(this.level);
-                writer.WriteLine(maxHeight);
-                writer.WriteLine(octaves);
-                writer.WriteLine(smooth);
-                writer.WriteLine(persistence);
+                writer.WriteLine(this.maxHeight);
+                writer.WriteLine(this.octaves);
+                writer.WriteLine(this.smooth);
+                writer.WriteLine(this.persistence);
 
                 writer.WriteLine();
 

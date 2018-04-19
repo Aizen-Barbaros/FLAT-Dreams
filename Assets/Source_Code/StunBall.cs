@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunBall : MonoBehaviour {
-
-
+public class StunBall : MonoBehaviour
+{
     private void OnTriggerEnter(Collider collision)
     {
         if(collision.gameObject.CompareTag("Ennemy"))
