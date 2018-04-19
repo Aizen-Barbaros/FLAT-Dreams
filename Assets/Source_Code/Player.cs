@@ -16,7 +16,6 @@ public class Player : Character
     {
         this.iniCamX = Input.mousePosition.x;
         this.iniCamY = Input.mousePosition.y;
-
         this.currentLives = 3;
         this.keyCaught = 0;
         this.isCaught = false;
@@ -51,8 +50,10 @@ public class Player : Character
             base.SortVitesse();
 
         if (Input.GetKeyDown("2") && base.dashCooldown + base.lastDash <= Time.time)
+        {
+            GetComponent<AudioSource>().PlayOneShot(base.dashSound, 1f);
             base.Dash();
-
+        }
         if (Input.GetMouseButton(0) && base.stunCooldown + base.lastStun <= Time.time)
             base.Stun();
 

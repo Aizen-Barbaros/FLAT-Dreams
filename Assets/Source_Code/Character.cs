@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    //Sound
+    protected AudioSource source;
+
     //CamSpeed
     protected float camSpeed;
 
@@ -29,6 +32,7 @@ public class Character : MonoBehaviour
     protected float lastDash;
     protected float dashDuration;
     protected float dashCooldown;
+    public AudioClip dashSound;
 
     //Freeze
     protected bool resetfreeze;
@@ -39,6 +43,7 @@ public class Character : MonoBehaviour
     protected float lastStun;
     protected float stunCooldown;
     protected GameObject stunBall;
+    public AudioClip stunSound;
 
     //Sort Fog
     protected bool resetFog;
@@ -67,6 +72,7 @@ public class Character : MonoBehaviour
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
         this.freezeDuration = 5.0f;
+        this.source = GetComponent<AudioSource>();
     }
 
     protected virtual void OnCollisionStay(Collision collision) //TO DO
@@ -98,10 +104,18 @@ public class Character : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, h, 0);
         this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
 
-        //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
-        Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
-        movement = movement.normalized * this.speed * Time.deltaTime;
-        this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
+        if (horizontal != 0 || vertical != 0)
+        {
+            //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
+            Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
+            movement = movement.normalized * this.speed * Time.deltaTime;
+            this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
+        }
+        else
+        {
+            if(this.isGrounded)
+                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y,0f);
+        }
     }
 
 
@@ -126,7 +140,7 @@ public class Character : MonoBehaviour
             //Mathematic function who give the velocity for a specific jump height
             float velocity = Mathf.Sqrt(2 * Physics.gravity.y * this.jumpHeight * -1);
             //Apply a velocity vertically
-            this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+            this.GetComponent<Rigidbody>().velocity = new Vector3(0f, velocity, 0f);
         }
     }
 
@@ -160,7 +174,7 @@ public class Character : MonoBehaviour
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
-        stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+4, playerPosition.z),camOrientation);
+        stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+2, playerPosition.z),camOrientation);
         //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
         this.stunCooldown = 3;
@@ -198,6 +212,7 @@ public class Character : MonoBehaviour
     {
         //Immobilize the character when called
         this.freezeDuration = 5.0f;
+        source.PlayOneShot(stunSound,1f);
         this.speed = 0;
         this.lastfreeze = Time.time;
         this.resetfreeze = true;
