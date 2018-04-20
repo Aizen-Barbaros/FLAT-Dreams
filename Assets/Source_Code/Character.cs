@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
 {
     //Sound
     protected AudioSource source;
+    public AudioClip LandingSound;
 
     //CamSpeed
     protected float camSpeed;
@@ -56,11 +57,13 @@ public class Character : MonoBehaviour
     protected float lastRocket;
     protected float RocketCooldown;
     protected float RocketHeight;
+    public AudioClip RocketSound;
 
     //Position of the player
     protected Vector3 playerPosition;                                         
 
     protected bool isGrounded;
+    protected bool landing;
     protected bool isFrozen;
     private float step;
 
@@ -82,6 +85,11 @@ public class Character : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = true;
+            if(this.landing ==true)
+            {
+                GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
+                this.landing = false;
+            }
             //Debug.Log("Grounded");
         }
     }
@@ -91,6 +99,7 @@ public class Character : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = false;
+            this.landing = true;
             //Debug.Log("Leave Grounded");
         }
     }

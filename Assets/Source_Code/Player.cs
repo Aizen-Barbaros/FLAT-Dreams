@@ -76,7 +76,10 @@ public class Player : Character
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3) && base.RocketCooldown + base.lastRocket <= Time.time)
+            {
+                GetComponent<AudioSource>().PlayOneShot(base.RocketSound, 1f);
                 base.Rockets();
+            }
 
             if (Input.GetKeyDown(KeyCode.Alpha4) && base.FogCooldown + base.lastFog <= Time.time)
                 base.HighSenses();
