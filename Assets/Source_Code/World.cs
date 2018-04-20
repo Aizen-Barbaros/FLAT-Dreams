@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class World : MonoBehaviour
 {
@@ -141,6 +141,11 @@ public class World : MonoBehaviour
     {
         if (player.activeSelf == true)
         {
+            // CHANGE VALUES IN THE HUD
+            GameObject.Find("Level").GetComponent<Text>().text = this.level.ToString();
+            GameObject.Find("Lives").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetCurrentLives().ToString();
+            GameObject.Find("Keys").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetKeyCaught().ToString();
+
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
             {
                 this.playerIsFrozen = true;
@@ -164,6 +169,7 @@ public class World : MonoBehaviour
             if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
             {
                 player.GetComponentInChildren<Player>().SetKeyCaught(0);
+                this.level++;
                 this.normalSpeed += 0.75f;
                 this.DeleteWorld();
                 this.GenerateWorld();
