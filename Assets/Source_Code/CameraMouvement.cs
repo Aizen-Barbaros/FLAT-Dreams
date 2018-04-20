@@ -18,4 +18,10 @@ public class CameraMouvement : MonoBehaviour
         transform.Rotate(-this.verticalSpeed * Input.GetAxis("Mouse Y"), 0, 0);
         positionCam = transform.position;
     }
+
+
+    public void SetVerticalSpeed(float verticalSpeed)
+    {
+        this.verticalSpeed = verticalSpeed;
+    }
 }

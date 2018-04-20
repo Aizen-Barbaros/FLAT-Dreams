@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4223115100907842}
   - component: {fileID: 33263501455982140}
   - component: {fileID: 23031487070521564}
+  - component: {fileID: 64178114704088302}
   m_Layer: 0
   m_Name: Lollipop_tree
   m_TagString: Ground
@@ -81,4 +82,18 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1726375852119494}
+  m_Mesh: {fileID: 4300000, guid: 5b4a1d0aba0963240b91d4cfcc836a9a, type: 3}
+--- !u!64 &64178114704088302
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726375852119494}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 5b4a1d0aba0963240b91d4cfcc836a9a, type: 3}

@@ -7,22 +7,26 @@ public class Enemy : Character
     public LayerMask targetLayerMask;
     
     private Collider[] colliders;
-    private Player player; 
+    private Player player;
+
 
     protected void FixedUpdate()
     {
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        if (colliders.Length >= 1)
+        if (!base.isFrozen)
         {
-            this.player = colliders[0].GetComponent<Player>();
-            this.ChasePlayer(this.player.transform.position);
-        }
+            if (colliders.Length >= 1)
+            {
+                this.player = colliders[0].GetComponent<Player>();
+                this.ChasePlayer(this.player.transform.position);
+            }
 
-        if (base.lastfreeze + base.freezeDuration <= Time.time && resetfreeze)
-        {
-            base.speed = base.normalSpeed;
-            base.resetfreeze = false;
+            if (base.lastfreeze + base.freezeDuration <= Time.time && resetfreeze)
+            {
+                base.speed = base.normalSpeed;
+                base.resetfreeze = false;
+            }
         }
     }
 
@@ -37,6 +41,18 @@ public class Enemy : Character
     {
         base.normalSpeed = normalSpeed;
         base.speed = base.normalSpeed;
+    }
+
+
+    public bool GetIsFrozen()
+    {
+        return base.isFrozen;
+    }
+
+
+    public void SetIsFrozen(bool isFrozen)
+    {
+        base.isFrozen = isFrozen;
     }
 
 

@@ -119,8 +119,6 @@ public class World : MonoBehaviour
 
         if (File.Exists(this.fileName))
         {
-            player.SetActive(false);
-
             this.level = 1;
             this.normalSpeed = 5.0f;
             this.playerIsFrozen = false;
@@ -130,8 +128,6 @@ public class World : MonoBehaviour
 
         else
         {
-            player.SetActive(false);
-
             this.level = 1;
             this.normalSpeed = 5.0f;
             this.playerIsFrozen = false;
@@ -150,7 +146,7 @@ public class World : MonoBehaviour
                 this.playerIsFrozen = true;
 
                 for (int i = 0; i < this.numberOfMonsters; i++)
-                    this.monsters[i].SetActive(false);
+                    this.monsters[i].GetComponentInChildren<Enemy>().SetIsFrozen(true);
 
                 canvas.enabled = true;
             }
@@ -160,7 +156,7 @@ public class World : MonoBehaviour
                 this.playerIsFrozen = false;
 
                 for (int i = 0; i < this.numberOfMonsters; i++)
-                    this.monsters[i].SetActive(true);
+                    this.monsters[i].GetComponentInChildren<Enemy>().SetIsFrozen(false);
 
                 canvas.enabled = false;
             }
@@ -228,7 +224,7 @@ public class World : MonoBehaviour
     }
 
 
-    public void GenerateSavedWorld(string fileName)                                 // TO DEBUG
+    public void GenerateSavedWorld(string fileName)
     {
         // CHUNKS
         this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
@@ -294,7 +290,7 @@ public class World : MonoBehaviour
                 // PLAYER
                 string text = reader.ReadLine();
                 string[] coordinates = text.Split(' ');
-                player.transform.position = new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2]));
+                player.transform.position = new Vector3(float.Parse(coordinates[0]), float.Parse(coordinates[1]), float.Parse(coordinates[2]));
                 player.GetComponentInChildren<Player>().SetCurrentLives(int.Parse(reader.ReadLine()));
                 player.GetComponentInChildren<Player>().SetKeyCaught(int.Parse(reader.ReadLine()));
 
@@ -322,7 +318,7 @@ public class World : MonoBehaviour
                 {
                     text = reader.ReadLine();
                     coordinates = text.Split(' ');
-                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
+                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(float.Parse(coordinates[0]), float.Parse(coordinates[1]), float.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                 }
 
                 reader.ReadLine();
@@ -357,7 +353,7 @@ public class World : MonoBehaviour
     }
 
 
-    public void SaveWorld()                             // TO DEBUG
+    public void SaveWorld()
     {
         try
         {

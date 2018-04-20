@@ -7,7 +7,6 @@ public class Player : Character
     private int currentLives;
     private int keyCaught;
     private bool isCaught;
-    private bool isFrozen;
 
 
     void Start()
@@ -15,7 +14,6 @@ public class Player : Character
         this.currentLives = 3;
         this.keyCaught = 0;
         this.isCaught = false;
-        this.isFrozen = false;
 
         base.jumpHeight = 1.5f;
 
@@ -33,77 +31,77 @@ public class Player : Character
         base.RocketHeight = 60;
     }
 
-    private void Update()
-    {
-        base.Move();    
-    }
     
     void FixedUpdate ()
     {
-        if (Input.GetKeyDown("space"))
-            base.Jump();
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isFrozen)
             {
-                this.isFrozen = false;
+                base.isFrozen = false;
 
                 // Freeze Player
                 this.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
                 // Freeze Camera
-                this.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Skybox;
-                this.GetComponentInChildren<Camera>().cullingMask = 1;
+                this.GetComponentInChildren<CameraMouvement>().SetVerticalSpeed(7.5f);
             }
 
             else
             {
-                this.isFrozen = true;
+                base.isFrozen = true;
 
                 // Freeze Player
                 this.GetComponentInChildren<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 
                 // Freeze Camera
-                this.GetComponentInChildren<Camera>().clearFlags = CameraClearFlags.Nothing;
-                this.GetComponentInChildren<Camera>().cullingMask = 0;
+                this.GetComponentInChildren<CameraMouvement>().SetVerticalSpeed(0);
             }
         }
 
-        if (Input.GetKeyDown("1") && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
-            base.SortVitesse();
-
-        if (Input.GetKeyDown("2") && base.dashCooldown + base.lastDash <= Time.time)
+        if (!base.isFrozen)
         {
-            GetComponent<AudioSource>().PlayOneShot(base.dashSound, 1f);
-            base.Dash();
-        }
-        if (Input.GetMouseButton(0) && base.stunCooldown + base.lastStun <= Time.time)
-            base.Stun();
+            base.Move();
 
-        if (Input.GetKeyDown("4") && base.FogCooldown + base.lastFog <= Time.time)
-            base.HighSenses();
+            if (Input.GetKeyDown(KeyCode.Space))
+                base.Jump();
 
-        if (Input.GetKeyDown("3") && base.RocketCooldown + base.lastRocket <= Time.time)
-            base.Rockets();
+            if (Input.GetKeyDown(KeyCode.Alpha1) && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
+                base.SortVitesse();
 
-        if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
-        {
-            base.speed = base.normalSpeed;
-            base.resetSpeedBoost = false;
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha2) && base.dashCooldown + base.lastDash <= Time.time)
+            {
+                GetComponent<AudioSource>().PlayOneShot(base.dashSound, 1f);
+                base.Dash();
+            }
 
-        if (base.lastFog + base.FogDuration <= Time.time && resetFog)
-        {
-            if(normalFog)
-                RenderSettings.fog = true;
-            base.resetFog = false;
-        }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && base.RocketCooldown + base.lastRocket <= Time.time)
+                base.Rockets();
 
-        if (base.lastDash + base.dashDuration <= Time.time && resetDash)
-        {
-            base.speed = base.normalSpeed;
-            base.resetDash = false;
+            if (Input.GetKeyDown(KeyCode.Alpha4) && base.FogCooldown + base.lastFog <= Time.time)
+                base.HighSenses();
+
+            if (Input.GetMouseButton(0) && base.stunCooldown + base.lastStun <= Time.time)
+                base.Stun();
+
+            if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
+            {
+                base.speed = base.normalSpeed;
+                base.resetSpeedBoost = false;
+            }
+
+            if (base.lastFog + base.FogDuration <= Time.time && resetFog)
+            {
+                if (normalFog)
+                    RenderSettings.fog = true;
+                base.resetFog = false;
+            }
+
+            if (base.lastDash + base.dashDuration <= Time.time && resetDash)
+            {
+                base.speed = base.normalSpeed;
+                base.resetDash = false;
+            }
         }
     }
 
@@ -182,12 +180,12 @@ public class Player : Character
 
     public bool GetIsFrozen()
     {
-        return this.isFrozen;
+        return base.isFrozen;
     }
 
 
     public void SetIsFrozen(bool isFrozen)
     {
-        this.isFrozen = isFrozen;
+        base.isFrozen = isFrozen;
     }
 }

@@ -61,6 +61,7 @@ public class Character : MonoBehaviour
     protected Vector3 playerPosition;                                         
 
     protected bool isGrounded;
+    protected bool isFrozen;
     private float step;
 
 
@@ -72,6 +73,7 @@ public class Character : MonoBehaviour
         this.dashDuration = 0.3f;
         this.stunCooldown = 0;
         this.freezeDuration = 5.0f;
+        this.isFrozen = false;
         this.source = GetComponent<AudioSource>();
     }
 
