@@ -103,6 +103,7 @@ public class World : MonoBehaviour
 
     public void Start()
     {
+        Cursor.visible = false;
         canvas.enabled = false;
 
         try
@@ -155,6 +156,7 @@ public class World : MonoBehaviour
 
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
             {
+                Cursor.visible = true;
                 this.playerIsFrozen = true;
 
                 for (int i = 0; i < this.numberOfMonsters; i++)
@@ -165,6 +167,7 @@ public class World : MonoBehaviour
 
             else if (player.GetComponentInChildren<Player>().GetIsFrozen() == false && this.playerIsFrozen == true)
             {
+                Cursor.visible = false;
                 this.playerIsFrozen = false;
 
                 for (int i = 0; i < this.numberOfMonsters; i++)
