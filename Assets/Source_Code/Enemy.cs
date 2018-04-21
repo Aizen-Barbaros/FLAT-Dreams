@@ -31,31 +31,6 @@ public class Enemy : Character
     }
 
 
-    public float GetNormalSpeed()
-    {
-        return base.normalSpeed;
-    }
-
-
-    public void SetNormalSpeed(float normalSpeed)
-    {
-        base.normalSpeed = normalSpeed;
-        base.speed = base.normalSpeed;
-    }
-
-
-    public bool GetIsFrozen()
-    {
-        return base.isFrozen;
-    }
-
-
-    public void SetIsFrozen(bool isFrozen)
-    {
-        base.isFrozen = isFrozen;
-    }
-
-
     public void ChasePlayer(Vector3 target)
     {
         base.Move(target);

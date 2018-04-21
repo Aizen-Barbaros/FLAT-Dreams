@@ -192,6 +192,7 @@ public class Character : MonoBehaviour
         this.lastStun = Time.time;
     }
 
+
     protected void HighSenses()
     {
         //delete the fog of the world if it exists for a short time
@@ -207,6 +208,7 @@ public class Character : MonoBehaviour
             normalFog = false;
     }
 
+
     protected void Rockets()
     {
         //Make the player go up very high
@@ -219,6 +221,7 @@ public class Character : MonoBehaviour
 
     }
 
+
     public void Stunned()
     {
         //Immobilize the character when called
@@ -227,5 +230,68 @@ public class Character : MonoBehaviour
         this.speed = 0;
         this.lastfreeze = Time.time;
         this.resetfreeze = true;
+    }
+
+
+    public float GetNormalSpeed()
+    {
+        return this.normalSpeed;
+    }
+
+
+    public void SetNormalSpeed(float normalSpeed)
+    {
+        this.normalSpeed = normalSpeed;
+        this.speed = this.normalSpeed;
+    }
+
+
+    public bool GetIsFrozen()
+    {
+        return this.isFrozen;
+    }
+
+
+    public void SetIsFrozen(bool isFrozen)
+    {
+        this.isFrozen = isFrozen;
+    }
+
+
+    public float GetTimeBeforeNextSpell(float time)
+    {
+        if (time < 0)
+            return 0;
+        return time;
+    }
+
+
+    public float GetSpeedBoostTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastSpeedBoost + this.speedBoostCooldown - Time.time);
+    }
+
+
+    public float GetDashTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastDash + this.dashCooldown - Time.time);
+    }
+
+
+    public float GetRocketTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastRocket + this.RocketCooldown - Time.time);
+    }
+
+
+    public float GetFogTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastFog + this.FogCooldown - Time.time);
+    }
+
+
+    public float GetStunTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastStun + this.stunCooldown - Time.time);
     }
 }

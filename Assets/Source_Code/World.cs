@@ -146,6 +146,13 @@ public class World : MonoBehaviour
             GameObject.Find("Lives").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetCurrentLives().ToString();
             GameObject.Find("Keys").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetKeyCaught().ToString();
 
+            GameObject.Find("SpeedBoost").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetSpeedBoostTimeBeforeNext().ToString();
+            GameObject.Find("Dash").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetDashTimeBeforeNext().ToString();
+            GameObject.Find("Rocket").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetRocketTimeBeforeNext().ToString();
+            GameObject.Find("Fog").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetFogTimeBeforeNext().ToString();
+            GameObject.Find("Stun").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetStunTimeBeforeNext().ToString();
+
+
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
             {
                 this.playerIsFrozen = true;

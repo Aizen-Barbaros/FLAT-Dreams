@@ -9,7 +9,7 @@ public class Player : Character
     private bool isCaught;
 
 
-    void Start()
+    public void Start()
     {
         this.currentLives = 3;
         this.keyCaught = 0;
@@ -31,8 +31,8 @@ public class Player : Character
         base.RocketHeight = 60;
     }
 
-    
-    void FixedUpdate ()
+
+    public void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -61,49 +61,51 @@ public class Player : Character
 
         if (!base.isFrozen)
         {
+            // ACTIVATIONS
             base.Move();
 
             if (Input.GetKeyDown(KeyCode.Space))
                 base.Jump();
-
-            if (Input.GetKeyDown(KeyCode.Alpha1) && base.lastSpeedBoost + base.speedBoostCooldown <= Time.time)
+            
+            if (Input.GetKeyDown(KeyCode.Alpha1) && base.GetSpeedBoostTimeBeforeNext() == 0)
                 base.SortVitesse();
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && base.dashCooldown + base.lastDash <= Time.time)
+            if (Input.GetKeyDown(KeyCode.Alpha2) && base.GetDashTimeBeforeNext() == 0)
             {
                 GetComponent<AudioSource>().PlayOneShot(base.dashSound, 1f);
                 base.Dash();
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3) && base.RocketCooldown + base.lastRocket <= Time.time)
+            if (Input.GetKeyDown(KeyCode.Alpha3) && base.GetRocketTimeBeforeNext() == 0)
             {
                 GetComponent<AudioSource>().PlayOneShot(base.RocketSound, 1f);
                 base.Rockets();
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha4) && base.FogCooldown + base.lastFog <= Time.time)
+            if (Input.GetKeyDown(KeyCode.Alpha4) && base.GetFogTimeBeforeNext() == 0)
                 base.HighSenses();
 
-            if (Input.GetMouseButton(0) && base.stunCooldown + base.lastStun <= Time.time)
+            if (Input.GetMouseButton(0) && base.GetStunTimeBeforeNext() == 0)
                 base.Stun();
 
-            if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && resetSpeedBoost)
+            //RESETS
+            if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && base.resetSpeedBoost)
             {
                 base.speed = base.normalSpeed;
                 base.resetSpeedBoost = false;
             }
 
-            if (base.lastFog + base.FogDuration <= Time.time && resetFog)
-            {
-                if (normalFog)
-                    RenderSettings.fog = true;
-                base.resetFog = false;
-            }
-
-            if (base.lastDash + base.dashDuration <= Time.time && resetDash)
+            if (base.lastDash + base.dashDuration <= Time.time && base.resetDash)
             {
                 base.speed = base.normalSpeed;
                 base.resetDash = false;
+            }
+
+            if (base.lastFog + base.FogDuration <= Time.time && base.resetFog)
+            {
+                if (base.normalFog)
+                    RenderSettings.fog = true;
+                base.resetFog = false;
             }
         }
     }
@@ -129,19 +131,6 @@ public class Player : Character
             this.currentLives--;
             this.isCaught = true;
         }
-    }
-
-
-    public float GetNormalSpeed()
-    {
-        return base.normalSpeed;
-    }
-
-
-    public void SetNormalSpeed(float normalSpeed)
-    {
-        base.normalSpeed = normalSpeed;
-        base.speed = base.normalSpeed;
     }
 
 
@@ -178,17 +167,5 @@ public class Player : Character
     public void SetCaught(bool isCaught)
     {
         this.isCaught = isCaught;
-    }
-
-
-    public bool GetIsFrozen()
-    {
-        return base.isFrozen;
-    }
-
-
-    public void SetIsFrozen(bool isFrozen)
-    {
-        base.isFrozen = isFrozen;
     }
 }
