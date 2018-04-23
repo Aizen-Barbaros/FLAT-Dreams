@@ -120,6 +120,9 @@ public class Character : MonoBehaviour
 
         if (horizontal != 0 || vertical != 0)
         {
+            if (this.isGrounded)
+                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y, 0f);
+
             //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
             Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
             movement = movement.normalized * this.speed * Time.deltaTime;
@@ -141,6 +144,7 @@ public class Character : MonoBehaviour
         //target.y = 0;                                                                           //A REVOIR
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
         anim.SetTrigger("isWalking");
+
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
