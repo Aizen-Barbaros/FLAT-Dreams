@@ -72,13 +72,13 @@ public class Player : Character
 
             if (Input.GetKeyDown(KeyCode.Alpha2) && base.GetDashTimeBeforeNext() == 0)
             {
-                GetComponent<AudioSource>().PlayOneShot(base.dashSound, 1f);
+                GetComponent<AudioSource>().PlayOneShot(base.dashSound, 0.375f);
                 base.Dash();
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3) && base.GetRocketTimeBeforeNext() == 0)
             {
-                GetComponent<AudioSource>().PlayOneShot(base.RocketSound, 1f);
+                GetComponent<AudioSource>().PlayOneShot(base.RocketSound, 0.375f);
                 base.Rockets();
             }
 

@@ -233,7 +233,7 @@ public class Character : MonoBehaviour
     {
         //Immobilize the character when called
         this.freezeDuration = 5.0f;
-        source.PlayOneShot(stunSound,1f);
+        source.PlayOneShot(stunSound,0.75f);
         this.speed = 0;
         this.lastfreeze = Time.time;
         this.resetfreeze = true;
