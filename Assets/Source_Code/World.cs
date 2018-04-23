@@ -206,7 +206,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
 
-        this.GenerateWorldValues(3);
+        this.GenerateWorldValues(Random.Range(0,10));
         this.GenerateTerrainValues(Random.Range(0, 3));
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();
@@ -222,7 +222,7 @@ public class World : MonoBehaviour
         this.GenerateLife();
 
         // MONSTERS
-        this.monsters = new GameObject[1];
+        this.monsters = new GameObject[this.numberOfMonsters];
         this.GenerateMonsters();
 
         // TREES
