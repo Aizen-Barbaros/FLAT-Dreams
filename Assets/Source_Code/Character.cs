@@ -67,6 +67,8 @@ public class Character : MonoBehaviour
     protected bool isFrozen;
     private float step;
 
+    //Animation
+    static Animator anim;
 
     private void Start()
     {
@@ -78,6 +80,7 @@ public class Character : MonoBehaviour
         this.freezeDuration = 5.0f;
         this.isFrozen = false;
         this.source = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     protected virtual void OnCollisionStay(Collision collision) //TO DO
@@ -137,7 +140,7 @@ public class Character : MonoBehaviour
         //Follow the player
         //target.y = 0;                                                                           //A REVOIR
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
-
+        anim.SetTrigger("isWalking");
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
