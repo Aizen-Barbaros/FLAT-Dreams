@@ -147,11 +147,11 @@ public class World : MonoBehaviour
             GameObject.Find("Lives").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetCurrentLives().ToString();
             GameObject.Find("Keys").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetKeyCaught().ToString();
 
-            GameObject.Find("SpeedBoost").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetSpeedBoostTimeBeforeNext().ToString();
-            GameObject.Find("Dash").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetDashTimeBeforeNext().ToString();
-            GameObject.Find("Rocket").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetRocketTimeBeforeNext().ToString();
-            GameObject.Find("Fog").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetFogTimeBeforeNext().ToString();
-            GameObject.Find("Stun").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetStunTimeBeforeNext().ToString();
+            GameObject.Find("SpeedBoost").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetSpeedBoostTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetSpeedBoostTimeBeforeNext()).ToString();
+            GameObject.Find("Dash").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetDashTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetDashTimeBeforeNext()).ToString();
+            GameObject.Find("Rocket").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetRocketTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetRocketTimeBeforeNext()).ToString();
+            GameObject.Find("Fog").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetFogTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetFogTimeBeforeNext()).ToString();
+            GameObject.Find("Stun").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetStunTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetStunTimeBeforeNext()).ToString();
 
 
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
@@ -193,7 +193,9 @@ public class World : MonoBehaviour
 
             else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
             {
-                player.GetComponentInChildren<Player>().SetCaught(false);;
+                player.GetComponentInChildren<Player>().SetCaught(false);
+                player.GetComponentInChildren<Player>().SetKeyCaught(0);
+                player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
                 this.DeleteWorld();
                 this.GenerateWorld();
             }

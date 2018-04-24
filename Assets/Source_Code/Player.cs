@@ -128,7 +128,7 @@ public class Player : Character
 
         if (collision.gameObject.tag == "Ennemy")
         {
-            this.currentLives--;
+            //this.currentLives--;
             this.isCaught = true;
         }
     }
