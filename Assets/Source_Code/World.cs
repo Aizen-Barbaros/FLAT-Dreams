@@ -315,7 +315,7 @@ public class World : MonoBehaviour
                 reader.ReadLine();
 
                 // KEYS
-                for(int i = 0; i < this.keys.Length; i++)
+                for(int i = 0; i < this.keys.Length - player.GetComponentInChildren<Player>().GetKeyCaught(); i++)
                 {
                     text = reader.ReadLine();
                     coordinates = text.Split(' ');
@@ -336,7 +336,7 @@ public class World : MonoBehaviour
                 {
                     text = reader.ReadLine();
                     coordinates = text.Split(' ');
-                    this.monsters[i] = Instantiate(this.littleMonster, new Vector3(float.Parse(coordinates[0]), float.Parse(coordinates[1]), float.Parse(coordinates[2])), Quaternion.identity) as GameObject;
+                    this.monsters[i] = Instantiate(this.monsterModel, new Vector3(float.Parse(coordinates[0]), float.Parse(coordinates[1]), float.Parse(coordinates[2])), Quaternion.identity) as GameObject;
                 }
 
                 reader.ReadLine();
@@ -400,7 +400,10 @@ public class World : MonoBehaviour
 
                 // KEYS
                 for (int i = 0; i < this.keys.Length; i++)
-                    writer.WriteLine(this.keys[i].transform.position.x + " " + this.keys[i].transform.position.y + " " + this.keys[i].transform.position.z);
+                {
+                    if (this.keys[i])
+                        writer.WriteLine(this.keys[i].transform.position.x + " " + this.keys[i].transform.position.y + " " + this.keys[i].transform.position.z);
+                }
 
                 writer.WriteLine();
 
