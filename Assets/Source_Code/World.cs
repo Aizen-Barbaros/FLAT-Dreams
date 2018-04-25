@@ -438,15 +438,15 @@ public class World : MonoBehaviour
     {
         player.SetActive(false);
 
-        for (int i = 0; i < this.keys.Length; i++)
+        for (int i = 0; i < this.numberOfKeys; i++)
             GameObject.Destroy(this.keys[i]);
 
         GameObject.Destroy(this.life);
 
-        for (int i = 0; i < this.monsters.Length; i++)
+        for (int i = 0; i < this.numberOfMonsters; i++)
             GameObject.Destroy(this.monsters[i]);
 
-        for (int i = 0; i < this.trees.Length; i++)
+        for (int i = 0; i < this.numberOfTrees; i++)
             GameObject.Destroy(this.trees[i]);
 
         for (int x = 0; x < this.chunks.GetLength(0); x++)
