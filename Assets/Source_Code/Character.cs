@@ -143,12 +143,8 @@ public class Character : MonoBehaviour
         //Follow the player
         //target.y = 0;                                                                           //A REVOIR
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
-<<<<<<< HEAD
-        
-=======
         anim.SetTrigger("isWalking");
 
->>>>>>> 63902220dfa7cd80c34eb39109e98fecec8f88a3
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
