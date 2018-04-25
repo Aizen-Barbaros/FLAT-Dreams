@@ -1630,9 +1630,9 @@ MonoBehaviour:
     type: 2}
   snowMan: {fileID: 1871271894131468, guid: 6018f6e69ccb4b5479b888e9a24633c6, type: 2}
   reaper: {fileID: 1399951583453210, guid: 9bf1c7fbb2eeabe448ae1b47cf1894ae, type: 2}
-  bear: {fileID: 1885414144483158, guid: 1ed93925f09bfd24eb3db7f5e7f40ef7, type: 2}
+  bear: {fileID: 1925261090480116, guid: 10da26a487ca13442a179596af8a35c3, type: 2}
   ghost: {fileID: 1651736398124110, guid: be6265085403f2d40acc419b19a4cd8d, type: 2}
-  gnome: {fileID: 1515905815565828, guid: 12664d610b4a9604e82279c04da6fdde, type: 2}
+  gnome: {fileID: 1511149506949294, guid: 1b8316782befd4040b3e90714ed50ce5, type: 2}
   yeti: {fileID: 1086311411959932, guid: 4bb13c2205c98804db675a77bb48c6f9, type: 2}
   zombie: {fileID: 1683988045441132, guid: 0eac856d87299804c8f1068c17472611, type: 2}
   agentSmith: {fileID: 1368355780122668, guid: cc8c450b9bca15b49ae844fdb9531141, type: 2}

@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: ced762b07be81d34b924f330473c854b
-timeCreated: 1524430207
+guid: 64f791860dc5ced4c871706a3019dd22
+timeCreated: 1524492085
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Goblin
-    100002: //RootNode
+    100000: //RootNode
+    100002: Goblin
     100004: mixamorig:Head
     100006: mixamorig:HeadTop_End
     100008: mixamorig:Hips
@@ -40,8 +40,8 @@ ModelImporter:
     100064: mixamorig:Spine
     100066: mixamorig:Spine1
     100068: mixamorig:Spine2
-    400000: Goblin
-    400002: //RootNode
+    400000: //RootNode
+    400002: Goblin
     400004: mixamorig:Head
     400006: mixamorig:HeadTop_End
     400008: mixamorig:Hips
@@ -77,10 +77,15 @@ ModelImporter:
     400068: mixamorig:Spine2
     2100000: palettemat
     4300000: Goblin
-    7400000: Orc Idle
+    7400000: mixamo.com
     9500000: //RootNode
     13700000: Goblin
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: palettemat
+    second: {fileID: 2100000, guid: ad35edf8ce91a3345acccdb4533e5633, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -106,35 +111,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Orc Idle
-      takeName: mixamo.com
-      firstFrame: 0
-      lastFrame: 221
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -164,7 +141,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 2
     human:
@@ -580,8 +557,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 64f791860dc5ced4c871706a3019dd22,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0
