@@ -196,7 +196,7 @@ public class Character : MonoBehaviour
         stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+2, playerPosition.z),camOrientation);
         //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
-        this.stunCooldown = 3;
+        this.stunCooldown = 5;
         this.lastStun = Time.time;
     }
 
@@ -233,7 +233,7 @@ public class Character : MonoBehaviour
     public void Stunned()
     {
         //Immobilize the character when called
-        this.freezeDuration = 5.0f;
+        this.freezeDuration = 4.0f;
         source.PlayOneShot(stunSound,0.75f);
         this.speed = 0;
         this.lastfreeze = Time.time;
