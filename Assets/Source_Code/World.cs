@@ -208,7 +208,7 @@ public class World : MonoBehaviour
         // CHUNKS
         this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
 
-        this.GenerateWorldValues(Random.Range(0,10));
+        this.GenerateWorldValues(5);
         this.GenerateTerrainValues(Random.Range(0, 3));
         this.GenerateSurfaceHeights();
         this.GenerateTerrain();

@@ -68,7 +68,7 @@ public class Character : MonoBehaviour
     private float step;
 
     //Animation
-    static Animator anim;
+    private Animator anim;
 
     private void Start()
     {
@@ -148,6 +148,7 @@ public class Character : MonoBehaviour
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
+        anim.SetBool("isWalking", true);
     }
 
 
