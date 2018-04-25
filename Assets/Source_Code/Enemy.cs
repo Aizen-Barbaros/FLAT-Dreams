@@ -47,7 +47,7 @@ public class Enemy : Character
     protected override void OnCollisionStay(Collision collision)
     {
         base.OnCollisionStay(collision);
-        if (collision.contacts.Length > 5)
+        if (collision.contacts.Length > 4)
             base.Jump();
     }
 
