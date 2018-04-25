@@ -5,7 +5,9 @@ using UnityEngine;
 public class Enemy : Character
 {
     public LayerMask targetLayerMask;
-    
+    public AudioClip BaseSound;
+
+    private float lastBaseSound;
     private Collider[] colliders;
     private Player player;
 
@@ -33,6 +35,11 @@ public class Enemy : Character
 
     public void ChasePlayer(Vector3 target)
     {
+        if(!source.isPlaying&&Time.time-3>=lastBaseSound)
+        {
+            base.source.PlayOneShot(BaseSound,0.05f);
+            this.lastBaseSound = Time.time;
+        }
         base.Move(target);
     }
 
