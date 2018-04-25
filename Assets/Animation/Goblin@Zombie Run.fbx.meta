@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 73a9f073d14446d40a691a511ec8746e
-timeCreated: 1524430207
+guid: 1a3765cf2629dc342916ba5ab335e928
+timeCreated: 1524678665
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -111,7 +111,7 @@ ModelImporter:
       name: Zombie Run
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 23
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

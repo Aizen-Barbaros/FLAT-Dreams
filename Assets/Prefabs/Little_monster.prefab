@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 65022971335239570}
   - component: {fileID: 114785066936986438}
   - component: {fileID: 82890038511711878}
+  - component: {fileID: 95631685189610534}
   m_Layer: 0
   m_Name: Little_monster
   m_TagString: Ennemy
@@ -193,6 +194,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95631685189610534
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1101169839716826}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114785066936986438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,9 +222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af25d215d39fcb4dbfab6d99c611b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LandingSound: {fileID: 0}
   StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
   dashSound: {fileID: 0}
   stunSound: {fileID: 0}
+  RocketSound: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  BaseSound: {fileID: 0}
