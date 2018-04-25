@@ -152,6 +152,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114775334342763440, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: gnome
+      value: 
+      objectReference: {fileID: 1511149506949294, guid: 1b8316782befd4040b3e90714ed50ce5,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb358728affed68448dd29652a585b91, type: 2}
   m_IsPrefabParent: 0
