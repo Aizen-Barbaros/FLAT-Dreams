@@ -88,8 +88,8 @@ public class Character : MonoBehaviour
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = true;
-            if(this.landing ==true)
-            {
+            if(this.landing ==true)                                                         //Félix LANDING ?! pas la même chose que isGrounded?
+            {                                                                               //Pas mieux de le mettre dans OncollisionEnter? plus logique?
                 GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
                 this.landing = false;
             }
@@ -118,7 +118,7 @@ public class Character : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, h, 0);
         this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
 
-        if (horizontal != 0 || vertical != 0)
+        if (horizontal != 0 || vertical != 0)                                                                       //Enlever ça ???????
         {
             if (this.isGrounded)
                 this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y, 0f);

@@ -16,7 +16,7 @@ public class Enemy : Character
     {
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        if (!base.isFrozen)
+        if (!base.isFrozen)                                 //ON SERAIT PAS MIEUX DE METTRE SANS DANS LA CLASSE MERE?
         {
             if (colliders.Length >= 1)
             {
@@ -35,11 +35,12 @@ public class Enemy : Character
 
     public void ChasePlayer(Vector3 target)
     {
-        if(!source.isPlaying&&Time.time-3>=lastBaseSound)
+        if(!source.isPlaying && Time.time-3>=lastBaseSound)    
         {
             base.source.PlayOneShot(BaseSound,0.05f);
             this.lastBaseSound = Time.time;
         }
+
         base.Move(target);
     }
 
