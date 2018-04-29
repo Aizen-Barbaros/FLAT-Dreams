@@ -59,7 +59,7 @@ public class Player : Character
             }
         }
 
-        if (!base.isFrozen)
+        if (!base.isFrozen) //Peut être vaut-il mieux mettre sans dans Update pour éviter d'Avoir l'impression que le joueur ne réponde pas au commande???
         {
             // ACTIVATIONS
             base.Move();
