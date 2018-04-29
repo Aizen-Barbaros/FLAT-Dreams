@@ -16,7 +16,7 @@ public class Enemy : Character
     {
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        if (!base.isFrozen)                                 //ON SERAIT PAS MIEUX DE METTRE SANS DANS LA CLASSE MERE?
+        if (!base.isFrozen)                                 //ON SERAIT PAS MIEUX DE METTRE SANS DANS LA CLASSE MERE? c'est le stun?
         {
             if (colliders.Length >= 1)
             {
