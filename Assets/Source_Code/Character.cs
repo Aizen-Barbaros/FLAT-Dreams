@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    //Rigidbody
+     //private Rigidbody entityRigidbody;
+
     //Sound
     protected AudioSource source;
     public AudioClip LandingSound;
@@ -60,7 +63,7 @@ public class Character : MonoBehaviour
     public AudioClip RocketSound;
 
     //Position of the player
-    protected Vector3 playerPosition;                                         
+    protected Vector3 playerPosition; //Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
 
     protected bool isGrounded;
     protected bool landing;
@@ -72,44 +75,50 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        //this.speed = 10; //Pourquoi ic? il n'est pas initialisé dans les classes filles?
+        //Initialization
         this.jumpHeight = 1.5f;
+
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
+
         this.stunCooldown = 0;
         this.freezeDuration = 5.0f;
         this.isFrozen = false;
+
         this.source = GetComponent<AudioSource>();
+
         anim = GetComponent<Animator>();
+
+        //this.entityRigidbody = this.GetComponent<Rigidbody>();
     }
 
-    protected virtual void OnCollisionStay(Collision collision) //TO DO
+    //Call when the present collider stay collid on the same collider
+    protected virtual void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = true;
-            if(this.landing ==true)
-            {
-                GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
+            if(this.landing ==true)                                                         //Félix LANDING ?! pas la même chose que isGrounded?
+            {                                                                               //Pas mieux de le mettre dans OncollisionEnter? plus logique?
+                this.GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
                 this.landing = false;
             }
-            //Debug.Log("Grounded");
         }
     }
 
-    protected virtual void OnCollisionExit(Collision collision) //TO DO
+    //Calle when the present collider leave a collider
+    protected virtual void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             this.isGrounded = false;
             this.landing = true;
-            //Debug.Log("Leave Grounded");
         }
     }
 
     protected void Move()
     {
-        //Gettting input
+        //Getting input
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         float h = camSpeed * Input.GetAxis("Mouse X");
@@ -118,21 +127,13 @@ public class Character : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(0, h, 0);
         this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
 
-        if (horizontal != 0 || vertical != 0)
-        {
-            if (this.isGrounded)
-                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y, 0f);
+        if (this.isGrounded)
+            this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y, 0f);
 
-            //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
-            Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
-            movement = movement.normalized * this.speed * Time.deltaTime;
-            this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
-        }
-        else
-        {
-            if(this.isGrounded)
-                this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y,0f);
-        }
+        //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
+        Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
+        movement = movement.normalized * this.speed * Time.deltaTime;
+        this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
     }
 
 
@@ -140,15 +141,14 @@ public class Character : MonoBehaviour
     {
         this.step = this.speed * Time.deltaTime;
 
-        //Follow the player
-        //target.y = 0;                                                                           //A REVOIR
-        this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
-        anim.SetTrigger("isWalking");
-
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
-        anim.SetBool("isWalking", true);
+        anim.SetBool("isWalking", true); // Devrait pas être en début de méthode?
+
+        //Follow the player
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
+        anim.SetTrigger("isWalking"); // Devrait pas être en début de méthode?
     }
 
 
@@ -164,9 +164,9 @@ public class Character : MonoBehaviour
     }
 
 
-    protected void SortVitesse()
+    protected void SortVitesse() //Changer nom de méthode? En anglais
     {
-        //Increase the player's speed for a short time
+        //Increase the entity's speed for a short time
         this.speed *= 2;
         this.lastSpeedBoost = Time.time;
         this.speedBoostCooldown = this.speedBoostDuration + 5;
@@ -176,7 +176,7 @@ public class Character : MonoBehaviour
 
     protected void Dash()
     {
-        //Increase the player's speed significantly for a realy short time
+        //Increase the entity's speed significantly for a realy short time
         this.speed *= 4;
         this.lastDash = Time.time;
         this.dashCooldown = 6;
@@ -184,24 +184,24 @@ public class Character : MonoBehaviour
     }
 
 
-    protected void Stun()
+    protected void Stun() // de la manière que c'est écrit on ne peut pas la réutiliser pour le monstre vaudrait peut-être mieux la mettre dans Player?
     {
         //Create a StunBall which immobilize ennemies on contact 
 
         //Take the player's position
-        this.playerPosition = GetComponent<Transform>().position;
+        this.playerPosition = GetComponent<Transform>().position; //Remplacer par this.transform.position? au lieu du getComponent? Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
         stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+2, playerPosition.z),camOrientation);
         //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
-        this.stunCooldown = 3;
+        this.stunCooldown = 5;
         this.lastStun = Time.time;
     }
 
 
-    protected void HighSenses()
+    protected void HighSenses() //Mettre dans player car mob jamais utiliser ça?
     {
         //delete the fog of the world if it exists for a short time
         this.lastFog = Time.time;
@@ -217,7 +217,7 @@ public class Character : MonoBehaviour
     }
 
 
-    protected void Rockets()
+    protected void Rockets() //Mettre dans player car mob jamais utiliser ça?
     {
         //Make the player go up very high
         this.RocketCooldown = 60;
@@ -233,7 +233,7 @@ public class Character : MonoBehaviour
     public void Stunned()
     {
         //Immobilize the character when called
-        this.freezeDuration = 5.0f;
+        this.freezeDuration = 4.0f;
         source.PlayOneShot(stunSound,0.75f);
         this.speed = 0;
         this.lastfreeze = Time.time;

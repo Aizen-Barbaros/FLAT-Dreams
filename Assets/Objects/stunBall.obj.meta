@@ -10,6 +10,7 @@ ModelImporter:
     400000: stunBall
     400002: //RootNode
     2100000: palette
+    2100002: stunBallMat
     2300000: stunBall
     3300000: stunBall
     4300000: stunBall

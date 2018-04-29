@@ -16,7 +16,7 @@ public class Enemy : Character
     {
         colliders = Physics.OverlapSphere(transform.position, 30, targetLayerMask);
 
-        if (!base.isFrozen)
+        if (!base.isFrozen)                                 //ON SERAIT PAS MIEUX DE METTRE SANS DANS LA CLASSE MERE? c'est le stun?
         {
             if (colliders.Length >= 1)
             {
@@ -35,11 +35,12 @@ public class Enemy : Character
 
     public void ChasePlayer(Vector3 target)
     {
-        if(!source.isPlaying&&Time.time-3>=lastBaseSound)
+        if(!source.isPlaying && Time.time-3>=lastBaseSound)    
         {
             base.source.PlayOneShot(BaseSound,0.05f);
             this.lastBaseSound = Time.time;
         }
+
         base.Move(target);
     }
 
@@ -47,7 +48,7 @@ public class Enemy : Character
     protected override void OnCollisionStay(Collision collision)
     {
         base.OnCollisionStay(collision);
-        if (collision.contacts.Length > 4)
+        if (collision.contacts.Length > 4) //À revoir peut être éventuellement faire des classe pour chaque monstre et ajusté la valeur en conséquence du collider du monstre
             base.Jump();
     }
 
