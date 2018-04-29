@@ -75,6 +75,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        print("type : " + this.gameObject.name);
         //Initialization
         this.jumpHeight = 1.5f;
 
@@ -135,7 +136,6 @@ public class Character : MonoBehaviour
         movement = movement.normalized * this.speed * Time.deltaTime;
         this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
     }
-
 
     protected void Move(Vector3 target)
     {

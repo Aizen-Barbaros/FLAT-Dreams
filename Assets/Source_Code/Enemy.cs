@@ -20,8 +20,9 @@ public class Enemy : Character
         {
             if (colliders.Length >= 1)
             {
+                StopCoroutine("ChasePlayer");
                 this.player = colliders[0].GetComponent<Player>();
-                this.ChasePlayer(this.player.transform.position);
+                StartCoroutine("ChasePlayer", this.player.transform.position);
             }
 
             if (base.lastfreeze + base.freezeDuration <= Time.time && resetfreeze)
@@ -32,18 +33,18 @@ public class Enemy : Character
         }
     }
 
-
-    public void ChasePlayer(Vector3 target)
+    IEnumerator ChasePlayer(Vector3 target)
     {
-        if(!source.isPlaying && Time.time-3>=lastBaseSound)    
+        if (!source.isPlaying && Time.time - 3 >= lastBaseSound)
         {
-            base.source.PlayOneShot(BaseSound,0.05f);
+            base.source.PlayOneShot(BaseSound, 0.05f);
             this.lastBaseSound = Time.time;
         }
 
         base.Move(target);
-    }
 
+        yield return null;
+    }
 
     protected override void OnCollisionStay(Collision collision)
     {
