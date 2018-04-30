@@ -8,6 +8,31 @@ public class Player : Character
     private int keyCaught;
     private bool isCaught;
 
+    //Sort vitesse
+    protected bool resetSpeedBoost;
+    protected float lastSpeedBoost;
+    protected float speedBoostDuration;
+    protected float speedBoostCooldown;
+    //Stun
+    protected float lastStun;
+    protected float stunCooldown;
+    protected GameObject stunBall;
+    public GameObject StunBall;
+
+    //Sort Fog
+    protected bool resetFog;
+    protected float lastFog;
+    protected float FogDuration;
+    protected float FogCooldown;
+    protected bool normalFog;
+
+    //Rocket
+    protected float lastRocket;
+    protected float RocketCooldown;
+    protected float RocketHeight;
+    public AudioClip RocketSound;
+
+
 
     public void Start()
     {
@@ -22,13 +47,14 @@ public class Player : Character
         base.dashCooldown = 0;
         base.dashDuration = 0.3f;
 
-        base.FogDuration = 2;
+        this.FogDuration = 2;
 
-        base.speedBoostDuration = 2;
-        base.lastSpeedBoost = Time.time;
-        base.speedBoostCooldown = 0;
+        this.speedBoostDuration = 2;
+        this.lastSpeedBoost = Time.time;
+        this.speedBoostCooldown = 0;
 
-        base.RocketHeight = 60;
+        this.RocketHeight = 60;
+
     }
 
 
@@ -67,8 +93,8 @@ public class Player : Character
             if (Input.GetKeyDown(KeyCode.Space))
                 base.Jump();
             
-            if (Input.GetKeyDown(KeyCode.Alpha1) && base.GetSpeedBoostTimeBeforeNext() == 0)
-                base.SortVitesse();
+            if (Input.GetKeyDown(KeyCode.Alpha1) && this.GetSpeedBoostTimeBeforeNext() == 0)
+                this.SpeedBoost();
 
             if (Input.GetKeyDown(KeyCode.Alpha2) && base.GetDashTimeBeforeNext() == 0)
             {
@@ -76,23 +102,23 @@ public class Player : Character
                 base.Dash();
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha3) && base.GetRocketTimeBeforeNext() == 0)
+            if (Input.GetKeyDown(KeyCode.Alpha3) && this.GetRocketTimeBeforeNext() == 0)
             {
-                GetComponent<AudioSource>().PlayOneShot(base.RocketSound, 0.375f);
-                base.Rockets();
+                GetComponent<AudioSource>().PlayOneShot(this.RocketSound, 0.375f);
+                this.Rockets();
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha4) && base.GetFogTimeBeforeNext() == 0)
-                base.HighSenses();
+            if (Input.GetKeyDown(KeyCode.Alpha4) && this.GetFogTimeBeforeNext() == 0)
+                this.HighSenses();
 
-            if (Input.GetMouseButton(0) && base.GetStunTimeBeforeNext() == 0)
-                base.Stun();
+            if (Input.GetMouseButton(0) && this.GetStunTimeBeforeNext() == 0)
+                this.Stun();
 
             //RESETS
-            if (base.lastSpeedBoost + base.speedBoostDuration <= Time.time && base.resetSpeedBoost)
+            if (this.lastSpeedBoost + this.speedBoostDuration <= Time.time && this.resetSpeedBoost)
             {
                 base.speed = base.normalSpeed;
-                base.resetSpeedBoost = false;
+                this.resetSpeedBoost = false;
             }
 
             if (base.lastDash + base.dashDuration <= Time.time && base.resetDash)
@@ -101,11 +127,11 @@ public class Player : Character
                 base.resetDash = false;
             }
 
-            if (base.lastFog + base.FogDuration <= Time.time && base.resetFog)
+            if (this.lastFog + this.FogDuration <= Time.time && this.resetFog)
             {
-                if (base.normalFog)
+                if (this.normalFog)
                     RenderSettings.fog = true;
-                base.resetFog = false;
+                this.resetFog = false;
             }
         }
     }
@@ -166,5 +192,79 @@ public class Player : Character
     public void SetCaught(bool isCaught)
     {
         this.isCaught = isCaught;
+    }
+
+    protected void SpeedBoost() //Changer nom de méthode? En anglais
+    {
+        //Increase the entity's speed for a short time
+        this.speed *= 2;
+        this.lastSpeedBoost = Time.time;
+        this.speedBoostCooldown = this.speedBoostDuration + 5;
+        this.resetSpeedBoost = true;
+    }
+
+    protected void Stun()
+    {
+        //Create a StunBall which immobilize ennemies on contact 
+
+        //Take the player's position
+        this.playerPosition = GetComponent<Transform>().position; //Remplacer par this.transform.position? au lieu du getComponent? Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
+        //Take the camera's orientation
+        Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
+        //Create the StunBall at the player's position and with the camera's orientation
+        stunBall = Instantiate(StunBall, new Vector3(playerPosition.x, playerPosition.y + 2, playerPosition.z), camOrientation);
+        //Apply mouvement to the StunBall
+        stunBall.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 50, ForceMode.Impulse);
+        this.stunCooldown = 5;
+        this.lastStun = Time.time;
+    }
+
+    protected void HighSenses() //Mettre dans player car mob jamais utiliser ça?
+    {
+        //delete the fog of the world if it exists for a short time
+        this.lastFog = Time.time;
+        this.FogCooldown = 30;
+        this.resetFog = true;
+        if (RenderSettings.fog)
+        {
+            RenderSettings.fog = false;
+            normalFog = true;
+        }
+        else
+            normalFog = false;
+    }
+
+    protected void Rockets() //Mettre dans player car mob jamais utiliser ça?
+    {
+        //Make the player go up very high
+        this.RocketCooldown = 60;
+        this.lastRocket = Time.time;
+        //Mathematic function who give the velocity for a specific jump height
+        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * RocketHeight * -1);
+        //Apply a velocity vertically
+        this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
+
+    }
+
+
+
+    public float GetSpeedBoostTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastSpeedBoost + this.speedBoostCooldown - Time.time);
+    }
+
+    public float GetStunTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastStun + this.stunCooldown - Time.time);
+    }
+
+    public float GetFogTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastFog + this.FogCooldown - Time.time);
+    }
+
+    public float GetRocketTimeBeforeNext()
+    {
+        return GetTimeBeforeNextSpell(this.lastRocket + this.RocketCooldown - Time.time);
     }
 }
