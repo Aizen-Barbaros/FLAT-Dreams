@@ -138,13 +138,12 @@ public class Character : MonoBehaviour
 
     protected void Move(Vector3 target)
     {
-        this.step = this.speed * Time.deltaTime;
-
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
 
         //Follow the player
+        this.step = this.speed * Time.deltaTime;
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
 
         //Animation
