@@ -93,28 +93,27 @@ public class Character : MonoBehaviour
         //this.entityRigidbody = this.GetComponent<Rigidbody>();
     }
 
+    //Call when the present collider enter in another collider
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            this.GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
+        }
+    }
+
     //Call when the present collider stay collid on the same collider
     protected virtual void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
-        {
             this.isGrounded = true;
-            if(this.landing ==true)                                                         //Félix LANDING ?! pas la même chose que isGrounded?
-            {                                                                               //Pas mieux de le mettre dans OncollisionEnter? plus logique?
-                this.GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
-                this.landing = false;
-            }
-        }
     }
 
     //Calle when the present collider leave a collider
     protected virtual void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
-        {
             this.isGrounded = false;
-            this.landing = true;
-        }
     }
 
     protected void Move()
@@ -144,11 +143,12 @@ public class Character : MonoBehaviour
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
-        anim.SetBool("isWalking", true); // Devrait pas être en début de méthode?
 
         //Follow the player
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
-        anim.SetTrigger("isWalking"); // Devrait pas être en début de méthode?
+
+        //Animation
+        anim.SetTrigger("isWalking");
     }
 
 
