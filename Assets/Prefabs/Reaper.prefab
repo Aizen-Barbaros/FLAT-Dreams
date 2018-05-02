@@ -229,3 +229,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   BaseSound: {fileID: 0}
+  numContact: 5

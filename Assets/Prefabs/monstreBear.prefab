@@ -942,6 +942,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   BaseSound: {fileID: 8300000, guid: 3f555cdf9663343499c5698ac9ac08e9, type: 3}
+  numContact: 4
 --- !u!137 &137137121618400742
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
