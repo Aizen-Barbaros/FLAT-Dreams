@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     //Sound
     protected AudioSource source;
     public AudioClip LandingSound;
+    public AudioClip stunSound;
 
     //CamSpeed
     protected float camSpeed;
@@ -21,15 +22,6 @@ public class Character : MonoBehaviour
 
     //Jump
     protected float jumpHeight;
-
-    //Stun
-    public GameObject StunBall;
-
-    //Sort vitesse
-    protected bool resetSpeedBoost;
-    protected float lastSpeedBoost;
-    protected float speedBoostDuration;
-    protected float speedBoostCooldown;
 
     //Dash
     protected bool resetDash;
@@ -42,25 +34,6 @@ public class Character : MonoBehaviour
     protected bool resetfreeze;
     protected float lastfreeze;
     protected float freezeDuration;
-
-    //Stun
-    protected float lastStun;
-    protected float stunCooldown;
-    protected GameObject stunBall;
-    public AudioClip stunSound;
-
-    //Sort Fog
-    protected bool resetFog;
-    protected float lastFog;
-    protected float FogDuration;
-    protected float FogCooldown;
-    protected bool normalFog;
-
-    //Rocket
-    protected float lastRocket;
-    protected float RocketCooldown;
-    protected float RocketHeight;
-    public AudioClip RocketSound;
 
     //Position of the player
     protected Vector3 playerPosition; //Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
@@ -82,7 +55,7 @@ public class Character : MonoBehaviour
         this.dashCooldown = 0;
         this.dashDuration = 0.3f;
 
-        this.stunCooldown = 0;
+       
         this.freezeDuration = 5.0f;
         this.isFrozen = false;
 
@@ -93,28 +66,27 @@ public class Character : MonoBehaviour
         //this.entityRigidbody = this.GetComponent<Rigidbody>();
     }
 
+    //Call when the present collider enter in another collider
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            this.GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
+        }
+    }
+
     //Call when the present collider stay collid on the same collider
     protected virtual void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
-        {
             this.isGrounded = true;
-            if(this.landing ==true)                                                         //Félix LANDING ?! pas la même chose que isGrounded?
-            {                                                                               //Pas mieux de le mettre dans OncollisionEnter? plus logique?
-                this.GetComponent<AudioSource>().PlayOneShot(this.LandingSound, 0.5f);
-                this.landing = false;
-            }
-        }
     }
 
     //Calle when the present collider leave a collider
     protected virtual void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
-        {
             this.isGrounded = false;
-            this.landing = true;
-        }
     }
 
     protected void Move()
@@ -139,16 +111,16 @@ public class Character : MonoBehaviour
 
     protected void Move(Vector3 target)
     {
-        this.step = this.speed * Time.deltaTime;
-
         //Rotation facing toward the player
         target.y = this.transform.position.y;
         this.transform.LookAt(target);
-        anim.SetBool("isWalking", true); // Devrait pas être en début de méthode?
 
         //Follow the player
+        this.step = this.speed * Time.deltaTime;
         this.transform.position = Vector3.MoveTowards(this.transform.position, target, this.step);
-        anim.SetTrigger("isWalking"); // Devrait pas être en début de méthode?
+
+        //Animation
+        anim.SetTrigger("isWalking");
     }
 
 
@@ -163,17 +135,6 @@ public class Character : MonoBehaviour
         }
     }
 
-
-    protected void SortVitesse() //Changer nom de méthode? En anglais
-    {
-        //Increase the entity's speed for a short time
-        this.speed *= 2;
-        this.lastSpeedBoost = Time.time;
-        this.speedBoostCooldown = this.speedBoostDuration + 5;
-        this.resetSpeedBoost = true;
-    }
-
-
     protected void Dash()
     {
         //Increase the entity's speed significantly for a realy short time
@@ -182,53 +143,6 @@ public class Character : MonoBehaviour
         this.dashCooldown = 6;
         this.resetDash = true;
     }
-
-
-    protected void Stun() // de la manière que c'est écrit on ne peut pas la réutiliser pour le monstre vaudrait peut-être mieux la mettre dans Player?
-    {
-        //Create a StunBall which immobilize ennemies on contact 
-
-        //Take the player's position
-        this.playerPosition = GetComponent<Transform>().position; //Remplacer par this.transform.position? au lieu du getComponent? Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
-        //Take the camera's orientation
-        Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
-        //Create the StunBall at the player's position and with the camera's orientation
-        stunBall =Instantiate(StunBall,new Vector3(playerPosition.x, playerPosition.y+2, playerPosition.z),camOrientation);
-        //Apply mouvement to the StunBall
-        stunBall.GetComponent<Rigidbody>().AddRelativeForce(0,0,50,ForceMode.Impulse);
-        this.stunCooldown = 5;
-        this.lastStun = Time.time;
-    }
-
-
-    protected void HighSenses() //Mettre dans player car mob jamais utiliser ça?
-    {
-        //delete the fog of the world if it exists for a short time
-        this.lastFog = Time.time;
-        this.FogCooldown = 30;
-        this.resetFog = true;
-        if (RenderSettings.fog)
-        {
-            RenderSettings.fog = false;
-            normalFog = true;
-        }
-        else
-            normalFog = false;
-    }
-
-
-    protected void Rockets() //Mettre dans player car mob jamais utiliser ça?
-    {
-        //Make the player go up very high
-        this.RocketCooldown = 60;
-        this.lastRocket = Time.time;
-        //Mathematic function who give the velocity for a specific jump height
-        float velocity = Mathf.Sqrt(2 * Physics.gravity.y * RocketHeight * -1);
-        //Apply a velocity vertically
-        this.GetComponent<Rigidbody>().velocity = new Vector3(0, velocity, 0);
-
-    }
-
 
     public void Stunned()
     {
@@ -274,32 +188,8 @@ public class Character : MonoBehaviour
     }
 
 
-    public float GetSpeedBoostTimeBeforeNext()
-    {
-        return GetTimeBeforeNextSpell(this.lastSpeedBoost + this.speedBoostCooldown - Time.time);
-    }
-
-
     public float GetDashTimeBeforeNext()
     {
         return GetTimeBeforeNextSpell(this.lastDash + this.dashCooldown - Time.time);
-    }
-
-
-    public float GetRocketTimeBeforeNext()
-    {
-        return GetTimeBeforeNextSpell(this.lastRocket + this.RocketCooldown - Time.time);
-    }
-
-
-    public float GetFogTimeBeforeNext()
-    {
-        return GetTimeBeforeNextSpell(this.lastFog + this.FogCooldown - Time.time);
-    }
-
-
-    public float GetStunTimeBeforeNext()
-    {
-        return GetTimeBeforeNextSpell(this.lastStun + this.stunCooldown - Time.time);
     }
 }
