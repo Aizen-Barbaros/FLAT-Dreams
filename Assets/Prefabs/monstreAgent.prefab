@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 82511369857765308}
   m_Layer: 0
   m_Name: monstreAgent
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -919,7 +919,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a920c481548e2eb4b9f6b8b0d5c30115, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -940,7 +940,7 @@ MonoBehaviour:
   dashSound: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   BaseSound: {fileID: 0}
 --- !u!137 &137367904093832266
 SkinnedMeshRenderer:
