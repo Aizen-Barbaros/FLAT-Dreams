@@ -223,11 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LandingSound: {fileID: 0}
-  StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
-  dashSound: {fileID: 0}
   stunSound: {fileID: 8300000, guid: 7a74d3322574b4546ab8c82c0b6f9bbc, type: 3}
-  RocketSound: {fileID: 0}
+  dashSound: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  BaseSound: {fileID: 0}
+  BaseSound: {fileID: 8300000, guid: d8c5327ca0a95f14b9277f31d41d412a, type: 3}
