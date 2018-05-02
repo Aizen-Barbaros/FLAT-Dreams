@@ -182,6 +182,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1278135973492236, guid: 09414940ec95aba41bfd92e91bd4a567,
         type: 2}
+    - target: {fileID: 114775334342763440, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: yeti
+      value: 
+      objectReference: {fileID: 1033294324246334, guid: 79a8f801b3b3eb144b626f06ede5e62b,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb358728affed68448dd29652a585b91, type: 2}
   m_IsPrefabParent: 0

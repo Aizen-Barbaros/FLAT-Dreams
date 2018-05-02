@@ -208,7 +208,7 @@ public class Player : Character
         //Create a StunBall which immobilize ennemies on contact 
 
         //Take the player's position
-        this.playerPosition = GetComponent<Transform>().position; //Remplacer par this.transform.position? au lieu du getComponent? Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
+        this.playerPosition = GetComponent<Transform>().position;
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
