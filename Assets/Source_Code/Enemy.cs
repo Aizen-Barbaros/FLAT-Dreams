@@ -15,6 +15,8 @@ public class Enemy : Character
     public AudioClip BaseSound;
     private float lastBaseSound;
 
+    //Number of contatc on the map for the present Enemy
+    public int numContact;
 
     //Call each 0,002 seconds
     protected void FixedUpdate()
@@ -46,7 +48,7 @@ public class Enemy : Character
     protected override void OnCollisionStay(Collision collision)
     {
         base.OnCollisionStay(collision);
-        if (collision.contacts.Length > 4) //À revoir peut être éventuellement faire des classe pour chaque monstre et ajusté la valeur en conséquence du collider du monstre
+        if (collision.contacts.Length > numContact) //À revoir peut être éventuellement faire des classe pour chaque monstre et ajusté la valeur en conséquence du collider du monstre
             base.Jump();
     }
 
