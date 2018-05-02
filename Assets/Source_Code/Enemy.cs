@@ -66,7 +66,7 @@ public class Enemy : Character
         }
         if (!source.isPlaying && Time.time - 3 >= lastBaseSound)
         {
-            base.source.PlayOneShot(BaseSound, 0.05f);
+            base.source.PlayOneShot(BaseSound, 0.13f);
         }
 
         base.Move(target);
