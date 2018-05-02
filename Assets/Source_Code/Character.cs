@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    //Rigidbody
-     //private Rigidbody entityRigidbody;
-
     //Sound
     protected AudioSource source;
     public AudioClip LandingSound;
@@ -39,7 +36,6 @@ public class Character : MonoBehaviour
     protected Vector3 playerPosition; //Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
 
     protected bool isGrounded;
-    protected bool landing;
     protected bool isFrozen;
     private float step;
 
@@ -48,7 +44,6 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        print("type : " + this.gameObject.name);
         //Initialization
         this.jumpHeight = 1.5f;
 
@@ -62,8 +57,6 @@ public class Character : MonoBehaviour
         this.source = GetComponent<AudioSource>();
 
         anim = GetComponent<Animator>();
-
-        //this.entityRigidbody = this.GetComponent<Rigidbody>();
     }
 
     //Call when the present collider enter in another collider
