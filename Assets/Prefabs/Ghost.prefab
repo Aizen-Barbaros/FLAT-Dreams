@@ -60,7 +60,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 6c78b0ae3ed9f1d4d89f7e03e4ad2d7b, type: 2}
+  - {fileID: 2100000, guid: 2d30ace82366d5747ac61956237d9c3d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,7 +86,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1651736398124110}
-  m_Mesh: {fileID: 4300000, guid: 9fd2655753f0bbd41a415cef25940002, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 59ae8580671e47f4e890a75c2b545139, type: 3}
 --- !u!54 &54382488733260336
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -223,11 +223,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LandingSound: {fileID: 0}
-  StunBall: {fileID: 1578900656030778, guid: b3cf7d5e69f06df46851499a818508b3, type: 2}
+  stunSound: {fileID: 8300000, guid: 1d7f8dfb48cbdb949a504edc9916898a, type: 3}
   dashSound: {fileID: 0}
-  stunSound: {fileID: 8300000, guid: 7a74d3322574b4546ab8c82c0b6f9bbc, type: 3}
-  RocketSound: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  BaseSound: {fileID: 0}
+  BaseSound: {fileID: 8300000, guid: d8c5327ca0a95f14b9277f31d41d412a, type: 3}

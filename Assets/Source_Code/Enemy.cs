@@ -60,10 +60,13 @@ public class Enemy : Character
     //Coroutine who play the Chassing sound and call the function to move the Enemy
     IEnumerator ChasePlayer(Vector3 target)
     {
+        if (source.isPlaying)
+        {
+            this.lastBaseSound = Time.time;
+        }
         if (!source.isPlaying && Time.time - 3 >= lastBaseSound)
         {
-            base.source.PlayOneShot(BaseSound, 0.05f);
-            this.lastBaseSound = Time.time;
+            base.source.PlayOneShot(BaseSound, 0.13f);
         }
 
         base.Move(target);
