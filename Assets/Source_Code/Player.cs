@@ -13,6 +13,7 @@ public class Player : Character
     protected float lastSpeedBoost;
     protected float speedBoostDuration;
     protected float speedBoostCooldown;
+
     //Stun
     protected float lastStun;
     protected float stunCooldown;
@@ -31,8 +32,6 @@ public class Player : Character
     protected float RocketCooldown;
     protected float RocketHeight;
     public AudioClip RocketSound;
-
-
 
     public void Start()
     {
@@ -57,8 +56,7 @@ public class Player : Character
 
     }
 
-
-    public void FixedUpdate()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -85,14 +83,14 @@ public class Player : Character
             }
         }
 
-        if (!base.isFrozen) //Peut être vaut-il mieux mettre sans dans Update pour éviter d'Avoir l'impression que le joueur ne réponde pas au commande???
+        if (!base.isFrozen)
         {
             // ACTIVATIONS
             base.Move();
 
             if (Input.GetKeyDown(KeyCode.Space))
                 base.Jump();
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha1) && this.GetSpeedBoostTimeBeforeNext() == 0)
                 this.SpeedBoost();
 
@@ -135,7 +133,6 @@ public class Player : Character
             }
         }
     }
-
 
     protected override void OnCollisionEnter(Collision collision)
     {
