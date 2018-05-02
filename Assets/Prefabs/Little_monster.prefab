@@ -228,4 +228,4 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  BaseSound: {fileID: 0}
+  BaseSound: {fileID: 8300000, guid: f4a7e56dd68001d45afee1105d1b739f, type: 3}
