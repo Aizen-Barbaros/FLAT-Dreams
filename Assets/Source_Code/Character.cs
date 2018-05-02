@@ -84,6 +84,8 @@ public class Character : MonoBehaviour
 
     protected void Move()
     {
+        Rigidbody rigidbody = this.GetComponent<Rigidbody>();
+
         //Getting input
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -91,15 +93,15 @@ public class Character : MonoBehaviour
 
         //Applied rotation on the Rigidbody
         Quaternion rotation = Quaternion.Euler(0, h, 0);
-        this.GetComponent<Rigidbody>().MoveRotation(this.GetComponent<Rigidbody>().rotation * rotation);
+        rigidbody.MoveRotation(rigidbody.rotation * rotation);
 
         if (this.isGrounded)
-            this.GetComponent<Rigidbody>().velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y, 0f);
+            rigidbody.velocity = new Vector3(0f, this.GetComponent<Rigidbody>().velocity.y, 0f);
 
         //Le -vertical est utiliser à cause de la position de la caméra dans le prefab, peut-être devrions nous la changer?
-        Vector3 movement = (this.GetComponent<Rigidbody>().rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
+        Vector3 movement = (rigidbody.rotation * rotation) * new Vector3(-vertical, 0f, horizontal);
         movement = movement.normalized * this.speed * Time.deltaTime;
-        this.GetComponent<Rigidbody>().MovePosition(this.transform.position + movement);
+        rigidbody.MovePosition(this.transform.position + movement);
     }
 
     protected void Move(Vector3 target)
