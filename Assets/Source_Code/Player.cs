@@ -13,6 +13,7 @@ public class Player : Character
     protected float lastSpeedBoost;
     protected float speedBoostDuration;
     protected float speedBoostCooldown;
+
     //Stun
     protected float lastStun;
     protected float stunCooldown;
@@ -31,8 +32,6 @@ public class Player : Character
     protected float RocketCooldown;
     protected float RocketHeight;
     public AudioClip RocketSound;
-
-
 
     public void Start()
     {
@@ -57,8 +56,7 @@ public class Player : Character
 
     }
 
-
-    public void FixedUpdate()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -85,14 +83,14 @@ public class Player : Character
             }
         }
 
-        if (!base.isFrozen) //Peut être vaut-il mieux mettre sans dans Update pour éviter d'Avoir l'impression que le joueur ne réponde pas au commande???
+        if (!base.isFrozen)
         {
             // ACTIVATIONS
             base.Move();
 
             if (Input.GetKeyDown(KeyCode.Space))
                 base.Jump();
-            
+
             if (Input.GetKeyDown(KeyCode.Alpha1) && this.GetSpeedBoostTimeBeforeNext() == 0)
                 this.SpeedBoost();
 
@@ -136,7 +134,6 @@ public class Player : Character
         }
     }
 
-
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
@@ -158,42 +155,6 @@ public class Player : Character
             this.isCaught = true;
     }
 
-
-    public int GetCurrentLives()
-    {
-        return this.currentLives;
-    }
-
-
-    public void SetCurrentLives(int currentLives)
-    {
-        this.currentLives = currentLives;
-    }
-
-
-    public int GetKeyCaught()
-    {
-        return this.keyCaught;
-    }
-
-
-    public void SetKeyCaught(int keyCaught)
-    {
-        this.keyCaught = keyCaught;
-    }
-
-
-    public bool GetCaught()
-    {
-        return this.isCaught;
-    }
-
-
-    public void SetCaught(bool isCaught)
-    {
-        this.isCaught = isCaught;
-    }
-
     protected void SpeedBoost() //Changer nom de méthode? En anglais
     {
         //Increase the entity's speed for a short time
@@ -208,7 +169,7 @@ public class Player : Character
         //Create a StunBall which immobilize ennemies on contact 
 
         //Take the player's position
-        this.playerPosition = GetComponent<Transform>().position; //Remplacer par this.transform.position? au lieu du getComponent? Définir playerPosition à l'intérieur de la méthode pour qu'il se détruise quand elle est fini?
+        this.playerPosition = GetComponent<Transform>().position;
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
@@ -246,7 +207,35 @@ public class Player : Character
 
     }
 
+    public int GetCurrentLives()
+    {
+        return this.currentLives;
+    }
 
+    public void SetCurrentLives(int currentLives)
+    {
+        this.currentLives = currentLives;
+    }
+
+    public int GetKeyCaught()
+    {
+        return this.keyCaught;
+    }
+
+    public void SetKeyCaught(int keyCaught)
+    {
+        this.keyCaught = keyCaught;
+    }
+
+    public bool GetCaught()
+    {
+        return this.isCaught;
+    }
+
+    public void SetCaught(bool isCaught)
+    {
+        this.isCaught = isCaught;
+    }
 
     public float GetSpeedBoostTimeBeforeNext()
     {

@@ -3106,6 +3106,7 @@ AudioSource:
     - serializedVersion: 2
       time: 0
       value: 1
+<<<<<<< HEAD
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3546,3 +3547,49 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2115201659}
+=======
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639624113279064, guid: cb358728affed68448dd29652a585b91, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775334342763440, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: gnome
+      value: 
+      objectReference: {fileID: 1511149506949294, guid: 1b8316782befd4040b3e90714ed50ce5,
+        type: 2}
+    - target: {fileID: 114685098322708588, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: StunBall
+      value: 
+      objectReference: {fileID: 1103336295943378, guid: d7d13d6e57c2624408aaa9e8b954ee1d,
+        type: 2}
+    - target: {fileID: 4605597980287940, guid: cb358728affed68448dd29652a585b91, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605597980287940, guid: cb358728affed68448dd29652a585b91, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605597980287940, guid: cb358728affed68448dd29652a585b91, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775334342763440, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: zombie
+      value: 
+      objectReference: {fileID: 1278135973492236, guid: 09414940ec95aba41bfd92e91bd4a567,
+        type: 2}
+    - target: {fileID: 114775334342763440, guid: cb358728affed68448dd29652a585b91,
+        type: 2}
+      propertyPath: yeti
+      value: 
+      objectReference: {fileID: 1615246642776850, guid: 79a8f801b3b3eb144b626f06ede5e62b,
+        type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cb358728affed68448dd29652a585b91, type: 2}
+  m_IsPrefabParent: 0
+>>>>>>> 4ded02ad1b3ce7af52f0eb5b20397d434b053d2d
