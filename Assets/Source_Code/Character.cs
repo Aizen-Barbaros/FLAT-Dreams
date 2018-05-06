@@ -44,11 +44,6 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD
-        //print("type : " + this.gameObject.name);
-=======
->>>>>>> 4ded02ad1b3ce7af52f0eb5b20397d434b053d2d
-        //Initialization
         this.jumpHeight = 1.5f;
 
         this.dashCooldown = 0;
