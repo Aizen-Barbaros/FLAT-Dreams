@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -9,6 +10,9 @@ public class World : MonoBehaviour
 {
     // CANVAS
     public Canvas escapeMenu;
+
+    // GO
+    public GameObject loading;
 
     // CHARACTER
     public GameObject player;
@@ -106,6 +110,7 @@ public class World : MonoBehaviour
     {
         Cursor.visible = false;
         escapeMenu.enabled = false;
+        loading.SetActive(false);
 
         try
         {
@@ -146,7 +151,6 @@ public class World : MonoBehaviour
             GameObject.Find("Rocket").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetRocketTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetRocketTimeBeforeNext()).ToString();
             GameObject.Find("Fog").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetFogTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetFogTimeBeforeNext()).ToString();
             GameObject.Find("Stun").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetStunTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetStunTimeBeforeNext()).ToString();
-            
 
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
             {
@@ -170,31 +174,48 @@ public class World : MonoBehaviour
                 escapeMenu.enabled = false;
             }
 
-            if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
+            if (loading.activeSelf)
             {
-                player.GetComponentInChildren<Player>().SetKeyCaught(0);
-                this.level++;
-                this.normalSpeed += 0.75f;
+                if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
+                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
 
-                this.DeleteWorld();
-                this.GenerateWorld();
+                if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
+                {
+                    Debug.Log("1");
+                    player.GetComponentInChildren<Player>().SetKeyCaught(0);
+                    this.level++;
+                    this.normalSpeed += 0.75f;
+
+                    this.DeleteWorld();
+                    this.GenerateWorld();
+
+                    loading.SetActive(false);
+                }
+
+                else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
+                {
+                    Debug.Log("2");
+                    this.DeleteWorld();
+                    File.Delete(this.fileName);
+                    SceneManager.LoadScene("Menu");
+                }
+
+                else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
+                {
+                    Debug.Log("3");
+                    player.GetComponentInChildren<Player>().SetCaught(false);
+                    player.GetComponentInChildren<Player>().SetKeyCaught(0);
+                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
+
+                    this.DeleteWorld();
+                    this.GenerateWorld();
+                    
+                    loading.SetActive(false);
+                }
             }
 
-            else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
-            {
-                this.DeleteWorld();
-                File.Delete(this.fileName);
-            }
-
-            else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
-            {
-                player.GetComponentInChildren<Player>().SetCaught(false);
-                player.GetComponentInChildren<Player>().SetKeyCaught(0);
-                player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
-
-                this.DeleteWorld();
-                this.GenerateWorld();
-            }
+            else if (!loading.activeSelf && (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys || player.GetComponentInChildren<Player>().GetCurrentLives() == 0 || player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100))
+                loading.SetActive(true);
         }
     }
 

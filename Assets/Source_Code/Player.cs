@@ -33,6 +33,7 @@ public class Player : Character
     protected float RocketHeight;
     public AudioClip RocketSound;
 
+
     public void Start()
     {
         this.currentLives = 3;
@@ -53,7 +54,6 @@ public class Player : Character
         this.speedBoostCooldown = 0;
 
         this.RocketHeight = 60;
-
     }
 
     public void Update()
