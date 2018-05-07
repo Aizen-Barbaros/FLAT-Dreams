@@ -22,7 +22,7 @@ public class Utilities : MonoBehaviour
                 writer.WriteLine(fileName);
             }
 
-            this.ChangeScene("World");
+            this.ChangeSceneAsync("World");
         }
 
         catch (System.Exception exception)
@@ -61,6 +61,12 @@ public class Utilities : MonoBehaviour
     public void ChangeScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+
+
+    public void ChangeSceneAsync(string sceneName)
+    {
+        SceneManager.LoadSceneAsync(sceneName);
     }
 
 

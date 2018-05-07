@@ -44,7 +44,6 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        //Initialization
         this.jumpHeight = 1.5f;
 
         this.dashCooldown = 0;

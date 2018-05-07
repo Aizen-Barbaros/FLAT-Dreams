@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class World : MonoBehaviour
 {
     // CANVAS
-    public Canvas canvas;
+    public Canvas escapeMenu;
+
+    // GO
+    public GameObject loading;
 
     // CHARACTER
     public GameObject player;
@@ -104,7 +109,8 @@ public class World : MonoBehaviour
     public void Start()
     {
         Cursor.visible = false;
-        canvas.enabled = false;
+        escapeMenu.enabled = false;
+        loading.SetActive(false);
 
         try
         {
@@ -117,28 +123,21 @@ public class World : MonoBehaviour
             Debug.Log(exception.ToString());
         }
 
+        this.level = 1;
+        this.normalSpeed = 5.0f;
+        this.playerIsFrozen = false;
 
         if (File.Exists(this.fileName))
-        {
-            this.level = 1;
-            this.normalSpeed = 5.0f;
-            this.playerIsFrozen = false;
-
             this.GenerateSavedWorld(this.fileName);
-        }
 
         else
-        {
-            this.level = 1;
-            this.normalSpeed = 5.0f;
-            this.playerIsFrozen = false;
-
             this.GenerateWorld();
-        }
+
+        player.SetActive(true);
     }
 
 
-    public void FixedUpdate()
+    public void Update()
     {
         if (player.activeSelf == true)
         {
@@ -153,7 +152,6 @@ public class World : MonoBehaviour
             GameObject.Find("Fog").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetFogTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetFogTimeBeforeNext()).ToString();
             GameObject.Find("Stun").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetStunTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetStunTimeBeforeNext()).ToString();
 
-
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
             {
                 Cursor.visible = true;
@@ -162,7 +160,7 @@ public class World : MonoBehaviour
                 for (int i = 0; i < this.numberOfMonsters; i++)
                     this.monsters[i].GetComponentInChildren<Enemy>().SetIsFrozen(true);
 
-                canvas.enabled = true;
+                escapeMenu.enabled = true;
             }
 
             else if (player.GetComponentInChildren<Player>().GetIsFrozen() == false && this.playerIsFrozen == true)
@@ -173,32 +171,51 @@ public class World : MonoBehaviour
                 for (int i = 0; i < this.numberOfMonsters; i++)
                     this.monsters[i].GetComponentInChildren<Enemy>().SetIsFrozen(false);
 
-                canvas.enabled = false;
+                escapeMenu.enabled = false;
             }
 
-            if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
+            if (loading.activeSelf)
             {
-                player.GetComponentInChildren<Player>().SetKeyCaught(0);
-                this.level++;
-                this.normalSpeed += 0.75f;
-                this.DeleteWorld();
-                this.GenerateWorld();
+                if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
+                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
+
+                if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
+                {
+                    Debug.Log("1");
+                    player.GetComponentInChildren<Player>().SetKeyCaught(0);
+                    this.level++;
+                    this.normalSpeed += 0.75f;
+
+                    this.DeleteWorld();
+                    this.GenerateWorld();
+
+                    loading.SetActive(false);
+                }
+
+                else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
+                {
+                    Debug.Log("2");
+                    this.DeleteWorld();
+                    File.Delete(this.fileName);
+                    SceneManager.LoadScene("Menu");
+                }
+
+                else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
+                {
+                    Debug.Log("3");
+                    player.GetComponentInChildren<Player>().SetCaught(false);
+                    player.GetComponentInChildren<Player>().SetKeyCaught(0);
+                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
+
+                    this.DeleteWorld();
+                    this.GenerateWorld();
+                    
+                    loading.SetActive(false);
+                }
             }
 
-            else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
-            {
-                this.DeleteWorld();
-                File.Delete(this.fileName);
-            }
-
-            else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
-            {
-                player.GetComponentInChildren<Player>().SetCaught(false);
-                player.GetComponentInChildren<Player>().SetKeyCaught(0);
-                player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
-                this.DeleteWorld();
-                this.GenerateWorld();
-            }
+            else if (!loading.activeSelf && (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys || player.GetComponentInChildren<Player>().GetCurrentLives() == 0 || player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100))
+                loading.SetActive(true);
         }
     }
 
@@ -207,7 +224,6 @@ public class World : MonoBehaviour
     {
         // CHUNKS
         this.chunks = new Chunk[mapSize / chunkSize, mapSize / chunkSize];
-
 
         this.GenerateWorldValues(Random.Range(0, 10));
 
@@ -362,6 +378,7 @@ public class World : MonoBehaviour
                 for (int i = 0; i < this.numberOfMonsters; i++)
                     this.monsters[i].GetComponentInChildren<Enemy>().SetNormalSpeed(this.normalSpeed + (this.level - 1) * 0.75f);
 
+                // PLAYER
                 player.SetActive(true);
             }
         }
@@ -438,6 +455,7 @@ public class World : MonoBehaviour
 
     public void DeleteWorld()
     {
+        // PLAYER
         player.SetActive(false);
 
         for (int i = 0; i < this.numberOfKeys; i++)

@@ -33,6 +33,7 @@ public class Player : Character
     protected float RocketHeight;
     public AudioClip RocketSound;
 
+
     public void Start()
     {
         this.currentLives = 3;
@@ -53,7 +54,6 @@ public class Player : Character
         this.speedBoostCooldown = 0;
 
         this.RocketHeight = 60;
-
     }
 
     public void Update()
@@ -155,42 +155,6 @@ public class Player : Character
             this.isCaught = true;
     }
 
-
-    public int GetCurrentLives()
-    {
-        return this.currentLives;
-    }
-
-
-    public void SetCurrentLives(int currentLives)
-    {
-        this.currentLives = currentLives;
-    }
-
-
-    public int GetKeyCaught()
-    {
-        return this.keyCaught;
-    }
-
-
-    public void SetKeyCaught(int keyCaught)
-    {
-        this.keyCaught = keyCaught;
-    }
-
-
-    public bool GetCaught()
-    {
-        return this.isCaught;
-    }
-
-
-    public void SetCaught(bool isCaught)
-    {
-        this.isCaught = isCaught;
-    }
-
     protected void SpeedBoost() //Changer nom de méthode? En anglais
     {
         //Increase the entity's speed for a short time
@@ -209,7 +173,7 @@ public class Player : Character
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
-        stunBall = Instantiate(StunBall, new Vector3(playerPosition.x, playerPosition.y +2, playerPosition.z), camOrientation);
+        stunBall = Instantiate(StunBall, new Vector3(playerPosition.x, playerPosition.y + 2, playerPosition.z), camOrientation);
         //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 50, ForceMode.Impulse);
         this.stunCooldown = 5;
@@ -243,7 +207,35 @@ public class Player : Character
 
     }
 
+    public int GetCurrentLives()
+    {
+        return this.currentLives;
+    }
 
+    public void SetCurrentLives(int currentLives)
+    {
+        this.currentLives = currentLives;
+    }
+
+    public int GetKeyCaught()
+    {
+        return this.keyCaught;
+    }
+
+    public void SetKeyCaught(int keyCaught)
+    {
+        this.keyCaught = keyCaught;
+    }
+
+    public bool GetCaught()
+    {
+        return this.isCaught;
+    }
+
+    public void SetCaught(bool isCaught)
+    {
+        this.isCaught = isCaught;
+    }
 
     public float GetSpeedBoostTimeBeforeNext()
     {

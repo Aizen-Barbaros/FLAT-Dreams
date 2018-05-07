@@ -229,3 +229,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   BaseSound: {fileID: 8300000, guid: d8c5327ca0a95f14b9277f31d41d412a, type: 3}
+  numContact: 5

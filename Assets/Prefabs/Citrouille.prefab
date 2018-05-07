@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114723013397757692}
   - component: {fileID: 82879881494564978}
   m_Layer: 0
-  m_Name: citrouille
+  m_Name: Citrouille
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,3 +211,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   BaseSound: {fileID: 0}
+  numContact: 2
