@@ -173,7 +173,7 @@ public class Player : Character
         //Take the camera's orientation
         Quaternion camOrientation = GetComponentInChildren<Camera>().transform.rotation;
         //Create the StunBall at the player's position and with the camera's orientation
-        stunBall = Instantiate(StunBall, new Vector3(playerPosition.x, playerPosition.y + 1.5f, playerPosition.z), camOrientation);
+        stunBall = Instantiate(StunBall, new Vector3(playerPosition.x, playerPosition.y + 1.4f, playerPosition.z), camOrientation);
         //Apply mouvement to the StunBall
         stunBall.GetComponent<Rigidbody>().AddRelativeForce(0, 0, 50, ForceMode.Impulse);
         this.stunCooldown = 5;
