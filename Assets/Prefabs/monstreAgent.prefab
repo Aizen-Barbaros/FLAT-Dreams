@@ -498,7 +498,7 @@ Transform:
   m_GameObject: {fileID: 1891018715153790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4433799975731644}
   - {fileID: 4662365942368858}
@@ -821,12 +821,12 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1891018715153790}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5b717ae23ad4c494480e23b023fa56d8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.4, y: 1.1, z: 0.4}
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!82 &82511369857765308
 AudioSource:
   m_ObjectHideFlags: 1
@@ -942,7 +942,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   BaseSound: {fileID: 0}
-  numContact: 4
+  numContact: 5
 --- !u!137 &137367904093832266
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
