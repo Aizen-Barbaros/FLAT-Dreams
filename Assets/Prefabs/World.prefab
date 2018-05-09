@@ -2016,7 +2016,7 @@ MonoBehaviour:
   littleMonster: {fileID: 1101169839716826, guid: dffa351f86c070c4cb0e3500201205e5,
     type: 2}
   snowMan: {fileID: 1871271894131468, guid: 6018f6e69ccb4b5479b888e9a24633c6, type: 2}
-  reaper: {fileID: 1399951583453210, guid: 9bf1c7fbb2eeabe448ae1b47cf1894ae, type: 2}
+  reaper: {fileID: 1659266874282940, guid: 9bf1c7fbb2eeabe448ae1b47cf1894ae, type: 2}
   bear: {fileID: 1925261090480116, guid: 10da26a487ca13442a179596af8a35c3, type: 2}
   ghost: {fileID: 1651736398124110, guid: be6265085403f2d40acc419b19a4cd8d, type: 2}
   gnome: {fileID: 1511149506949294, guid: 1b8316782befd4040b3e90714ed50ce5, type: 2}

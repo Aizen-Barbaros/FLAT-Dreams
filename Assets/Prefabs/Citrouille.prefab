@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82879881494564978}
   m_Layer: 0
   m_Name: Citrouille
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1615246642776850}
-  m_Mesh: {fileID: 4300000, guid: 436adcd5c8ef6e94bb6f57a039d7aa46, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 5a550c6a090905c4593582bd3bc3c80e, type: 3}
 --- !u!54 &54411389036277812
 Rigidbody:
   m_ObjectHideFlags: 1
