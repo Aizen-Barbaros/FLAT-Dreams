@@ -10,10 +10,16 @@ ModelImporter:
     400000: monstreReaper
     400002: //RootNode
     2100000: palette
+    2100002: monstreReaperMat
     2300000: monstreReaper
     3300000: monstreReaper
     4300000: monstreReaper
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: monstreReaperMat
+    second: {fileID: 2100000, guid: ad35edf8ce91a3345acccdb4533e5633, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
