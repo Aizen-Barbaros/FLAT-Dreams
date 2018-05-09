@@ -8,6 +8,7 @@ public class Menu : MonoBehaviour
 {
 	void Start ()
     {
+        Cursor.visible = true;
         GameObject.Find("SaveMenu").SetActive(true);
 
         GameObject.Find("World1").GetComponent<Text>().text = "World 1 - " + Utilities.FindWorldLevel("World1.txt").ToString();

@@ -821,7 +821,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925261090480116}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5b717ae23ad4c494480e23b023fa56d8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -942,7 +942,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   BaseSound: {fileID: 8300000, guid: 3f555cdf9663343499c5698ac9ac08e9, type: 3}
-  numContact: 4
+  numContact: 6
 --- !u!137 &137137121618400742
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
