@@ -93,79 +93,9 @@ public class Cube
         Vector2 uvTopRight;
 
         // TEXTURES' INDEX
-        int topTopIndex;
-        int topSideIndex;
-        int underSideIndex;
-
-        if (World.worldType == World.WorldTypes.NORMAL)
-        {
-            topTopIndex = 0;
-            topSideIndex = 1;
-            underSideIndex = 2;
-        }
-
-        else if (World.worldType == World.WorldTypes.SNOWY)
-        {
-            topTopIndex = 3;
-            topSideIndex = 4;
-            underSideIndex = 5;
-        }
-
-        else if (World.worldType == World.WorldTypes.HELL)
-        {
-            topTopIndex = 6;
-            topSideIndex = 7;
-            underSideIndex = 8;
-        }
-
-        else if(World.worldType == World.WorldTypes.DREAMY)
-        {
-            topTopIndex = 9;
-            topSideIndex = 10;
-            underSideIndex = 11;
-        }
-
-        else if (World.worldType == World.WorldTypes.METAL)
-        {
-            topTopIndex = 12;
-            topSideIndex = 13;
-            underSideIndex = 14;
-        }
-
-        else if (World.worldType == World.WorldTypes.CHEESE)
-        {
-            topTopIndex = 15;
-            topSideIndex = 16;
-            underSideIndex = 17;
-        }
-
-        else if (World.worldType == World.WorldTypes.AUTUMN)
-        {
-            topTopIndex = 18;
-            topSideIndex = 19;
-            underSideIndex = 20;
-        }
-
-        else if (World.worldType == World.WorldTypes.ROTTING)
-        {
-            topTopIndex = 21;
-            topSideIndex = 22;
-            underSideIndex = 23;
-        }
-
-        else if (World.worldType == World.WorldTypes.TROPICAL)
-        {
-            topTopIndex = 24;
-            topSideIndex = 25;
-            underSideIndex = 26;
-        }
-
-        else
-        {
-            topTopIndex = 27;
-            topSideIndex = 28;
-            underSideIndex = 29;
-        }
+        int topTopIndex = 3 * (int)World.worldType;
+        int topSideIndex = topTopIndex + 1;
+        int underSideIndex = topTopIndex + 2;
 
         // SETTING TEXTURES
         if (this.isOnTheSurface && face == CubeSides.TOP)
