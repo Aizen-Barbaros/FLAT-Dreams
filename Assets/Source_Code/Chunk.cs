@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// A chunk is a set of cubes that are combined togethers to create a single entity
 public class Chunk
 {
-    private GameObject chunk;
-    private Material textureAtlas;
+    private GameObject chunk;           // The actual game object that will reprenset the chunk in the game
+    private Material textureAtlas;      // The texture atlas used on this chunk
 
 
     public Chunk(Vector3 position, Material textureAtlas)
     {
         this.chunk = new GameObject((int)position.x * World.chunkSize + "_" + (int)position.y * World.chunkSize + "_" + (int)position.z * World.chunkSize);
         this.chunk.transform.position = position * World.chunkSize;
-        this.chunk.tag = "Ground";
+        this.chunk.tag = "Ground";              // Put a tag Ground so that the player can actually only jump if he touches the ground
         this.textureAtlas = textureAtlas;
 
-        this.CreateChunk();
-        this.CombineCubes();
+        this.CreateChunk();         // Creates the chunk
+        this.CombineCubes();        // Combines all the chunk's cubes to create a single entity
 
-        MeshCollider meshCollider = this.chunk.gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
-        meshCollider.sharedMesh = this.chunk.transform.GetComponent<MeshFilter>().mesh;
+        MeshCollider meshCollider = this.chunk.gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;       // Put a mesh collider on it
+        meshCollider.sharedMesh = this.chunk.transform.GetComponent<MeshFilter>().mesh;                             // Apply a mesh filter on it
     }
 
 
+    // Create all the needed cubes to properly get this chunk
     public void CreateChunk()
     {
         for (int x = 0; x < World.chunkSize; x++)
@@ -33,7 +34,7 @@ public class Chunk
                 int yDifferenceWithNeighbours = 0;
                 int mapX = (int)this.chunk.transform.position.x + x;
                 int mapZ = (int)this.chunk.transform.position.z + z;
-                
+
                 // x neighbours check
                 for (int i = -1; i <= 1; i++)
                 {
@@ -53,7 +54,8 @@ public class Chunk
                             yDifferenceWithNeighbours = World.surfaceHeights[mapX, mapZ] - World.surfaceHeights[mapX, mapZ + i];
                     }
                 }
-                
+
+                // This indicates and creates the right number of cube that have to be created under each top cubes, so that there are no holes on the terrain
                 if (yDifferenceWithNeighbours > 1)
                 {
                     for (int i = -(--yDifferenceWithNeighbours); i < 0; i++)
@@ -62,13 +64,16 @@ public class Chunk
                         underCube.DisplayCube();
                     }
                 }
-                
+
+                // Creates the top cube
                 Cube cube = new Cube(this.chunk, new Vector3(x, World.surfaceHeights[mapX, mapZ], z), this.textureAtlas, true);
                 cube.DisplayCube();
             }
         }
     }
 
+
+    // This function is used to destroy all the game objects that are used to display a chunk
     public void DeleteChunk()
     {
         MonoBehaviour.Destroy(this.chunk.GetComponent<MeshCollider>());
@@ -78,9 +83,11 @@ public class Chunk
     }
 
 
+    // This function uses all the cubes mesh filters, and combine them into a single one, so that there will be less game object on the map
+    // So in fact, the cubes are just put together and then become a whole
     public void CombineCubes()
     {
-        MeshFilter[] childrenMeshes = this.chunk.GetComponentsInChildren<MeshFilter>();
+        MeshFilter[] childrenMeshes = this.chunk.GetComponentsInChildren<MeshFilter>();     // Get all the chunk's cubes' faces
         CombineInstance[] combine = new CombineInstance[childrenMeshes.Length];
 
         for (int i = 0; i < childrenMeshes.Length; i++)
@@ -89,7 +96,7 @@ public class Chunk
             combine[i].transform = childrenMeshes[i].transform.localToWorldMatrix;
         }
 
-        MeshFilter parentMesh = (MeshFilter)this.chunk.gameObject.AddComponent(typeof(MeshFilter));
+        MeshFilter parentMesh = (MeshFilter)this.chunk.gameObject.AddComponent(typeof(MeshFilter));     // Combine all the chunk's cubes' faces
         parentMesh.mesh = new Mesh();
 
         parentMesh.mesh.CombineMeshes(combine);
@@ -97,7 +104,7 @@ public class Chunk
         MeshRenderer parentMeshRenderer = this.chunk.gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         parentMeshRenderer.material = this.textureAtlas;
 
-        foreach (Transform square in this.chunk.transform)
+        foreach (Transform square in this.chunk.transform)      // Destroy each faces entity because we don't need them as they already exists in the form of a chunk
             GameObject.Destroy(square.gameObject);
     }
 }
