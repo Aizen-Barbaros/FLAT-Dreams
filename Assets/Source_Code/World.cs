@@ -176,12 +176,8 @@ public class World : MonoBehaviour
 
             if (loading.activeSelf)
             {
-                if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
-                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
-
                 if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
                 {
-                    Debug.Log("1");
                     player.GetComponentInChildren<Player>().SetKeyCaught(0);
                     this.level++;
                     this.normalSpeed += 0.75f;
@@ -192,17 +188,8 @@ public class World : MonoBehaviour
                     loading.SetActive(false);
                 }
 
-                else if (player.GetComponentInChildren<Player>().GetCurrentLives() == 0)
+                else if ((player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100) && player.GetComponentInChildren<Player>().GetCurrentLives() - 1 > 0)
                 {
-                    Debug.Log("2");
-                    this.DeleteWorld();
-                    File.Delete(this.fileName);
-                    SceneManager.LoadScene("Menu");
-                }
-
-                else if (player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100)
-                {
-                    Debug.Log("3");
                     player.GetComponentInChildren<Player>().SetCaught(false);
                     player.GetComponentInChildren<Player>().SetKeyCaught(0);
                     player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
@@ -211,6 +198,13 @@ public class World : MonoBehaviour
                     this.GenerateWorld();
                     
                     loading.SetActive(false);
+                }
+
+                else
+                {
+                    this.DeleteWorld();
+                    File.Delete(this.fileName);
+                    SceneManager.LoadScene("Menu");
                 }
             }
 

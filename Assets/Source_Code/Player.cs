@@ -152,7 +152,10 @@ public class Player : Character
         }
 
         if (collision.gameObject.tag == "Ennemy")
+        {
+            this.currentLives--;
             this.isCaught = true;
+        }
     }
 
     protected void SpeedBoost() //Changer nom de méthode? En anglais
