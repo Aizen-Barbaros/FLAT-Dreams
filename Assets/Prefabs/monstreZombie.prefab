@@ -940,7 +940,7 @@ MonoBehaviour:
   dashSound: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   BaseSound: {fileID: 8300000, guid: cabc0c6ec7433274daec08a3437dc7c4, type: 3}
   numContact: 6
 --- !u!137 &137123282146509936
