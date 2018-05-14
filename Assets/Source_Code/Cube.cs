@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+// The class Cube is the representation of a cube of 1 by 1 by 1 in Unity
+// Only the visible faces of the cube will be shown
 public class Cube
 {
     public enum CubeSides { FRONT, BACK, TOP, BOTTOM, LEFT, RIGHT };
 
+    // Coordinates of all the cubes' face's vertices on the texture atlas
+    // TOP TOP means the top face of a cube that is on the surface
+    // TOP SIDE means a side face of a cube that is on the surface
+    // UNDER SIDE means a side face of a cube that is not on the surface
+    // There are no UNDER TOP because this face can never be seen, so it'll
+    // never be rendered.
     private Vector2[,] cubeTextureInAtlas = {{new Vector2(0.0f, 0.8f), new Vector2(0.2f, 0.8f), new Vector2(0.0f, 1.0f), new Vector2(0.2f, 1.0f)},              // NORMAL TOP TOP 0
 	                                         {new Vector2(0.2f, 0.8f), new Vector2(0.4f, 0.8f), new Vector2(0.2f, 1.0f), new Vector2(0.4f, 1.0f)},              // NORMAL TOP SIDE 1
 		                                     {new Vector2(0.4f, 0.8f), new Vector2(0.6f, 0.8f), new Vector2(0.4f, 1.0f), new Vector2(0.6f, 1.0f)},              // NORMAL UNDER SIDE 2
@@ -38,12 +46,11 @@ public class Cube
 	                                         {new Vector2(0.8f, 0.0f), new Vector2(1.0f, 0.0f), new Vector2(0.8f, 0.2f), new Vector2(1.0f, 0.2f)},              // MATRIX TOP SIDE 28
 		                                     {new Vector2(0.8f, 0.0f), new Vector2(1.0f, 0.0f), new Vector2(0.8f, 0.2f), new Vector2(1.0f, 0.2f)}};             // MATRIX UNDER SIDE 29
 
-
-    private GameObject parent;
-    private Vector3 position;
-    private Vector3 mapPosition;
-    private Material material;
-    private bool isOnTheSurface;
+    private GameObject parent;          // The chunk that contains the cube
+    private Vector3 position;           // The relative position in the chunk containing the cube
+    private Vector3 mapPosition;        // The absolute position in the map
+    private Material material;          // The material used to display the cube
+    private bool isOnTheSurface;        // A boolean which is true if this cube in on the surface, and which is false otherwise
 
 
     public Cube(GameObject parent, Vector3 position, Material material, bool isOnTheSurface)
@@ -58,6 +65,7 @@ public class Cube
     }
 
 
+    // This function displays the cube's faces that are visible
     public void DisplayCube()
     {
         if (!this.CheckNeighbour((int)this.mapPosition.x, (int)this.mapPosition.z + 1))
@@ -69,14 +77,21 @@ public class Cube
         if (!this.CheckNeighbour((int)this.mapPosition.x + 1, (int)this.mapPosition.z))
             this.CreateFace(CubeSides.RIGHT);
 
+        // The top face of the cubes that are on the surface is always shown,
+        // no matter what
         if (this.isOnTheSurface == true)
             this.CreateFace(CubeSides.TOP);
+
+        // Also, the under face is never shown
     }
 
 
+
+    // This function creates a cube's face and apply a texture on it, as well as a mesh filter and renderer
     public void CreateFace(CubeSides face)
     {
         // VERTICES
+        // List all the coordinates of the vertices on a cube
         Vector3 vertex1 = new Vector3(0.5f, -0.5f, -0.5f);
         Vector3 vertex2 = new Vector3(0.5f, -0.5f, 0.5f);
         Vector3 vertex3 = new Vector3(0.5f, 0.5f, -0.5f);
@@ -87,87 +102,21 @@ public class Cube
         Vector3 vertex8 = new Vector3(-0.5f, 0.5f, 0.5f);
 
         // UVs
+        // List all the uvs on a cube
         Vector2 uvBottomLeft;
         Vector2 uvBottomRight;
         Vector2 uvTopLeft;
         Vector2 uvTopRight;
 
         // TEXTURES' INDEX
-        int topTopIndex;
-        int topSideIndex;
-        int underSideIndex;
-
-        if (World.worldType == World.WorldTypes.NORMAL)
-        {
-            topTopIndex = 0;
-            topSideIndex = 1;
-            underSideIndex = 2;
-        }
-
-        else if (World.worldType == World.WorldTypes.SNOWY)
-        {
-            topTopIndex = 3;
-            topSideIndex = 4;
-            underSideIndex = 5;
-        }
-
-        else if (World.worldType == World.WorldTypes.HELL)
-        {
-            topTopIndex = 6;
-            topSideIndex = 7;
-            underSideIndex = 8;
-        }
-
-        else if(World.worldType == World.WorldTypes.DREAMY)
-        {
-            topTopIndex = 9;
-            topSideIndex = 10;
-            underSideIndex = 11;
-        }
-
-        else if (World.worldType == World.WorldTypes.METAL)
-        {
-            topTopIndex = 12;
-            topSideIndex = 13;
-            underSideIndex = 14;
-        }
-
-        else if (World.worldType == World.WorldTypes.CHEESE)
-        {
-            topTopIndex = 15;
-            topSideIndex = 16;
-            underSideIndex = 17;
-        }
-
-        else if (World.worldType == World.WorldTypes.AUTUMN)
-        {
-            topTopIndex = 18;
-            topSideIndex = 19;
-            underSideIndex = 20;
-        }
-
-        else if (World.worldType == World.WorldTypes.ROTTING)
-        {
-            topTopIndex = 21;
-            topSideIndex = 22;
-            underSideIndex = 23;
-        }
-
-        else if (World.worldType == World.WorldTypes.TROPICAL)
-        {
-            topTopIndex = 24;
-            topSideIndex = 25;
-            underSideIndex = 26;
-        }
-
-        else
-        {
-            topTopIndex = 27;
-            topSideIndex = 28;
-            underSideIndex = 29;
-        }
+        // Determine wish texture to apply on each type of face, depending on
+        // the world's type
+        int topTopIndex = 3 * (int)World.worldType;
+        int topSideIndex = topTopIndex + 1;
+        int underSideIndex = topTopIndex + 2;
 
         // SETTING TEXTURES
+        // Actually sets the texture on the face, depending on it's type
         if (this.isOnTheSurface && face == CubeSides.TOP)
         {
             uvBottomLeft = this.cubeTextureInAtlas[topTopIndex, 0];
@@ -199,6 +148,7 @@ public class Cube
         int[] triangles = new int[6];
 
         // SIDES
+        // Determine the mesh's variables depending on the face's type
         switch (face)
         {
             case CubeSides.BOTTOM:
@@ -241,6 +191,8 @@ public class Cube
         triangles = new int[] { 3, 1, 0, 3, 2, 1 };
 
         // MESH
+        // Create a new mesh and initialize it's variables with the ones which
+        // where chosen
         Mesh mesh = new Mesh
         {
             name = "FaceMesh" + face.ToString(),
@@ -252,10 +204,12 @@ public class Cube
 
         mesh.RecalculateBounds();
 
+        // Creates a game object instantiating the face
         GameObject side = new GameObject("Side");
         side.transform.position = this.position;
         side.transform.parent = this.parent.transform;
 
+        // Apply a mesh filter and a mesh renderer on the face
         MeshFilter meshFilter = (MeshFilter)side.AddComponent(typeof(MeshFilter));
         meshFilter.mesh = mesh;
 
@@ -264,10 +218,13 @@ public class Cube
     }
 
 
+    // This function checks if a face has some neighbours that will make this
+    // face not visible
     public bool CheckNeighbour(int x, int z)
     {
-        if (x >= 0 && x < World.mapSize && z >= 0 && z < World.mapSize)
+        if (x >= 0 && x < World.mapSize && z >= 0 && z < World.mapSize) // Verifies if a cube can actually exist at the coordinates we want to check out
         {
+            // If > 0, it means that this face is a least one cube above it's neighbours, so it is possibly visible
             if ((World.surfaceHeights[(int)this.mapPosition.x, (int)this.mapPosition.z] - World.surfaceHeights[x, z]) > 0)
                 return false;
             else
@@ -275,6 +232,6 @@ public class Cube
         }
 
         else
-            return true;
+            return true; // This means that the side faces that are on the border of the world will not be rendered
     }
 }

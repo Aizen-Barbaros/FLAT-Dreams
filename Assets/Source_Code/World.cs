@@ -99,10 +99,10 @@ public class World : MonoBehaviour
     private int level;
     private float normalSpeed;
 
-    // FILENAME
+    // NAME OF THE FILE CONTAINING THE PATH TO THE SAVING FILE
     private string fileName;
 
-    // PLAYER IS FROZEN
+    // VERIFIES IF THE PLAYER PAUSED THE GAME OR NOT
     private bool playerIsFrozen;
 
 
@@ -127,21 +127,21 @@ public class World : MonoBehaviour
         this.normalSpeed = 5.0f;
         this.playerIsFrozen = false;
 
+        // If the file already existed, it means that the program as the generate a save world
         if (File.Exists(this.fileName))
             this.GenerateSavedWorld(this.fileName);
 
+        // Else it has to create a new one
         else
             this.GenerateWorld();
-
-        player.SetActive(true);
     }
 
 
     public void Update()
     {
-        if (player.activeSelf == true)
+        if (player.activeSelf == true) // Only check that if the player is active
         {
-            // CHANGE VALUES IN THE HUD
+            // Update the level, lives, keys and spell values in the HUD
             GameObject.Find("Level").GetComponent<Text>().text = this.level.ToString();
             GameObject.Find("Lives").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetCurrentLives().ToString();
             GameObject.Find("Keys").GetComponent<Text>().text = player.GetComponentInChildren<Player>().GetKeyCaught().ToString();
@@ -152,6 +152,7 @@ public class World : MonoBehaviour
             GameObject.Find("Fog").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetFogTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetFogTimeBeforeNext()).ToString();
             GameObject.Find("Stun").GetComponent<Text>().text = (player.GetComponentInChildren<Player>().GetStunTimeBeforeNext() == 0) ? " " : Mathf.Ceil(player.GetComponentInChildren<Player>().GetStunTimeBeforeNext()).ToString();
 
+            // If the player paused the game
             if (player.GetComponentInChildren<Player>().GetIsFrozen() == true)
             {
                 Cursor.visible = true;
@@ -163,6 +164,7 @@ public class World : MonoBehaviour
                 escapeMenu.enabled = true;
             }
 
+            // If the player unpaused the game but the actual monsters and stuff haven't regain mobility yet
             else if (player.GetComponentInChildren<Player>().GetIsFrozen() == false && this.playerIsFrozen == true)
             {
                 Cursor.visible = false;
@@ -174,46 +176,52 @@ public class World : MonoBehaviour
                 escapeMenu.enabled = false;
             }
 
+            // Verifies firt if the loading screen is active
             if (loading.activeSelf)
             {
+                // If the player got all 3 keys
                 if (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys)
                 {
-                    player.GetComponentInChildren<Player>().SetKeyCaught(0);
-                    this.level++;
-                    this.normalSpeed += 0.75f;
+                    player.GetComponentInChildren<Player>().SetKeyCaught(0);    // Set the number of key caught to zero
+                    this.level++;                                               // Increment the level
+                    this.normalSpeed += 0.75f;                                  // Increase the speed of the characters
 
-                    this.DeleteWorld();
-                    this.GenerateWorld();
+                    this.DeleteWorld();                                         // Delete the current world
+                    this.GenerateWorld();                                       // Generate a new one
 
-                    loading.SetActive(false);
+                    loading.SetActive(false);                                   // Remove the loading screen
                 }
 
+                // If the player got caught but still has at least a life
                 else if ((player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100) && player.GetComponentInChildren<Player>().GetCurrentLives() - 1 > 0)
                 {
-                    player.GetComponentInChildren<Player>().SetCaught(false);
-                    player.GetComponentInChildren<Player>().SetKeyCaught(0);
-                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);
+                    player.GetComponentInChildren<Player>().SetCaught(false);   // Set the player as uncaught
+                    player.GetComponentInChildren<Player>().SetKeyCaught(0);    // Set the number of key caught to zero
+                    player.GetComponentInChildren<Player>().SetCurrentLives(player.GetComponentInChildren<Player>().GetCurrentLives() - 1);     // Get one life off of the player
 
-                    this.DeleteWorld();
-                    this.GenerateWorld();
-                    
+                    this.DeleteWorld();                                         // Delete the current world
+                    this.GenerateWorld();                                       // Generate a new one
+
                     loading.SetActive(false);
                 }
 
+                // Game over
                 else
                 {
-                    this.DeleteWorld();
-                    File.Delete(this.fileName);
-                    SceneManager.LoadScene("Menu");
+                    this.DeleteWorld();                                         // Delete the current world
+                    File.Delete(this.fileName);                                 // Since he definitively lost, delete the save file
+                    SceneManager.LoadScene("Menu");                             // Go back to the main menu
                 }
             }
 
+            // Else if the player got all 3 keys, died or when down to 0 life, the loading screen will appear
             else if (!loading.activeSelf && (player.GetComponentInChildren<Player>().GetKeyCaught() == this.numberOfKeys || player.GetComponentInChildren<Player>().GetCurrentLives() == 0 || player.GetComponentInChildren<Player>().GetCaught() == true || player.transform.position.y < -100))
                 loading.SetActive(true);
         }
     }
 
 
+    // Generate a new random world
     public void GenerateWorld()
     {
         // CHUNKS
@@ -254,6 +262,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate a world based on a file save
     public void GenerateSavedWorld(string fileName)
     {
         // CHUNKS
@@ -314,10 +323,11 @@ public class World : MonoBehaviour
                 this.GenerateWorldValues(wType);
                 this.GenerateSurfaceHeights();
                 this.GenerateTerrain();
-                
+
                 reader.ReadLine();
 
                 // PLAYER
+                // Put the player at the position where he was when he saved
                 string text = reader.ReadLine();
                 string[] coordinates = text.Split(' ');
                 player.transform.position = new Vector3(float.Parse(coordinates[0]), float.Parse(coordinates[1]), float.Parse(coordinates[2]));
@@ -327,7 +337,8 @@ public class World : MonoBehaviour
                 reader.ReadLine();
 
                 // KEYS
-                for(int i = 0; i < this.keys.Length - player.GetComponentInChildren<Player>().GetKeyCaught(); i++)
+                // Put the keys at the position where they where when the world was saved
+                for (int i = 0; i < this.keys.Length - player.GetComponentInChildren<Player>().GetKeyCaught(); i++)
                 {
                     text = reader.ReadLine();
                     coordinates = text.Split(' ');
@@ -337,6 +348,7 @@ public class World : MonoBehaviour
                 reader.ReadLine();
 
                 // LIFE
+                // Put the life at the position where they where when the world was saved
                 text = reader.ReadLine();
                 coordinates = text.Split(' ');
                 this.life = Instantiate(heart, new Vector3(int.Parse(coordinates[0]), int.Parse(coordinates[1]), int.Parse(coordinates[2])), Quaternion.identity) as GameObject;
@@ -344,6 +356,7 @@ public class World : MonoBehaviour
                 reader.ReadLine();
 
                 // MONSTERS
+                // Put the monsters at the position where they where when the world was saved
                 for (int i = 0; i < this.monsters.Length; i++)
                 {
                     text = reader.ReadLine();
@@ -367,10 +380,13 @@ public class World : MonoBehaviour
                 }
 
                 // SPEEDS
-                player.GetComponentInChildren<Player>().SetNormalSpeed(this.normalSpeed + 3.0f + (this.level - 1) * 0.75f);
+                // Adjusts the speed of the player and of the monsters depending on the level
+                this.normalSpeed += (this.level - 1) * 0.75f;
+
+                player.GetComponentInChildren<Player>().SetNormalSpeed(this.normalSpeed + 3.0f);
 
                 for (int i = 0; i < this.numberOfMonsters; i++)
-                    this.monsters[i].GetComponentInChildren<Enemy>().SetNormalSpeed(this.normalSpeed + (this.level - 1) * 0.75f);
+                    this.monsters[i].GetComponentInChildren<Enemy>().SetNormalSpeed(this.normalSpeed);
 
                 // PLAYER
                 player.SetActive(true);
@@ -384,6 +400,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Save the all the world important value
     public void SaveWorld()
     {
         try
@@ -447,6 +464,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Delete all the game objects of the current world
     public void DeleteWorld()
     {
         // PLAYER
@@ -471,6 +489,8 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate the world values depending on the world type
+    // World values include : the monster model, the number of trees, the tree mode, the sky and the fog
     public void GenerateWorldValues(int wType)
     {
         if (wType == 0)
@@ -604,6 +624,8 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate terrain values depending on the terrain type
+    // Terrain values include : the maximal height of the terrain, and the smoothness of it
     public void GenerateTerrainValues(int tType)
     {
         if (tType == 0)
@@ -626,12 +648,13 @@ public class World : MonoBehaviour
             this.maxHeight = 150;
             this.smooth = Random.Range(0.011f, 0.013f);
         }
-        
+
         this.octaves = Random.Range(3, 5);
         this.persistence = 0.5f;
     }
 
 
+    // Generate the terrain based on the world and terrain variables
     public void GenerateTerrain()
     {
         for (int x = 0; x < this.chunks.GetLength(0); x += 1)
@@ -644,6 +667,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Determines the coordinates of all the surface cubes of the world
     public void GenerateSurfaceHeights()
     {
         surfaceHeights = new int[mapSize, mapSize];
@@ -656,6 +680,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Determines the y position of a surface cube
     public float Noise(float x, float z)
     {
         float total = 0;
@@ -676,6 +701,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate the key's game objects
     public void GenerateKeys()
     {
         for(int i = 0; i < this.keys.Length; i++)
@@ -685,12 +711,14 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate the life game object
     public void GenerateLife()
     {
         this.life = Instantiate(heart, this.GenerateRandomVector(0, 1), Quaternion.identity) as GameObject;
     }
 
 
+    // Generate the monster's game object
     public void GenerateMonsters()
     {
         for (int i = 0; i < this.monsters.Length; i++)
@@ -700,6 +728,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate the tree's game object
     public void GenerateTrees()
     {
         for (int i = 0; i < this.trees.Length; i++)
@@ -709,6 +738,7 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate a random vector with an offset on the y axis
     public Vector3 GenerateRandomVector(int offset)
     {
         int x = Random.Range(0, mapSize);
@@ -718,6 +748,8 @@ public class World : MonoBehaviour
     }
 
 
+    // Generate a random vector with an offset on the y axis
+    // The vector need to be at as specific distance from the spawn position of the player
     public Vector3 GenerateRandomVector(int distanceFromSpawn, int offset)
     {
         int x, z;
