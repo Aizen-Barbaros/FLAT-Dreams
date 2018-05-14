@@ -512,7 +512,7 @@ public class World : MonoBehaviour
             RenderSettings.fog = true;
             RenderSettings.fogMode = FogMode.ExponentialSquared;
             RenderSettings.fogColor = Color.black;
-            RenderSettings.fogDensity = 0.01f;
+            RenderSettings.fogDensity = 0.05f;
         }
 
         else if (wType == 3)

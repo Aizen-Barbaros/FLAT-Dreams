@@ -155,7 +155,7 @@ public class Player : Character
             this.isCaught = true;
     }
 
-    protected void SpeedBoost() //Changer nom de méthode? En anglais
+    protected void SpeedBoost() 
     {
         //Increase the entity's speed for a short time
         this.speed *= 2;
